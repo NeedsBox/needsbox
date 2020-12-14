@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'OSD.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'osd',
+        'NAME': 'osd-testes',
         'USER': 'postgres',
         'PASSWORD': 'nickac',
         'HOST': '127.0.0.1',
