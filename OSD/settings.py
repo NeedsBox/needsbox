@@ -42,7 +42,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ['needs-box-9d8vt.ondigitalocean.app']
+ALLOWED_HOSTS = ['needs-box-9d8vt.ondigitalocean.app', '127.0.0.1']
 
 # Application definition
 
@@ -133,8 +133,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 sentry_sdk.init(
     dsn="https://323599db0082457d860f7d359b24d432@o482572.ingest.sentry.io/5566342",
