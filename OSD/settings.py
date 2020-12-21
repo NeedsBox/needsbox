@@ -42,7 +42,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ['needs-box-9d8vt.ondigitalocean.app', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
