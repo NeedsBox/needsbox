@@ -15,7 +15,7 @@ Jinja2==2.11.2
 jsonschema==3.2.0
 MarkupSafe==1.1.1
 packaging==20.8
-psycopg2==2.8.6
+psycopg2-binary==2.8.6
 pyparsing==2.4.7
 pyrsistent==0.17.3
 pytz==2020.4
@@ -29,4 +29,5 @@ swagger-spec-validator==2.7.3
 typing-extensions==3.7.4.3
 uritemplate==3.0.1
 urllib3==1.26.2
+whitenoise==5.2.0
 zipp==3.4.0
