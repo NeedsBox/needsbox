@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 import environ
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
