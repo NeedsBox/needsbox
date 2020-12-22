@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import os
+
 from pathlib import Path
+import os
 
 import environ
 import sentry_sdk
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'advertisement',
-    'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+    #'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
     'rest_framework',
 ]
