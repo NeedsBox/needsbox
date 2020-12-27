@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'advertisement',
-    #'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+    'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
     'rest_framework',
 ]
@@ -129,13 +129,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 sentry_sdk.init(
     dsn="https://323599db0082457d860f7d359b24d432@o482572.ingest.sentry.io/5566342",
