@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.fields.files import ImageFieldFile
 from accounts.models import Account
 from django.core.validators import MinValueValidator, MaxValueValidator
 
