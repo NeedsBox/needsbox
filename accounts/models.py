@@ -36,9 +36,9 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     USER_TYPE =( 
-    ("PES", "Pessoal"), 
-    ("PRO", "Profissional"),
-    ) 
+        ("PES", "Pessoal"), 
+        ("PRO", "Profissional"),
+    )
     
     email = models.EmailField(max_length=60, unique=True, null=True)
     username = models.CharField(max_length=30, unique=True)
