@@ -93,4 +93,5 @@ modules.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all
 
-OSD/.env
+db.sqlite3
+osd/.env
