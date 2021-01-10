@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'project',
     'accounts',
     'phone_field',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
