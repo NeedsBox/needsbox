@@ -7,7 +7,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -45,9 +44,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('msg', models.TextField()),
-                ('stars', models.IntegerField(validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(5)])),
+                ('stars', models.IntegerField(validators=[django.core.validators.MinValueValidator(1),
+                                                          django.core.validators.MaxValueValidator(5)])),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('advertisement', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='project.advertisement')),
+                ('advertisement',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='project.advertisement')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Advertisement, Review, Location
+
 # Register your models here.
 
 admin.site.register(Category)

@@ -5,7 +5,6 @@ import phone_field.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -24,7 +23,8 @@ class Migration(migrations.Migration):
                 ('biography', models.TextField(blank=True)),
                 ('website', models.CharField(blank=True, max_length=50)),
                 ('contact', phone_field.models.PhoneField(blank=True, help_text='Contact phone number', max_length=31)),
-                ('account_type', models.CharField(choices=[('PES', 'Pessoal'), ('PRO', 'Profissional')], default='PES', max_length=3)),
+                ('account_type',
+                 models.CharField(choices=[('PES', 'Pessoal'), ('PRO', 'Profissional')], default='PES', max_length=3)),
                 ('date_joined', models.DateTimeField(auto_now_add=True)),
                 ('last_login', models.DateTimeField(auto_now=True)),
                 ('is_admin', models.BooleanField(default=False)),

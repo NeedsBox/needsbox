@@ -17,5 +17,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
-#url para media, apenas manter em desenvolvimento, não pode ser assim em produção
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# url para media, apenas manter em desenvolvimento, não pode ser assim em produção
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
