@@ -5,6 +5,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
+class Location(models.Model):
+    city = models.CharField(max_length=50 , blank=False)
+    town = models.CharField(max_length=50, blank=True)
+    
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     
@@ -16,6 +21,7 @@ class Advertisement(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     
