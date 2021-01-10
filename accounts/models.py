@@ -42,7 +42,7 @@ class Account(AbstractBaseUser):
     
     email = models.EmailField(max_length=60, unique=True, null=True)
     username = models.CharField(max_length=30, unique=True)
-    name = models.CharField(max_length=50, null=False, blank=True)
+    name = models.CharField(max_length=50, null=False)
     profile_image = models.ImageField(blank=True)
     biography = models.TextField(blank=True)
     website = models.CharField(max_length=50, blank=True)
