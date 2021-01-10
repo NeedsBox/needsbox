@@ -9,6 +9,9 @@ class Location(models.Model):
     city = models.CharField(max_length=50 , blank=False)
     town = models.CharField(max_length=50, blank=True)
     
+    def __str__(self):
+        return self.city + " | " + self.town
+    
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
