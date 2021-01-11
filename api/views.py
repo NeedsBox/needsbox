@@ -1,37 +1,42 @@
-from django.shortcuts import render
-from rest_framework import viewsets, mixins
-from rest_framework import permissions
+# Create your views here.
+import uuid
+
+from rest_framework import status
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-# Create your views here.
-from rest_framework.viewsets import GenericViewSet
-
-from accounts.models import Account
-from project.models import Advertisement
-from api.serializers import UserSerializer, AdvertisementSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Account.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 @api_view(['GET'])
-def adList(request):
-    posts = Advertisement.objects.all()
-    
-    serializer = AdvertisementSerializer(posts, many=True)
-    
-    return Response(serializer.data)
+def verify_token(request, token: str):
+    result = status.HTTP_404_NOT_FOUND
+    if Token.objects.filter(key=token).exists():
+        result = status.HTTP_200_OK
 
-@api_view(['GET'])
-def userList(request):
-    users = Account.objects.all()
-    
-    serializer = UserSerializer(users, many=True)
-    
-    return Response(serializer.data)
+    return Response(status=result)
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     API endpoint that allows users to be viewed or edited.
+#     """
+#     queryset = Account.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+#
+#
+# @api_view(['GET'])
+# def adList(request):
+#     posts = Advertisement.objects.all()
+#
+#     serializer = AdvertisementSerializer(posts, many=True)
+#
+#     return Response(serializer.data)
+#
+#
+# @api_view(['GET'])
+# def userList(request):
+#     users = Account.objects.all()
+#
+#     serializer = UserSerializer(users, many=True)
+#
+#     return Response(serializer.data)
