@@ -7,11 +7,13 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 class Location(models.Model):
-    city = models.CharField(max_length=50, blank=False)
-    town = models.CharField(max_length=50, blank=True)
+    district = models.CharField(max_length=50, blank=False)
+    city = models.CharField(max_length=50, blank=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __str__(self):
-        return self.city + " | " + self.town
+        return self.district + " | " + self.city
 
 
 class Category(models.Model):
