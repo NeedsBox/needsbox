@@ -35,9 +35,20 @@ class Advertisement(models.Model):
     def __str__(self):
         return self.title
 
+class Service(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_update = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
 
 class Review(models.Model):
-    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     msg = models.TextField()
     stars = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
