@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.top-bar, .top-bar-left, footer {
+    background-color: #262322;
+}
+
+.menu>li {
+    background-color: #262322;
+    color: white;
+}
+
+.menu>li>a {
+    padding: 10px 25px;
+}
+
+.register-button {
+    color: #FFFFFF !important;
+    font-size: 18px;
+    padding: 5px 5px;
+    border-radius: 40px;
+    border: 0px solid #3866A3;
+    background: #F18F01;
+}
+
+.register-button:hover {
+    color: lightgray !important;
+    background: #262322;
+}
+
+.login-button {
+    color: #FFFFFF !important;
+    font-size: 18px;
+    padding: 5px 5px;
+    border-radius: 40px;
+    background-color: none;
+    border-color: #ff9800;
+}
+
+.login-button:hover {
+    color: lightgray !important;
+    background: #262322;
+}
+
+.separator {
+    font-size: 24px;
+}
