@@ -4,6 +4,12 @@ from accounts.models import Account
 from project.models import Advertisement, Category, Location
 
 
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     email = serializers.EmailField(write_only=True, required=True)
     password = serializers.CharField(write_only=True, required=True)

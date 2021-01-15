@@ -6,7 +6,8 @@ from rest_framework.exceptions import ValidationError, APIException
 from rest_framework.response import Response
 
 from accounts.models import Account
-from api.serializers import UserSerializer
+from api.serializers import UserSerializer, CategorySerializer
+from project.models import Category
 
 
 @api_view(['GET'])
@@ -16,6 +17,21 @@ def verify_token(request, token: str):
         result = status.HTTP_200_OK
 
     return Response(status=result)
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows categories to be viewed.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def get_permissions(self):
+        if self.action == 'list':
+            self.permission_classes = [permissions.AllowAny]
+        else:
+            self.permission_classes = [permissions.IsAdminUser]
+        return super().get_permissions()
 
 
 class UserViewSet(viewsets.ModelViewSet):
