@@ -54,7 +54,7 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
-    user = UserSerializer(many=False)
+    user = UserSerializer(many=False, read_only=True)
     location = LocationSerializer(many=False)
     category = CategorySerializer()
 
