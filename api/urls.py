@@ -3,6 +3,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from api import views
+from api.views import AdListView
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -12,4 +13,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/sessions', obtain_auth_token),
     path('users/sessions/<str:token>', views.verify_token),
+    path('ads/', AdListView.as_view()),
 ]

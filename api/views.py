@@ -3,11 +3,14 @@ from rest_framework import status, permissions, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError, APIException
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from accounts.models import Account
-from api.serializers import UserSerializer, CategorySerializer
-from project.models import Category
+from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer
+from project.models import Category, Advertisement
 
 
 @api_view(['GET'])
@@ -32,6 +35,14 @@ class CategoryViewSet(viewsets.ModelViewSet):
         else:
             self.permission_classes = [permissions.IsAdminUser]
         return super().get_permissions()
+
+
+class AdListView(ListAPIView):
+    serializer_class = AdvertisementSerializer
+    queryset = Advertisement.objects.all()
+    pagination_class = PageNumberPagination
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('title', 'location__district', 'location__city', 'category__name', 'description')
 
 
 class UserViewSet(viewsets.ModelViewSet):
