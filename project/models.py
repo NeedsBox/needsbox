@@ -57,4 +57,4 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.msg
+        return f"Review de {self.user.username}: \n{self.msg}"

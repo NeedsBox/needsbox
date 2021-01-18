@@ -2,17 +2,19 @@
 from rest_framework import status, permissions, viewsets, mixins
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
-from rest_framework.exceptions import ValidationError, APIException
+from rest_framework.exceptions import APIException
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from accounts.models import Account
-from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer
-from project.models import Category, Advertisement, Service
+from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer, \
+    ReviewSerializer
+from project.models import Category, Advertisement, Service, Review
 
 
 @api_view(['GET'])
@@ -57,7 +59,7 @@ class ServiceListView(ListAPIView):
 
 class CustomModelViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
     def get_permissions(self):
-        if self.action == 'retrieve':
+        if self.action == 'retrieve' or self.action == 'list':
             self.permission_classes = [permissions.AllowAny]
         else:
             self.permission_classes = [permissions.IsAuthenticated]
@@ -69,10 +71,19 @@ class CustomModelViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin,
         is_admin = bool(user and user.is_staff)
         username = serializer.data["user"]["username"]
         if (not is_admin) and username != user.username:
-            exception = APIException("User is not allowed to modify other users ads")
+            exception = APIException("User is not allowed to modify other users objects")
             exception.status_code = status.HTTP_401_UNAUTHORIZED
             raise exception
         super().perform_update(serializer)
+
+
+class ReviewViewSet(NestedViewSetMixin, CustomModelViewSet, mixins.ListModelMixin):
+    """
+    API endpoint that allows ads to be viewed or edited.
+    """
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    lookup_field = 'id'
 
 
 class AdViewSet(CustomModelViewSet):

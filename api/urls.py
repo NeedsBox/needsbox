@@ -1,13 +1,15 @@
 from django.urls import path, include
-from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework_extensions.routers import ExtendedDefaultRouter
 
 from api import views
-from api.views import AdListView, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView
+from api.views import AdListView, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView, \
+    ReviewViewSet
 
-router = routers.DefaultRouter()
+router = ExtendedDefaultRouter()
 router.register(r'ads', AdViewSet)
-router.register(r'services', ServiceViewSet)
+router.register(r'services', ServiceViewSet) \
+    .register(r'reviews', ReviewViewSet, parents_query_lookups=['service_id'], basename="reviews")
 router.register(r'users', UserViewSet)
 router.register(r'categories', CategoryViewSet)
 

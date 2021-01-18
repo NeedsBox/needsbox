@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from accounts.models import Account
-from project.models import Advertisement, Category, Location, Service
+from project.models import Advertisement, Category, Location, Service, Review
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -85,3 +85,24 @@ class AdvertisementSerializer(ServiceAdvertisementSerializer):
             'created_at',
             'user',
         ]
+
+
+class ReviewSerializer(ModelSerializer):
+    user = UserSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'service',
+            'user',
+            'msg',
+            'stars',
+            'created_at'
+        ]
+
+    def create(self, validated_data):
+        # Atribuir utilizador atual
+        validated_data["user"] = self.context["request"].user
+
+        return super().create(validated_data)
