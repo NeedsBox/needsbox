@@ -5,13 +5,14 @@ from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError, APIException
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListAPIView
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from accounts.models import Account
-from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer
-from project.models import Category, Advertisement
+from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer
+from project.models import Category, Advertisement, Service
 
 
 @api_view(['GET'])
@@ -46,11 +47,35 @@ class AdListView(ListAPIView):
     search_fields = ('title', 'location__district', 'location__city', 'category__name', 'description')
 
 
-class AdViewSet(mixins.CreateModelMixin,
-                mixins.RetrieveModelMixin,
-                mixins.UpdateModelMixin,
-                mixins.DestroyModelMixin,
-                GenericViewSet):
+class ServiceListView(ListAPIView):
+    serializer_class = ServiceSerializer
+    queryset = Service.objects.all()
+    pagination_class = PageNumberPagination
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('title', 'location__district', 'location__city', 'category__name', 'description')
+
+
+class CustomModelViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
+    def get_permissions(self):
+        if self.action == 'retrieve':
+            self.permission_classes = [permissions.AllowAny]
+        else:
+            self.permission_classes = [permissions.IsAuthenticated]
+
+        return super().get_permissions()
+
+    def perform_update(self, serializer: UserSerializer):
+        user: Account = self.request.user
+        is_admin = bool(user and user.is_staff)
+        username = serializer.data["user"]["username"]
+        if (not is_admin) and username != user.username:
+            exception = APIException("User is not allowed to modify other users ads")
+            exception.status_code = status.HTTP_401_UNAUTHORIZED
+            raise exception
+        super().perform_update(serializer)
+
+
+class AdViewSet(CustomModelViewSet):
     """
     API endpoint that allows ads to be viewed or edited.
     """
@@ -58,19 +83,14 @@ class AdViewSet(mixins.CreateModelMixin,
     serializer_class = AdvertisementSerializer
     lookup_field = 'id'
 
-    def get_permissions(self):
-        self.permission_classes = [permissions.IsAuthenticated]
-        return super().get_permissions()
 
-    def perform_update(self, serializer: UserSerializer):
-        user: Account = self.request.user
-        is_admin = bool(user and user.is_staff)
-        username = serializer.data["user"]["name"]
-        if (not is_admin) and username != user.username:
-            exception = APIException("User is not allowed to modify other users")
-            exception.status_code = status.HTTP_401_UNAUTHORIZED
-            raise exception
-        super().perform_update(serializer)
+class ServiceViewSet(CustomModelViewSet):
+    """
+    API endpoint that allows services to be viewed or edited.
+    """
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    lookup_field = 'id'
 
 
 class UserViewSet(viewsets.ModelViewSet):

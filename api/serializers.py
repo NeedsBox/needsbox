@@ -1,13 +1,14 @@
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from accounts.models import Account
-from project.models import Advertisement, Category, Location
+from project.models import Advertisement, Category, Location, Service
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -34,14 +35,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = [
-            'name',
-        ]
-
-
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
@@ -53,11 +46,34 @@ class LocationSerializer(serializers.ModelSerializer):
         ]
 
 
-class AdvertisementSerializer(serializers.ModelSerializer):
+class ServiceAdvertisementSerializer(ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
     location = LocationSerializer(many=False)
-    category = CategorySerializer()
 
+    def create(self, validated_data):
+        location_data = validated_data.pop('location')
+        location = Location.objects.create(**location_data)
+        validated_data["location"] = location
+        validated_data["user"] = self.context["request"].user
+
+        return super().create(validated_data)
+
+
+class ServiceSerializer(ServiceAdvertisementSerializer):
+    class Meta:
+        model = Service
+        fields = [
+            'id',
+            'title',
+            'description',
+            'category',
+            'location',
+            'created_at',
+            'user',
+        ]
+
+
+class AdvertisementSerializer(ServiceAdvertisementSerializer):
     class Meta:
         model = Advertisement
         fields = [
