@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     'phone_field',
     'api',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
