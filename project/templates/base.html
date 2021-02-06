@@ -137,8 +137,8 @@
             {% endif %}
             {% if not user.is_authenticated %}
             <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap">
-                <button type="button" class="btn btn-primary btn-ctm">Register</button>
-                <button type="button" class="btn btn-secondary">Login</button>
+                <button type="button" class="btn btn-outline-primary btn-ctm">Login</button>
+                    <button type="button" class="btn btn-primary">Register</button>
             </ul>
             {% endif %}
             <!-- Button -->
@@ -307,8 +307,8 @@
                 {% endif %}
                 {% if not user.is_authenticated %}
                 <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
-                    <button type="button" class="btn btn-primary btn-ctm">Register</button>
-                    <button type="button" class="btn btn-secondary">Login</button>
+                    <button type="button" class="btn btn-outline-primary">Login</button>
+                    <button type="button" class="btn btn-primary">Register</button>
                 </ul>
                 {% endif %}
             </div>
