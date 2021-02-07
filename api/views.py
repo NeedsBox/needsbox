@@ -130,3 +130,5 @@ class UserViewSet(viewsets.ModelViewSet):
             exception.status_code = status.HTTP_401_UNAUTHORIZED
             raise exception
         super().perform_update(serializer)
+
+

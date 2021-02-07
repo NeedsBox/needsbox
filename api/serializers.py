@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 
 from accounts.models import Account
 from project.models import Advertisement, Category, Service, Review
+from spatialdata.models import Limits
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -91,3 +92,8 @@ class ReviewSerializer(ModelSerializer):
         validated_data["user"] = self.context["request"].user
 
         return super().create(validated_data)
+
+class LimitsSerializer(ModelSerializer):
+    class Meta:
+        model = Limits
+        fields = '__all__'
