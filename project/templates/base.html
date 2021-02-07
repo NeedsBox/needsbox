@@ -18,6 +18,8 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 
 
@@ -42,7 +44,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-default ">
         <div class="container-fluid px-0">
-            <a class="navbar-brand" href="{% url 'needsbox:index' %}"><img src="{% static 'images/logo.svg' %}" alt="" /></a>
+            <a class="navbar-brand" href="{% url 'needsbox:index' %}"><img src="{% static 'images/logo.svg' %}"
+                    alt="" /></a>
             <!-- Mobile view nav wrap -->
             {% if user.is_authenticated %}
             <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap">
@@ -380,6 +383,11 @@
 
     <!-- Theme JS -->
     <script src="{% static 'js/theme.min.js' %}"></script>
+
+    <script>
+        axios.defaults.xsrfCookieName = 'csrftoken';
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    </script>
 </body>
 
 </html>

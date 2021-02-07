@@ -16,13 +16,24 @@
                 </p>
                 <form>
                     <!-- Input -->
-                    <div class="input-group">
+                    <div class="input-group" id="app">
+                        <div>
+                            <div>
+                                <h1 v-on:click="teste()">[[ message ]]</h1>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h1 v-on:click="vote()">[[ info ]]</h1>
+                            </div>
+                        </div>
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                             aria-describedby="button-addon2">
-                        <select class="custom-select input-group-append" id="inputGroupSelect01">
-                            <option selected>Distrito</option>
+                        <select class="custom-select input-group-append" id="inputGroupSelect01" v-model="selected">
+                            <option selected disabled value="">Distrito</option>
                             {% for distrito in distritos %}
-                            <option value="{{ distrito.distrito }}">{{ distrito.distrito_title }}</option>
+                            <option value="{{ distrito.distrito }}" v-on:click="vote()">{{ distrito.distrito_title }}
+                            </option>
                             {% endfor %}
                         </select>
                         <div class="input-group-append">
@@ -772,4 +783,32 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+    var app = new Vue({
+        delimiters: ["[[", "]]"],
+        el: '#app',
+        data: {
+            message: 'Hello {{ user.username }} !',
+            selected: '',
+            info: null,
+        },
+        methods: {
+            vote: function () {
+                //alert('Hello {{ user.username }}!');
+                console.log("alert");
+            },
+            teste: function () {
+                alert("yo")
+            }
+        },
+        mounted() {
+            axios
+                .get('https://needsbox.tech/api/categories/')
+                .then(response => (this.info = response))
+        },
+    });
+</script>
 {% endblock %}
