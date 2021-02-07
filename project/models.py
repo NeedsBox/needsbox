@@ -1,20 +1,11 @@
 from django.db import models
+from django.contrib.gis.db import models
 from django.db.models.deletion import CASCADE
 from accounts.models import Account
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
-
-class Location(models.Model):
-    district = models.CharField(max_length=50, blank=False)
-    city = models.CharField(max_length=50, blank=True)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-
-    def __str__(self):
-        return self.district + " | " + self.city
-
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -28,7 +19,7 @@ class Advertisement(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.PointField()
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
@@ -41,7 +32,7 @@ class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.PointField()
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
