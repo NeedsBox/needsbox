@@ -17,24 +17,19 @@
                 <form>
                     <!-- Input -->
                     <div class="input-group" id="app">
-                        <div>
-                            <div>
-                                <h1 v-on:click="teste()">[[ message ]]</h1>
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <h1 v-on:click="vote()">[[ info ]]</h1>
-                            </div>
-                        </div>
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search"
                             aria-describedby="button-addon2">
-                        <select class="custom-select input-group-append" id="inputGroupSelect01" v-model="selected">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01">
                             <option selected disabled value="">Distrito</option>
                             {% for distrito in distritos %}
-                            <option value="{{ distrito.distrito }}" v-on:click="vote()">{{ distrito.distrito_title }}
+                            <option value="{{ distrito.distrito }}" v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
                             </option>
                             {% endfor %}
+                        </select>
+                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                            <option selected disabled value="">Concelho</option>
+                            <option value="" v-for="concelho in concelhos">[[ concelho.nome ]]
+                            </option>
                         </select>
                         <div class="input-group-append">
                             <button class="btn btn-warning" type="button" id="button-addon2"><i
@@ -791,23 +786,20 @@
         delimiters: ["[[", "]]"],
         el: '#app',
         data: {
-            message: 'Hello {{ user.username }} !',
-            selected: '',
             info: null,
+            concelhos: null,
+            currentUrl: location.toString(),
+            host: location.host
         },
         methods: {
-            vote: function () {
-                //alert('Hello {{ user.username }}!');
-                console.log("alert");
+            getDataFromApi() {
+                value = event.currentTarget.value;
+                return axios
+                .get(this.currentUrl + 'api/limits/' + value)
+                .then(response => (this.info = response.data))
+                .then(response => (this.concelhos = this.info))
+                .catch(error => console.log(error))
             },
-            teste: function () {
-                alert("yo")
-            }
-        },
-        mounted() {
-            axios
-                .get('http://localhost:8000/api/categories/')
-                .then(response => (this.info = response.data.results))
         },
     });
 </script>

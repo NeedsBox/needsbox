@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 
 from accounts.models import Account
 from project.models import Advertisement, Category, Service, Review
-from spatialdata.models import Limits
+from spatialdata.models import Limits as teste
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -95,5 +95,12 @@ class ReviewSerializer(ModelSerializer):
 
 class LimitsSerializer(ModelSerializer):
     class Meta:
-        model = Limits
-        fields = '__all__'
+        model = teste
+        fields = [
+            'id',
+            'concelho',
+            'nome',
+            'distrito',
+            'distrito_title',
+            'nuti',
+        ]
