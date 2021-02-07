@@ -16,16 +16,27 @@
                 </p>
                 <form>
                     <!-- Input -->
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                            aria-describedby="button-addon2">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                            <option selected>Distrito</option>
+                            {% for distrito in distritos %}
+                            <option value="{{ distrito.distrito }}">{{ distrito.distrito_title }}</option>
+                            {% endfor %}
+                        </select>
                         <div class="input-group-append">
-                          <button class="btn btn-warning" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-warning" type="button" id="button-addon2"><i
+                                    class="bi bi-search"></i></button>
                         </div>
                     </div>
-                </form>
+
+
             </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <div class="bg-white py-4 shadow-sm">
     <div class="container">
