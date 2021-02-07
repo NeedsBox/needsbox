@@ -806,8 +806,8 @@
         },
         mounted() {
             axios
-                .get('https://needsbox.tech/api/categories/')
-                .then(response => (this.info = response))
+                .get('http://localhost:8000/api/categories/')
+                .then(response => (this.info = response.data.results))
         },
     });
 </script>
