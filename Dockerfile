@@ -1,26 +1,42 @@
-FROM ubuntu:bionic
+# Base Image
+FROM python:3.8
 
+# create and set working directory
+RUN mkdir /app
+WORKDIR /app
+
+# Add current directory code to working directory
+ADD . /app/
+
+# set default environment variables
 ENV PYTHONUNBUFFERED 1
-ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive 
 
-RUN apt-get update -qq && apt-get install -y -qq \
-    # std libs
-    git less nano curl \
-    ca-certificates \
-    wget build-essential\
-    # python basic libs
-    python3.8 python3.8-dev python3.8-venv gettext \
-    # geodjango
-    gdal-bin binutils libproj-dev libgdal-dev \
-    # postgresql
-    libpq-dev postgresql-client && \
-    apt-get clean all && rm -rf /var/apt/lists/* && rm -rf /var/cache/apt/*
+# set project environment variables
+# grab these via Python's os.environ
+# these are 100% optional here
+ENV PORT=8888
 
-# install pip
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3.8 get-pip.py && rm get-pip.py
-RUN pip3 install --no-cache-dir setuptools wheel -U
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        tzdata \
+        python3-setuptools \
+        python3-pip \
+        python3-dev \
+        python3-venv \
+        git \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-CMD ["/bin/bash"]
 
-EXPOSE 8000
+# install environment dependencies
+RUN pip3 install --upgrade pip 
+RUN pip3 install pipenv
+
+# Install project dependencies
+RUN pipenv install --skip-lock --system --dev
+
+EXPOSE 8888
+CMD gunicorn cfehome.wsgi:application --bind 0.0.0.0:$PORT
