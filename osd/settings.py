@@ -166,3 +166,6 @@ sentry_sdk.init(
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
+
+GEOS_LIBRARY_PATH = env('GEOS_LIBRARY_PATH')
+GDAL_LIBRARY_PATH = env('GDAL_LIBRARY_PATH')
