@@ -1,23 +1,26 @@
-FROM python:3.8.5-alpine
+FROM ubuntu:bionic
 
-RUN set -ex \
-    && apk add --no-cache --virtual .build-deps postgresql-dev build-base \
-    && python -m venv /env \
-    && /env/bin/pip install --upgrade pip \
-    && /env/bin/pip install --no-cache-dir -r /app/requirements.txt \
-    && runDeps="$(scanelf --needed --nobanner --recursive /env \
-        | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
-        | sort -u \
-        | xargs -r apk info --installed \
-        | sort -u)" \
-    && apk add --virtual rundeps $runDeps \
-    && apk del .build-deps
-    && apt-get install binutils libproj-dev gdal-bin
+ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND noninteractive
+ENV LANG C.UTF-8
 
-ADD osd /app
-WORKDIR /app
+RUN apt-get update -qq && apt-get install -y -qq \
+    # std libs
+    git less nano curl \
+    ca-certificates \
+    wget build-essential\
+    # python basic libs
+    python3.8 python3.8-dev python3.8-venv gettext \
+    # geodjango
+    gdal-bin binutils libproj-dev libgdal-dev \
+    # postgresql
+    libpq-dev postgresql-client && \
+    apt-get clean all && rm -rf /var/apt/lists/* && rm -rf /var/cache/apt/*
 
-ENV VIRTUAL_ENV /env
-ENV PATH /env/bin:$PATH
+# install pip
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3.8 get-pip.py && rm get-pip.py
+RUN pip3 install --no-cache-dir setuptools wheel -U
+
+CMD ["/bin/bash"]
 
 EXPOSE 8000
