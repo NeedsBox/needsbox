@@ -137,6 +137,5 @@ class Limits(APIView):
     def get(self, request, string):
         
         limits = LimitsObj.objects.filter(distrito=string.upper() )
-        print(string)
         serializer = LimitsSerializer(limits, many=True)
         return Response(serializer.data)
