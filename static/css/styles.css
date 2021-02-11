@@ -16,3 +16,7 @@
 #inputGroupSelect01 {
   max-width: 20%;
 }
+
+.custom-select {
+  font-family: Arial;
+}
