@@ -62,65 +62,12 @@
             <div class="card-body">
               <span class="dropdown-header px-0 mb-2"> Category</span>
               <!-- Checkbox -->
+			  {% for categoria in categorias %}
               <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="reactCheck" checked>
-                <label class="custom-control-label" for="reactCheck">React</label>
+                <input type="checkbox" class="custom-control-input" id="{{ categoria.name }}Check">
+                <label class="custom-control-label" for="{{ categoria.name }}Check">{{ categoria.name }}</label>
               </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="javascriptCheck">
-                <label class="custom-control-label" for="javascriptCheck">Javascript</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="angularCheck">
-                <label class="custom-control-label" for="angularCheck">Angular</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="nodeCheck">
-                <label class="custom-control-label" for="nodeCheck">Node</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="angularJSCheck">
-                <label class="custom-control-label" for="angularJSCheck">Angular JS</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="gatsbyCheck">
-                <label class="custom-control-label" for="gatsbyCheck">GatsBy</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="graphQlCheck">
-                <label class="custom-control-label" for="graphQlCheck">GraphQL</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="vueJsCheck">
-                <label class="custom-control-label" for="vueJsCheck">VueJs</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="bootstrapCheck">
-                <label class="custom-control-label" for="bootstrapCheck">Bootstrap</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="figmaCheck">
-                <label class="custom-control-label" for="figmaCheck">Figma</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="sketchCheck">
-                <label class="custom-control-label" for="sketchCheck">Sketch</label>
-              </div>
-               <!-- Checkbox -->
-              <div class="custom-control custom-checkbox mb-1">
-                <input type="checkbox" class="custom-control-input" id="HTML5Check">
-                <label class="custom-control-label" for="HTML5Check">HTML5</label>
-              </div>
+              {% endfor %}
             </div>
             <!-- Card body -->
             <div class="card-body border-top">

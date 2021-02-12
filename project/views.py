@@ -1,5 +1,6 @@
 from spatialdata.models import Limits
 from django.shortcuts import render
+from .models import Category
 # Create your views here.
 
 def index(request):
@@ -14,4 +15,12 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def search(request):
-    return render(request, 'pages/search.html', context={})
+    context = {}
+
+    categorias = Category.objects.all()
+
+    context = {
+        'categorias': categorias,
+    }
+
+    return render(request, 'pages/search.html', context=context)
