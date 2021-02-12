@@ -20,6 +20,7 @@ class Advertisement(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     location = models.PointField()
+    image = models.ImageField(default="static/images/default-service.jpg", blank=True, upload_to='advertisements')
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
@@ -33,6 +34,7 @@ class Service(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     location = models.PointField()
+    image = models.ImageField(default="static/images/default-service.jpg", blank=True, upload_to='services')
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
