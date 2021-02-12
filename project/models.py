@@ -50,8 +50,35 @@ class Service(models.Model):
     
     def get_location(self):
         limits = Limits.objects.filter(geom__intersects=self.location).values('nome', 'distrito_title')
-
         return str(limits[0]['nome'])
+    
+    def get_reviews_count(self):
+        reviews = Review.objects.filter(service=self)
+        return reviews.count()
+
+    def get_average_review(self):
+        reviews = Review.objects.filter(service=self)
+        count = reviews.count()
+        if count == 0:
+            context = {
+                'average': "No reviews",
+                'count': 0,
+            }
+            return context
+        print(count)
+        total = float(0)
+        for x in reviews:
+            total+=x.stars
+        
+        final_count = count
+        average = float(total) / float(count)
+
+        context = {
+            'average': average,
+            'count': final_count,
+        }
+
+        return context
 
 
 class Review(models.Model):

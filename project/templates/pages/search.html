@@ -172,14 +172,14 @@
 										</ul>
 										<div class="lh-1">
 											<span>
-												<i class="mdi mdi-star text-warning mr-n1"></i>
-												<i class="mdi mdi-star text-warning mr-n1"></i>
-												<i class="mdi mdi-star text-warning mr-n1"></i>
-												<i class="mdi mdi-star text-warning mr-n1"></i>
-												<i class="mdi mdi-star text-warning"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star text-warning mr-n1"></i>
 											</span>
-											<span class="text-warning">4.5</span>
-											<span class="font-size-xs text-muted">(7,700)</span>
+											<span class="text-warning">{{ service.get_average_review.average }}</span>
+											<span class="font-size-xs text-muted">({{ service.get_average_review.count }})</span>
 										</div>
 									</div>
 									<!-- Card footer -->
