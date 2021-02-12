@@ -59,10 +59,16 @@ class Service(models.Model):
     def get_average_review(self):
         reviews = Review.objects.filter(service=self)
         count = reviews.count()
+
+        
+
         if count == 0:
             context = {
                 'average': "No reviews",
                 'count': 0,
+                'stars': 0,
+                'empty_stars': 5,
+                'half_stars': 0,
             }
             return context
         print(count)
@@ -73,9 +79,16 @@ class Service(models.Model):
         final_count = count
         average = float(total) / float(count)
 
+        stars = int(average)
+        empty_stars = 5 - stars
+        half_stars = average - stars
+
         context = {
             'average': average,
             'count': final_count,
+            'stars': stars,
+            'empty_stars': empty_stars,
+            'half_stars': half_stars,
         }
 
         return context

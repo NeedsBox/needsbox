@@ -172,11 +172,17 @@
 										</ul>
 										<div class="lh-1">
 											<span>
+												{% for i in "x"|ljust:service.get_average_review.stars %}
 												<i class="bi bi-star-fill text-warning mr-n1"></i>
-												<i class="bi bi-star-fill text-warning mr-n1"></i>
-												<i class="bi bi-star-fill text-warning mr-n1"></i>
-												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												{% endfor %}
+												{% for i in "x"|ljust:service.get_average_review.empty_stars %}
 												<i class="bi bi-star text-warning mr-n1"></i>
+												{% endfor %}
+												
+												<!--i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star-fill text-warning mr-n1"></i>
+												<i class="bi bi-star text-warning mr-n1"></i-->
 											</span>
 											<span class="text-warning">{{ service.get_average_review.average }}</span>
 											<span class="font-size-xs text-muted">({{ service.get_average_review.count }})</span>
