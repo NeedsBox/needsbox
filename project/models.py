@@ -49,9 +49,9 @@ class Service(models.Model):
             return static("images/default-service.jpg")
     
     def get_location(self):
-        limits = Limit
+        limits = Limits.objects.filter(geom__intersects=self.location).values('nome', 'distrito_title')
 
-        return "nice"
+        return str(limits[0]['nome'])
 
 
 class Review(models.Model):
