@@ -3,7 +3,8 @@ from django.contrib.gis.db import models
 from django.db.models.deletion import CASCADE
 from accounts.models import Account
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from django.templatetags.static import static
+from spatialdata.models import Limits
 
 # Create your models here.
 
@@ -45,8 +46,12 @@ class Service(models.Model):
         if self.image:
             return self.image.url
         else:
-            print("nice")
-            return "nice"
+            return static("images/default-service.jpg")
+    
+    def get_location(self):
+        limits = Limit
+
+        return "nice"
 
 
 class Review(models.Model):
