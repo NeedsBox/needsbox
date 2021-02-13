@@ -10,6 +10,7 @@ from api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('project.urls')),
+    path('account/', include('accounts.urls')),
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
