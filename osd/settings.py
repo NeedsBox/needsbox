@@ -167,5 +167,8 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 #GEOS_LIBRARY_PATH = env('GEOS_LIBRARY_PATH')
 #GDAL_LIBRARY_PATH = env('GDAL_LIBRARY_PATH')
