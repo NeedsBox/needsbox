@@ -3,28 +3,46 @@
 
 {% block content %}
 <!-- Page Content -->
-<div class="bg-primary">
+<div class="bg-primary tinted-image">
     <div class="container">
         <!-- Hero Section -->
         <div class="row align-items-center no-gutters">
-            <div class="col-xl-5 col-lg-6 col-md-12">
-                <div class="py-5 py-lg-0">
-                    <h1 class="text-white display-4 font-weight-bold">Welcome to Geeks UI
-                        Learning Application
-                    </h1>
-                    <p class="text-white-50 mb-4 lead">
-                        Hand-picked Instructor and expertly crafted courses, designed for the modern students and
-                        entrepreneur.
-                    </p>
-                    <a href="pages/course-filter-list.html" class="btn btn-success">Browse Courses</a>
-                    <a href="pages/sign-in.html" class="btn btn-white">Are You Instructor?</a>
-                </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 xdft">
+                <h1 class="text-white display-4 font-weight-bold">
+                    Bem Vindo ao NeedsBox
+                </h1>
+                <p class="text-white-50 mb-4 lead">
+                    Todos os serviços que procura num lugar!
+                </p>
+                <form>
+                    <!-- Input -->
+                    <div class="input-group" id="app">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                            aria-describedby="button-addon2">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                            <option selected disabled value="">Distrito</option>
+                            {% for distrito in distritos %}
+                            <option value="{{ distrito.distrito }}" v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                            <option selected disabled value="">Concelho</option>
+                            <option value="" v-for="concelho in concelhos">[[ concelho.nome ]]
+                            </option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="button" id="button-addon2"><i
+                                    class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+
+
             </div>
-            <div class=" col-xl-7 col-lg-6 col-md-12 text-lg-right text-center">
-                <img src="{% static 'images/hero-img.png' %}" alt="" class="img-fluid" />
-            </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <div class="bg-white py-4 shadow-sm">
     <div class="container">
@@ -84,8 +102,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-react.jpg' %}" alt=""
-                            class="rounded-top card-img-top"></a>
+                            src="{% static 'images/course-react.jpg' %}" alt="" class="rounded-top card-img-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -120,8 +137,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-1.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-1.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Morris Mccoy</span>
@@ -140,8 +156,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-graphql.jpg' %}" alt=""
-                            class="rounded-top card-img-top"></a>
+                            src="{% static 'images/course-graphql.jpg' %}" alt="" class="rounded-top card-img-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -176,8 +191,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-2.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-2.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Ted Hawkins</span>
@@ -196,8 +210,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-angular.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-angular.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -232,8 +245,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-3.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Juanita Bell</span>
@@ -252,8 +264,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-python.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-python.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -288,8 +299,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-4.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-4.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Claire Robertson</span>
@@ -322,8 +332,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-gatsby.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-gatsby.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -358,8 +367,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-5.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-5.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Morris Mccoy</span>
@@ -413,8 +421,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-6.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-6.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Ted Hawkins</span>
@@ -468,8 +475,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-7.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-7.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Juanita Bell</span>
@@ -524,8 +530,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-8.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-8.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Claire Robertson</span>
@@ -558,8 +563,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-react.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-react.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -594,8 +598,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-9.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-9.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Morris Mccoy</span>
@@ -614,8 +617,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-graphql.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-graphql.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -650,8 +652,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-10.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-10.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Ted Hawkins</span>
@@ -670,8 +671,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-angular.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-angular.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -706,8 +706,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-4.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-4.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Juanita Bell</span>
@@ -726,8 +725,7 @@
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-python.jpg' %}" alt=""
-                            class="card-img-top rounded-top"></a>
+                            src="{% static 'images/course-python.jpg' %}" alt="" class="card-img-top rounded-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
@@ -762,8 +760,7 @@
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-6.jpg' %}" class="rounded-circle avatar-xs"
-                                    alt="">
+                                <img src="{% static 'images/avatar-6.jpg' %}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
                                 <span>Claire Robertson</span>
@@ -781,4 +778,29 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+    var app = new Vue({
+        delimiters: ["[[", "]]"],
+        el: '#app',
+        data: {
+            info: null,
+            concelhos: null,
+            currentUrl: location.toString(),
+            host: location.host
+        },
+        methods: {
+            getDataFromApi() {
+                value = event.currentTarget.value;
+                return axios
+                .get(this.currentUrl + 'api/limits/' + value)
+                .then(response => (this.info = response.data))
+                .then(response => (this.concelhos = this.info))
+                .catch(error => console.log(error))
+            },
+        },
+    });
+</script>
 {% endblock %}

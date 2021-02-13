@@ -49,6 +49,7 @@ SECRET_KEY = '*@r7+&-$j+n_k&*k#sw+bbn4obh3p5y)8*@h4fooa#9ue23tc%'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'project',
     'accounts',
     'phone_field',
@@ -66,6 +68,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
+    'spatialdata',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -79,6 +83,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,3 +166,6 @@ sentry_sdk.init(
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
+
+#GEOS_LIBRARY_PATH = env('GEOS_LIBRARY_PATH')
+#GDAL_LIBRARY_PATH = env('GDAL_LIBRARY_PATH')

@@ -4,7 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_extensions.routers import ExtendedDefaultRouter
 
 from api import views
-from api.views import AdListView, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView, \
+from api.views import AdListView, Limits, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView, \
     ReviewViewSet
 
 # Documentation
@@ -38,6 +38,7 @@ urlpatterns = [
     path('users/sessions/<str:token>', views.verify_token),
     path('search/ads/', AdListView.as_view()),
     path('search/services/', ServiceListView.as_view()),
+    path('limits/<str:string>', views.Limits.as_view(), name="limits"),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

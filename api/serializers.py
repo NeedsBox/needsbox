@@ -2,7 +2,8 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from accounts.models import Account
-from project.models import Advertisement, Category, Location, Service, Review
+from project.models import Advertisement, Category, Service, Review
+from spatialdata.models import Limits as teste
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -35,25 +36,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class LocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Location
-        fields = [
-            'district',
-            'city',
-            'latitude',
-            'longitude',
-        ]
-
-
 class ServiceAdvertisementSerializer(ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
-    location = LocationSerializer(many=False)
 
     def create(self, validated_data):
-        location_data = validated_data.pop('location')
-        location = Location.objects.create(**location_data)
-        validated_data["location"] = location
         validated_data["user"] = self.context["request"].user
 
         return super().create(validated_data)
@@ -106,3 +92,15 @@ class ReviewSerializer(ModelSerializer):
         validated_data["user"] = self.context["request"].user
 
         return super().create(validated_data)
+
+class LimitsSerializer(ModelSerializer):
+    class Meta:
+        model = teste
+        fields = [
+            'id',
+            'concelho',
+            'nome',
+            'distrito',
+            'distrito_title',
+            'nuti',
+        ]

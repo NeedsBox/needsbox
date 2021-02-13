@@ -10,11 +10,13 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework_extensions.mixins import NestedViewSetMixin
+from rest_framework.views import APIView
 
 from accounts.models import Account
-from api.serializers import UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer, \
+from api.serializers import LimitsSerializer, UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer, \
     ReviewSerializer
 from project.models import Category, Advertisement, Service, Review
+from spatialdata.models import Limits as LimitsObj
 
 
 @api_view(['GET'])
@@ -130,3 +132,10 @@ class UserViewSet(viewsets.ModelViewSet):
             exception.status_code = status.HTTP_401_UNAUTHORIZED
             raise exception
         super().perform_update(serializer)
+
+class Limits(APIView):
+    def get(self, request, string):
+        
+        limits = LimitsObj.objects.filter(distrito=string.upper() )
+        serializer = LimitsSerializer(limits, many=True)
+        return Response(serializer.data)

@@ -1,50 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-body {
-    font-family: 'Ubuntu', sans-serif;
+.btn-ctm {
+  margin-right: 10px;
 }
 
-.top-bar, .top-bar-left, footer {
-    background-color: #262322;
+.tinted-image {
+  background: /* top, transparent red, faked with gradient */
+  linear-gradient( rgba(0, 0, 0, 0.5), rgba(44, 44, 44, 0.5)), /* bottom, image */
+  url('/static/images/daniel-sessler-YVj9hyQgtkY-unsplash.jpg') no-repeat center;
 }
 
-.menu>li {
-    background-color: #262322;
-    color: white;
+.xdft {
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
-.menu>li>a {
-    padding: 10px 25px;
+#inputGroupSelect01 {
+  max-width: 20%;
 }
 
-.register-button {
-    color: #FFFFFF !important;
-    font-size: 18px;
-    padding: 5px 5px;
-    border-radius: 40px;
-    border: 0px solid #3866A3;
-    background: #F18F01;
+.custom-select {
+  font-family: Arial;
 }
 
-.register-button:hover {
-    color: lightgray !important;
-    background: #262322;
-}
-
-.login-button {
-    color: #FFFFFF !important;
-    font-size: 18px;
-    padding: 5px 5px;
-    border-radius: 40px;
-    background-color: none;
-    border-color: #ff9800;
-}
-
-.login-button:hover {
-    color: lightgray !important;
-    background: #262322;
-}
-
-.separator {
-    font-size: 24px;
+.card-img-top.rounded-top {
+  float: left;
+  height: 150px;
+  object-fit: cover;
 }
