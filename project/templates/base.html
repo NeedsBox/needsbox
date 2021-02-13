@@ -139,7 +139,7 @@
                         <div class="dropdown-divider"></div>
                         <ul class="list-unstyled">
                             <li>
-                                <a class="dropdown-item" href="index.html">
+                                <a class="dropdown-item" href="{% url 'accounts:logout' %}">
                                     <i class="fe fe-power nav-icon"></i>Sign Out
                                 </a>
                             </li>
@@ -150,7 +150,7 @@
             {% endif %}
             {% if not user.is_authenticated %}
             <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap">
-                <button type="button" class="btn btn-outline-warning btn-ctm">Login</button>
+                <a type="button" class="btn btn-outline-warning btn-ctm" href="{% url 'accounts:login' %}"></a>>Login</a>
                 <button type="button" class="btn btn-warning">Register</button>
             </ul>
             {% endif %}
@@ -309,7 +309,7 @@
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a class="dropdown-item" href="index.html">
+                                    <a class="dropdown-item" href="{% url 'accounts:logout' %}">
                                         <i class="fe fe-power nav-icon"></i>Sign Out
                                     </a>
                                 </li>
@@ -320,7 +320,7 @@
                 {% endif %}
                 {% if not user.is_authenticated %}
                 <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
-                    <button type="button" class="btn btn-outline-warning">Login</button>
+                    <a type="button" class="btn btn-outline-warning" href="{% url 'accounts:login' %}">Login</a>
                     <button type="button" class="btn btn-warning">Register</button>
                 </ul>
                 {% endif %}
