@@ -1,6 +1,7 @@
 from spatialdata.models import Limits
 from django.shortcuts import render
 from .models import Category, Service
+from django.views.generic import ListView
 # Create your views here.
 
 def index(request):

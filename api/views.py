@@ -56,7 +56,7 @@ class ServiceListView(ListAPIView):
     queryset = Service.objects.all()
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('title', 'location__district', 'location__city', 'category__name', 'description')
+    search_fields = ('title', 'category__name', 'description')
 
 
 class CustomModelViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericViewSet):
