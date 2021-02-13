@@ -1,25 +1,17 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
+from django.shortcuts import render
+from .forms import CreateUserForm
 
 
 # Create your views here.
 
 
-def signup(request):
+def registerPage(request):
+    form = CreateUserForm()
+
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('sigm-in')
-        else:
-            form = UserRegisterForm()
-        return render(request, 'accounts/signup.html', {'form': form})
 
-
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+    context = {'form': form}
+    return render(request, 'sign-up.html', context)

@@ -167,9 +167,9 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
-#GEOS_LIBRARY_PATH = env('GEOS_LIBRARY_PATH')
-#GDAL_LIBRARY_PATH = env('GDAL_LIBRARY_PATH')
+# GEOS_LIBRARY_PATH = env('GEOS_LIBRARY_PATH')
+# GDAL_LIBRARY_PATH = env('GDAL_LIBRARY_PATH')
 
-LOGIN_REDIRECT_URL='project-base'
+LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = 'sign-in'
