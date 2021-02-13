@@ -18,6 +18,10 @@ def index(request):
 def search(request):
     context = {}
 
+    print(request.GET["search"])
+    print(request.GET["distrito"])
+    print(request.GET["concelho"])
+    
     categorias = Category.objects.all()
     services = Service.objects.all()
     services_count = services.count()

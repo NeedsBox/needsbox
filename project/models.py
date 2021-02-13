@@ -69,7 +69,6 @@ class Service(models.Model):
                 'half_stars': 0,
             }
             return context
-        print(count)
         total = float(0)
         for x in reviews:
             total+=x.stars

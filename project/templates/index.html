@@ -14,32 +14,31 @@
                 <p class="text-white-50 mb-4 lead">
                     Todos os serviços que procura num lugar!
                 </p>
-                <form>
+                <form action="{% url 'needsbox:search' %}" method="GET">
                     <!-- Input -->
                     <div class="input-group" id="app">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                            aria-describedby="button-addon2">
-                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                            aria-describedby="button-addon2" name="search">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="distrito">
                             <option selected disabled value="">Distrito</option>
                             {% for distrito in distritos %}
                             <option value="{{ distrito.distrito }}" v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
                             </option>
                             {% endfor %}
                         </select>
-                        <select class="custom-select input-group-append" id="inputGroupSelect01">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="concelho">
                             <option selected disabled value="">Concelho</option>
-                            <option value="" v-for="concelho in concelhos">[[ concelho.nome ]]
-                            </option>
+                            <option v-for="concelho in concelhos" :value="concelho.nome">[[ concelho.nome ]]</option>
                         </select>
                         <div class="input-group-append">
-                            <button class="btn btn-warning" type="button" id="button-addon2"><i
+                            <button class="btn btn-warning" type="submit" id="button-addon2"><i
                                     class="bi bi-search"></i></button>
                         </div>
                     </div>
 
-
+                </form>
             </div>
-            </form>
+            
         </div>
     </div>
 </div>
