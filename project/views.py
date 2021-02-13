@@ -19,10 +19,12 @@ def search(request):
 
     categorias = Category.objects.all()
     services = Service.objects.all()
+    services_count = services.count()
 
     context = {
         'categorias': categorias,
         'services': services,
+        'total_services': services_count,
     }
 
     return render(request, 'pages/search.html', context=context)

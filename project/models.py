@@ -58,9 +58,7 @@ class Service(models.Model):
 
     def get_average_review(self):
         reviews = Review.objects.filter(service=self)
-        count = reviews.count()
-
-        
+        count = reviews.count()        
 
         if count == 0:
             context = {
@@ -82,6 +80,9 @@ class Service(models.Model):
         stars = int(average)
         empty_stars = 5 - stars
         half_stars = average - stars
+        
+        if half_stars != 0:
+            empty_stars -= 1
 
         context = {
             'average': average,
