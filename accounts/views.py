@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from .models import Account
+from project.models import Service
 
 # Create your views here.
 
@@ -27,5 +29,19 @@ class UserRegisterView(generic.CreateView):
         )
         return super().form_valid(form)
 
-def profile(request):
-    return render(request, 'profile.html', context={})
+def profile(request, slug):
+    
+    user = Account.objects.get(username=slug)
+    
+    print(user)
+    
+    services = Service.objects.filter(user=user)
+    context = {
+        'user': user,
+        'services': services,
+    }
+    return render(request, 'profile.html', context=context)
+
+class AccountDetailView(generic.DetailView):
+    model = Account
+    slug_field = "username"
