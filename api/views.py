@@ -1,4 +1,5 @@
 # Create your views here.
+from django.db.models.sql import Query
 from rest_framework import status, permissions, viewsets, mixins
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
@@ -8,12 +9,13 @@ from rest_framework.generics import ListAPIView
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
-from rest_framework_extensions.mixins import NestedViewSetMixin
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from accounts.models import Account
-from api.serializers import LimitsSerializer, UserSerializer, CategorySerializer, AdvertisementSerializer, ServiceSerializer, \
+from api.serializers import LimitsSerializer, UserSerializer, CategorySerializer, AdvertisementSerializer, \
+    ServiceSerializer, \
     ReviewSerializer
 from project.models import Category, Advertisement, Service, Review
 from spatialdata.models import Limits as LimitsObj
@@ -24,6 +26,17 @@ def verify_token(request, token: str):
     result = status.HTTP_404_NOT_FOUND
     if Token.objects.filter(key=token).exists():
         result = status.HTTP_200_OK
+
+    return Response(status=result)
+
+
+@api_view(['GET'])
+def get_self_user(request, token: str):
+    result = status.HTTP_404_NOT_FOUND
+    objects_filter = Token.objects.filter(key=token)
+    if objects_filter.exists():
+        existing_token: Token = Token.objects.get(key=token)
+        return existing_token.user
 
     return Response(status=result)
 
@@ -133,9 +146,9 @@ class UserViewSet(viewsets.ModelViewSet):
             raise exception
         super().perform_update(serializer)
 
+
 class Limits(APIView):
     def get(self, request, string):
-        
-        limits = LimitsObj.objects.filter(distrito=string.upper() )
+        limits = LimitsObj.objects.filter(distrito=string.upper())
         serializer = LimitsSerializer(limits, many=True)
         return Response(serializer.data)
