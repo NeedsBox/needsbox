@@ -1,5 +1,4 @@
 # Create your views here.
-from django.db.models.sql import Query
 from rest_framework import status, permissions, viewsets, mixins
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
@@ -31,12 +30,13 @@ def verify_token(request, token: str):
 
 
 @api_view(['GET'])
-def get_self_user(request, token: str):
+def get_self_user(request):
+    token = request.auth.key
     result = status.HTTP_404_NOT_FOUND
     objects_filter = Token.objects.filter(key=token)
     if objects_filter.exists():
         existing_token: Token = Token.objects.get(key=token)
-        return existing_token.user
+        return Response(UserSerializer(existing_token.user).data)
 
     return Response(status=result)
 

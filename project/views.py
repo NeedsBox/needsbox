@@ -1,41 +1,42 @@
-from django.db.models.lookups import IContains, IsNull
-from spatialdata.models import Limits
+from django.db.models import Q
 from django.shortcuts import render
+
+from spatialdata.models import Limits
 from .models import Category, Service
-from django.views.generic import ListView
-from django.db.models import Q, query
+
+
 # Create your views here.
 
 def index(request):
     context = {}
-    
+
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
-    
+
     context = {
         'distritos': distritos,
     }
-    
+
     return render(request, 'index.html', context=context)
+
 
 def search(request):
     context = {}
 
-    
-    
     try:
         distrito = request.GET["distrito"]
     except:
         distrito = "none"
-    
+
     try:
         concelho = request.GET["concelho"]
     except:
         concelho = "none"
-    
-    concelho_polygon = Limits.objects.filter(nome=concelho).values("geom",)
+
+    concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
     distrito_polygon = Limits.objects.filter(distrito=distrito).count()
-    #location = Concelho.objects.filter(geom__intersects=context['post'].location).values('nome', 'distrito_title')
-    
+    print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA" + str(concelho_polygon))
+    # location = Concelho.objects.filter(geom__intersects=context['post'].location).values('nome', 'distrito_title')
+
     if concelho != "none":
         services = Service.objects.filter(
             Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
@@ -44,9 +45,9 @@ def search(request):
         services = Service.objects.filter(
             Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
         )
-    
+
     categorias = Category.objects.all()
-    #services = Service.objects.all()
+    # services = Service.objects.all()
     services_count = services.count()
 
     context = {

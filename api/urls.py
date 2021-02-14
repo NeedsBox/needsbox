@@ -1,27 +1,26 @@
 from django.conf.urls import url
 from django.urls import path, include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+# Documentation
+from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_extensions.routers import ExtendedDefaultRouter
 
 from api import views
-from api.views import AdListView, Limits, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView, \
+from api.views import AdListView, ServiceViewSet, UserViewSet, CategoryViewSet, AdViewSet, ServiceListView, \
     ReviewViewSet
-
-# Documentation
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
 app_name = 'api'
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="NeedsBox API",
-      default_version='v1',
-      description="This is the documentation for the NeedsBox API!",
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
+    openapi.Info(
+        title="NeedsBox API",
+        default_version='v1',
+        description="This is the documentation for the NeedsBox API!",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 # End of Documentation
 
@@ -36,7 +35,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/sessions', obtain_auth_token),
     path('users/sessions/<str:token>', views.verify_token),
-    path('users/sessions/self', views.get_self_user),
+    path('users/self', views.get_self_user),
     path('search/ads/', AdListView.as_view()),
     path('search/services/', ServiceListView.as_view()),
     path('limits/<str:string>', views.Limits.as_view(), name="limits"),
