@@ -34,7 +34,6 @@ def search(request):
     
     concelho_polygon = Limits.objects.filter(nome=concelho).values("geom",)
     distrito_polygon = Limits.objects.filter(distrito=distrito).count()
-    print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA" + str(concelho_polygon))
     #location = Concelho.objects.filter(geom__intersects=context['post'].location).values('nome', 'distrito_title')
     
     if concelho != "none":
