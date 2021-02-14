@@ -95,3 +95,5 @@ modules.xml
 
 db.sqlite3
 osd/.env
+osd/env
+.env
