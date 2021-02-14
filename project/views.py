@@ -37,3 +37,7 @@ def search(request):
     }
 
     return render(request, 'pages/search.html', context=context)
+
+
+def about(request):
+    return render(request, 'pages/about.html')

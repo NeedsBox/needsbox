@@ -6,5 +6,6 @@ app_name = 'needsbox'
 urlpatterns = [
     path('', views.index, name="index"),
     path('search/', views.search, name="search"),
+    path('about/', views.about, name="about"),
     #path('search/', views.SearchResultsView.as_view(), name='search_results'),
 ]
