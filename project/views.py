@@ -32,15 +32,6 @@ def search(request):
     except:
         concelho = "none"
     
-   # 
-    #if request.GET["distrito"] == None:
-     #   request.GET["distrito"] == "none"
-   # if request.GET["concelho"] == None:
-       # request.GET["concelho"] == "none"
-        
-    #print(request.GET["search"])
-    ##print(request.GET["concelho"])
-    
     concelho_polygon = Limits.objects.filter(nome=concelho).values("geom",)
     distrito_polygon = Limits.objects.filter(distrito=distrito).count()
     print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA" + str(concelho_polygon))
