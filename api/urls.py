@@ -36,7 +36,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/sessions', obtain_auth_token),
     path('users/sessions/<str:token>', views.verify_token),
-    path('users/sessions/self', views.get_self_user),
+    path('users/self', views.get_self_user),
     path('search/ads/', AdListView.as_view()),
     path('search/services/', ServiceListView.as_view()),
     path('limits/<str:string>', views.Limits.as_view(), name="limits"),
