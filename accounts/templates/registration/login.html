@@ -57,6 +57,11 @@
                     Não tem conta? <a href="{% url 'accounts:register' %}">Registe-se</a>
                   </label>
                 </div>
+                  <div class="checkbox mb-3">
+                    <label>
+                    <a href="{% url 'accounts:password_reset' %}">Recuperar Password</a>
+                  </label>
+                </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
               </form>
             </main>
