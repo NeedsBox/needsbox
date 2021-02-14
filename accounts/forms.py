@@ -3,37 +3,38 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import Account
 
+
 class RegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
             'placeholder': 'Username',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
     email = forms.EmailField(widget=forms.TextInput(
         attrs={
             'placeholder': 'Email',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
     name = forms.CharField(widget=forms.TextInput(
         attrs={
             'placeholder': 'Name',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'placeholder': 'Password',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
     password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'placeholder': 'Confirm Password',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
 
     class Meta:
         model = Account
@@ -51,15 +52,15 @@ class LoginForm(AuthenticationForm):
         attrs={
             'placeholder': 'Username',
             'class': 'form-control',
-            }
-        ), label='')
+        }
+    ), label='')
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'placeholder': 'Password',
             'class': 'form-control',
-            }
-        ), label='')
-    
+        }
+    ), label='')
+
     class Meta:
         model = AuthenticationForm
         fields = (

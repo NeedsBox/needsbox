@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.gis.db import models
+
 
 # Model de um concelho (deveria ter ficado numa app à parte)
 class Limits(models.Model):

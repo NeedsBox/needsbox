@@ -1,7 +1,6 @@
-import os
 from django.contrib.gis.utils import LayerMapping
-from .models import Limits
 
+from .models import Limits
 
 limits_mapping = {
     'id': 'id',
@@ -18,9 +17,9 @@ limits_mapping = {
     'geom': 'MULTIPOLYGON',
 }
 
-
 concelho_shapefile = 'concelhos_4326.gpkg'
 
+
 def run(verbose=True):
-    layermap = LayerMapping(Limits,concelho_shapefile,limits_mapping,transform=False)
-    layermap.save(strict=True,verbose=verbose)
+    layermap = LayerMapping(Limits, concelho_shapefile, limits_mapping, transform=False)
+    layermap.save(strict=True, verbose=verbose)

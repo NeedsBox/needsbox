@@ -1,5 +1,4 @@
 # Create your views here.
-from django.db.models.sql import Query
 from rest_framework import status, permissions, viewsets, mixins
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view

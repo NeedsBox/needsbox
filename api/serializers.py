@@ -93,6 +93,7 @@ class ReviewSerializer(ModelSerializer):
 
         return super().create(validated_data)
 
+
 class LimitsSerializer(ModelSerializer):
     class Meta:
         model = teste

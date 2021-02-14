@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import path
+
 from . import views
 
 app_name = 'needsbox'
@@ -6,5 +7,5 @@ app_name = 'needsbox'
 urlpatterns = [
     path('', views.index, name="index"),
     path('search/', views.search, name="search"),
-    #path('search/', views.SearchResultsView.as_view(), name='search_results'),
+    # path('search/', views.SearchResultsView.as_view(), name='search_results'),
 ]

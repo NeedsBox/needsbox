@@ -1,10 +1,10 @@
-from django.db import models
 from django.contrib.gis.db import models
-from django.db.models.deletion import CASCADE
-from accounts.models import Account
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.templatetags.static import static
+
+from accounts.models import Account
 from spatialdata.models import Limits
+
 
 # Create your models here.
 
@@ -41,24 +41,24 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def image_url(self):
         if self.image:
             return self.image.url
         else:
             return static("images/default-service.jpg")
-    
+
     def get_location(self):
         limits = Limits.objects.filter(geom__intersects=self.location).values('nome', 'distrito_title')
         return str(limits[0]['nome'])
-    
+
     def get_reviews_count(self):
         reviews = Review.objects.filter(service=self)
         return reviews.count()
 
     def get_average_review(self):
         reviews = Review.objects.filter(service=self)
-        count = reviews.count()        
+        count = reviews.count()
 
         if count == 0:
             context = {
@@ -71,15 +71,15 @@ class Service(models.Model):
             return context
         total = float(0)
         for x in reviews:
-            total+=x.stars
-        
+            total += x.stars
+
         final_count = count
         average = float(total) / float(count)
 
         stars = int(average)
         empty_stars = 5 - stars
         half_stars = average - stars
-        
+
         if half_stars != 0:
             empty_stars -= 1
 
