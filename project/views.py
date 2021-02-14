@@ -25,12 +25,12 @@ def search(request):
     try:
         distrito = request.GET["distrito"]
     except:
-        distrito = ""
+        distrito = "none"
     
     try:
         concelho = request.GET["concelho"]
     except:
-        concelho = ""
+        concelho = "none"
     
    # 
     #if request.GET["distrito"] == None:
@@ -46,9 +46,14 @@ def search(request):
     print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA" + str(concelho_polygon))
     #location = Concelho.objects.filter(geom__intersects=context['post'].location).values('nome', 'distrito_title')
     
-    services = Service.objects.filter(
-        Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
-    ).filter(location__intersects=concelho_polygon)
+    if concelho != "none":
+        services = Service.objects.filter(
+            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+        ).filter(location__intersects=concelho_polygon)
+    else:
+        services = Service.objects.filter(
+            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+        )
     
     categorias = Category.objects.all()
     #services = Service.objects.all()
