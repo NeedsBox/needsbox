@@ -3,8 +3,10 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.html import strip_tags
 from django.views import generic
+from django.shortcuts import render
 
 from .forms import RegisterForm
+from .models import Account
 
 
 # Create your views here.
@@ -29,3 +31,18 @@ class UserRegisterView(generic.CreateView):
             recipient_list=[form.cleaned_data.get('email')],
         )
         return super().form_valid(form)
+
+class AccountDetailView(generic.DetailView):
+    model = Account
+    slug_field = "username"
+
+def profile(request, username):
+    context = {}
+    
+    user = Account.objects.get(username=username)
+    
+    context = {
+        'user': user,
+    }
+    
+    return render(request, 'profile.html', context=context)
