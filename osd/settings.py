@@ -114,6 +114,17 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 WSGI_APPLICATION = 'osd.wsgi.application'
 
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "lisbon"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'pt'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyA8-X-WtlYjxZNz01toN_JLbTDJJzdPnjs"
+        #os.environ.get('GOOGLE_MAP_API_KEY')
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -177,13 +188,3 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
-MAP_WIDGETS = {
-    "GooglePointFieldWidget": (
-        ("zoom", 15),
-        ("mapCenterLocationName", "lisbon"),
-        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'pt'}}),
-        ("markerFitZoom", 12),
-    ),
-    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_MAP_API_KEY')
-}

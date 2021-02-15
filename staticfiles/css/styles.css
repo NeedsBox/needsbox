@@ -1,0 +1,28 @@
+.btn-ctm {
+  margin-right: 10px;
+}
+
+.tinted-image {
+  background: /* top, transparent red, faked with gradient */
+  linear-gradient( rgba(0, 0, 0, 0.5), rgba(44, 44, 44, 0.5)), /* bottom, image */
+  url('/static/images/daniel-sessler-YVj9hyQgtkY-unsplash.jpg') no-repeat center;
+}
+
+.xdft {
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+
+#inputGroupSelect01 {
+  max-width: 20%;
+}
+
+.custom-select {
+  font-family: Arial;
+}
+
+.card-img-top.rounded-top {
+  float: left;
+  height: 150px;
+  object-fit: cover;
+}
