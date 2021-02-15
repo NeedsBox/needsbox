@@ -1,15 +1,13 @@
+from django import forms
 from mapwidgets.widgets import GooglePointFieldWidget
 
 from project.models import Service
 
 
-class AddForm(forms.ModelForm):
+class AddServiceForm(forms.ModelForm):
     class Meta:
         model = Service
-        fields = (
-            'name',
-            'location',
-        )
+        fields = '__all__'
 
         widgets = {
             'location': GooglePointFieldWidget,

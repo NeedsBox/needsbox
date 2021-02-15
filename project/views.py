@@ -5,6 +5,7 @@ from spatialdata.models import Limits
 from .models import Category, Service
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from .forms import AddServiceForm
 
 # Create your views here.
 
@@ -62,7 +63,7 @@ def search(request):
 
 class ServiceCreate(CreateView):
     model = Service
-    fields = '__all__'
+    form_class = AddServiceForm
 
 
 class ServiceUpdate(UpdateView):
