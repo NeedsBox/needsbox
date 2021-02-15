@@ -121,8 +121,7 @@ MAP_WIDGETS = {
         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'pt'}}),
         ("markerFitZoom", 12),
     ),
-    "GOOGLE_MAP_API_KEY": "AIzaSyA8-X-WtlYjxZNz01toN_JLbTDJJzdPnjs"
-        #os.environ.get('GOOGLE_MAP_API_KEY')
+    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_MAP_API_KEY')
 }
 
 # Password validation
