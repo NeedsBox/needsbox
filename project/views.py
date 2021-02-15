@@ -3,7 +3,8 @@ from django.shortcuts import render
 
 from spatialdata.models import Limits
 from .models import Category, Service
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -57,3 +58,13 @@ def search(request):
     }
 
     return render(request, 'pages/search.html', context=context)
+
+
+class ServiceCreate(CreateView):
+    model = Service
+    fields = '__all__'
+
+
+class ServiceUpdate(UpdateView):
+    model = Service
+    fields = '__all__'

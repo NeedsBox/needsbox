@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'spatialdata',
     'corsheaders',
+    'mapwidgets',
 ]
 
 REST_FRAMEWORK = {
@@ -176,3 +177,13 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "london"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY":"AIzaSyCUo9hYhUUfxi3YIHJVqBnrypAFuHNwMWU"
+}
