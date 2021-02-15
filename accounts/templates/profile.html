@@ -146,10 +146,15 @@ no-repeat;
                                     </a>
                                     {% if request.user == user %}
                                     <div>
-                                        <a class="text-muted text-decoration-none" href="#!" role="button"
-                                            id="courseDropdown" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
+                                        <a class="text-muted text-decoration-none" href="{% url 'needsbox:service_update' service.id %}" role="button"
+                                            id="courseDropdown"  aria-haspopup="true" aria-expanded="false">
                                             <i class="mdi mdi-pencil"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="text-muted text-decoration-none" href="{% url 'needsbox:service_delete' service.id %}" role="button"
+                                            id="courseDropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-delete"></i>
                                         </a>
                                     </div>
                                     {% endif %}
