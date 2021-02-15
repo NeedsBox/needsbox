@@ -16,10 +16,8 @@ def index(request):
     context = {}
 
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
-    random_distrito = Limits.objects.filter(nome="Aveiro")
-    x = Service.objects.filter(location__intersects=random_distrito)
     
-    print(x)
+    
     
     services = list(Service.objects.all())
 

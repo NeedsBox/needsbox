@@ -108,7 +108,7 @@
                     </div>
                 </li>
                 {% if request.user.is_authenticated %}
-                {% include "aux/navbar-auth-mobile.html" %}
+                {% include "includes/navbar-auth-mobile.html" %}
                 {% endif %}
             </ul>
             
@@ -176,7 +176,7 @@
                     <input type="search" class="form-control pl-6" placeholder="Search Courses" />
                 </form-->
                 {% if request.user.is_authenticated %}
-                    {% include 'aux/navbar-auth.html' %}
+                    {% include 'includes/navbar-auth.html' %}
                     {% endif %}
                     
                 {% if not request.user.is_authenticated %}
