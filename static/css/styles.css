@@ -21,6 +21,10 @@
   font-family: Arial;
 }
 
+option {
+  font-family: Arial;
+}
+
 .card-img-top.rounded-top {
   float: left;
   height: 150px;

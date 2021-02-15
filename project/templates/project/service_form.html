@@ -17,7 +17,7 @@
               </p>
             </div>
             <div>
-              <a href="instructor-courses.html" class="btn btn-white ">Volta para os serviços</a>
+              <a href="{% url 'needsbox:index' %}" class="btn btn-white ">Voltar</a>
             </div>
           </div>
         </div>
@@ -34,14 +34,14 @@
             <div class="bs-stepper-header shadow-sm" role="tablist">
               <div class="step" data-target="#test-l-1">
                 <button type="button" class="step-trigger" role="tab" id="courseFormtrigger1" aria-controls="test-l-1">
-                  <span class="bs-stepper-circle">1</span>
+                  <span class="bs-stepper-circle"> </span>
                   <span class="bs-stepper-label">Informações</span>
                 </button>
               </div>
             </div>
             <!-- Stepper content -->
             <div class="bs-stepper-content mt-5">
-              <form action="" method="post">
+              <form action="" enctype='multipart/form-data' method="post">
                 <!-- Content one -->
                 <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade" aria-labelledby="courseFormtrigger1">
                   <!-- Card -->

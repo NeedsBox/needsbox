@@ -6,6 +6,8 @@ from .models import Category, Service
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import AddServiceForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 # Create your views here.
 
@@ -47,7 +49,6 @@ def search(request):
         )
 
     categorias = Category.objects.all()
-    # services = Service.objects.all()
     services_count = services.count()
 
     context = {
@@ -59,9 +60,22 @@ def search(request):
     return render(request, 'pages/search.html', context=context)
 
 
-class ServiceCreate(CreateView):
+#class ServiceCreate(CreateView):
     model = Service
     form_class = AddServiceForm
+
+# View para criar um Post
+class ServiceCreate(LoginRequiredMixin, CreateView):
+    model = Service
+    form_class = AddServiceForm
+    success_url = reverse_lazy('needsbox:index')
+    login_url = reverse_lazy('accounts:login')
+    
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class ServiceUpdate(UpdateView):
