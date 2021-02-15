@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Account
+from .models import Account, PublicContacts
 
 
 class AccountAdmin(UserAdmin):
@@ -15,6 +15,7 @@ class AccountAdmin(UserAdmin):
         'email',
         'profile_image',
         'biography',
+        'small_biography',
         'website',
         'contact',
         'account_type',
@@ -44,3 +45,4 @@ class AccountAdmin(UserAdmin):
 
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(PublicContacts)

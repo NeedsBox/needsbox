@@ -34,6 +34,7 @@ class Service(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
+    price = models.FloatField(blank=True, null=True)
     location = models.PointField()
     image = models.ImageField(blank=True, upload_to='services')
     created_at = models.DateTimeField(auto_now_add=True)

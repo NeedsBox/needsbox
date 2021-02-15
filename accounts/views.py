@@ -6,7 +6,8 @@ from django.views import generic
 from django.shortcuts import render
 
 from .forms import RegisterForm
-from .models import Account
+from .models import Account, PublicContacts
+from project.models import Service
 
 
 # Create your views here.
@@ -39,10 +40,34 @@ class AccountDetailView(generic.DetailView):
 def profile(request, username):
     context = {}
     
-    user = Account.objects.get(username=username)
+    
+    try:
+        user = Account.objects.get(username=username)
+    except Account.DoesNotExist:
+        return render(request, 'pages/404-error.html', context=context)
+    
+    if user.get_type() != 'PRO':
+        return render(request, 'pages/404-error.html', context=context)
+    
+    services = Service.objects.filter(user=user)
+    
+    try:
+        public_contacts = PublicContacts.objects.get(user=user)
+    except PublicContacts.DoesNotExist:
+        public_contacts = 0
+    review_count = 0
+    service_count = 0
+    
+    for service in services:
+        service_count += 1
+        review_count += service.get_reviews_count()
     
     context = {
         'user': user,
+        'services': services,
+        'review_count': review_count,
+        'service_count': service_count,
+        'contacts': public_contacts,
     }
     
     return render(request, 'profile.html', context=context)

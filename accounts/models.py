@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from phone_field import PhoneField
+from django.contrib.gis.db import models
+from spatialdata.models import Limits
 
 
 # Create your models here.
@@ -48,6 +50,7 @@ class Account(AbstractBaseUser):
     profile_image = models.ImageField(default="static/images/default-profile-picture.png", blank=True,
                                       upload_to='profile_pictures')
     biography = models.TextField(blank=True)
+    small_biography = models.CharField(blank=True, max_length=40)
     website = models.CharField(max_length=50, blank=True)
     contact = PhoneField(blank=True, help_text='Contact phone number')
     account_type = models.CharField(
@@ -75,3 +78,16 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+    def get_type(self):
+        return self.account_type
+
+class PublicContacts(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    email = models.EmailField(null=True)
+    phone = PhoneField(null=True)
+    address = models.PointField(null=True)
+    
+    def get_location(self):
+        limits = Limits.objects.filter(geom__intersects=self.address).values('nome', 'distrito_title')
+        return str(limits[0]['nome'])

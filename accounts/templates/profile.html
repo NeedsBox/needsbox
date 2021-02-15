@@ -17,27 +17,23 @@ no-repeat;
                     <div class="position-relative mt-n9">
                         <img src="{{ user.profile_image.url }}" alt=""
                             class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
-                        <a href="#!" class="position-absolute top-0 right-0 mr-2" data-toggle="tooltip"
+                        <!--a href="#!" class="position-absolute top-0 right-0 mr-2" data-toggle="tooltip"
                             data-placement="top" title="Verified">
                             <img src="{% static 'images/checked-mark.svg' %}" alt="" height="30" width="30" />
-                        </a>
+                        </a-->
                     </div>
                     <div class="ml-3">
                         <div class="d-flex align-items-center">
                             <h3 class="mb-0 font-weight-bold mr-2">{{ user.name }}</h3>
-                            <span class="badge badge-light-primary text-primary">Instructor</span>
+                            <!--span class="badge badge-light-primary text-primary">Instructor</span-->
                         </div>
-                        <span class="font-size-xs">Front-end Developer, Designer, Teacher</span>
+                        <span class="font-size-xs">{{ user.small_biography }}</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="font-size-md mt-4 mt-lg-0 pb-2 pb-lg-0 d-lg-flex justify-content-end">
-                    <a href="#!" class="mdi mdi-youtube text-muted mr-2"></a>
                     <a href="#!" class="mdi mdi-link-variant text-muted mr-2"></a>
-                    <a href="#!" class="mdi mdi-instagram text-muted mr-2"></a>
-                    <a href="#!" class="mdi mdi-facebook text-muted mr-2"></a>
-                    <a href="#!" class="mdi mdi-twitter text-muted"></a>
                 </div>
             </div>
         </div>
@@ -52,17 +48,11 @@ no-repeat;
                 <div class="card border-0 mb-4">
                     <!-- Card body -->
                     <div class="card-body">
-                        <h4>About me</h4>
+                        <h4>Descrição</h4>
                         <p>
-                            {% for service in services %}
-                            <p>{{ service }}</p>
-                            {% endfor %}
-                            I am an Innovation designer focussing on UX/UI based in
-                            Berlin. As a creative resident at Figma explored the city of
-                            the future and how new technologies like AI, voice control,
-                            and augmented reality will change our interfaces.
+                            {{ user.biography }}
                         </p>
-                        <a href="#!" class="btn-link"> Read more</a>
+                        <a href="#!" class="btn-link"> Enviar Mensagem</a>
                     </div>
                 </div>
                 <!-- Card -->
@@ -71,8 +61,8 @@ no-repeat;
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
                             <div>
-                                <h4 class="mb-0 font-weight-bold">32</h4>
-                                <p class="font-size-xs mb-0">Courses</p>
+                                <h4 class="mb-0 font-weight-bold">{{ service_count }}</h4>
+                                <p class="font-size-xs mb-0">Serviços</p>
                             </div>
                             <div>
                                 <span><i class="fe fe-file-text font-size-lg"></i></span>
@@ -89,7 +79,7 @@ no-repeat;
                         </div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <h4 class="mb-0 font-weight-bold">12,230</h4>
+                                <h4 class="mb-0 font-weight-bold">{{ review_count }}</h4>
                                 <p class="font-size-xs mb-0">Reviews</p>
                             </div>
                             <div>
@@ -99,13 +89,13 @@ no-repeat;
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-8 col-12">
+            <div class="col-lg-6 col-md-4 col-12">
                 <!-- Card -->
                 <div class="card border-0">
                     <!-- Card header -->
                     <div class="card-header">
                         <h4 class="mb-0">
-                            My Courses <span class="text-muted font-size-xs">(12)</span>
+                            Serviços <span class="text-muted font-size-xs">({{ service_count }})</span>
                         </h4>
                     </div>
                     <!-- Card body -->
@@ -128,59 +118,89 @@ no-repeat;
                                                 </h4>
                                                 <ul class="list-inline font-size-xs mb-0 text-inherit">
                                                     <li class="list-inline-item">
-                                                        <i class="far fa-clock mr-1"></i>Custo
+                                                        {% if service.price %}
+                                                        <i class="far fa-clock mr-1"></i>Custo: {{ service.price }}€/h
+                                                        {% else %}
+                                                        <i class="far fa-clock mr-1"></i>Custo: Requisitar
+                                                        {% endif %}
                                                     </li>
                                                     <li class="list-inline-item">
-                                                        <svg class="mt-n1" width="16" height="16" viewBox="0 0 16 16"
-                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <rect x="3" y="8" width="2" height="6" rx="1"
-                                                                fill="#754FFE"></rect>
-                                                            <rect x="7" y="5" width="2" height="9" rx="1"
-                                                                fill="#DBD8E9"></rect>
-                                                            <rect x="11" y="2" width="2" height="12" rx="1"
-                                                                fill="#DBD8E9"></rect>
-                                                        </svg>
-                                                        Beginner
+                                                        <i class="mdi mdi-map-marker"></i>
+                                                        {{ service.get_location }}
                                                     </li>
                                                     <li class="list-inline-item">
-                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
-                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
-                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
-                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
-                                                        <i class="mdi mdi-star text-warning"></i>
-                                                        <span class="text-warning">4.5</span>
-                                                        <span class="text-muted">(1,345)</span>
+                                                        {% if service.get_average_review.count != 0 %}
+												{% for i in "x"|ljust:service.get_average_review.stars %}
+												<i class="mdi mdi-star mr-n1 text-warning"></i>
+												{% endfor %}
+												{% if service.get_average_review.half_stars != 0 %}
+												<i class="mdi mdi-star-half mr-n1 text-warning"></i>
+												{% endif %}
+												{% endif %}
+                                                        <span class="text-warning">{{ service.get_average_review.average }}</span>
+                                                        <span class="text-muted">({{ service.get_average_review.count }})</span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </a>
+                                    {% if request.user == user %}
                                     <div>
-                                        <!-- Dropdown -->
-                                        <span class="dropdown dropleft">
-                                            <a class="text-muted text-decoration-none" href="#!" role="button"
-                                                id="courseDropdown" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i class="fe fe-more-vertical"></i>
-                                            </a>
-                                            <span class="dropdown-menu" aria-labelledby="courseDropdown">
-                                                <span class="dropdown-header">Share</span>
-                                                <a class="dropdown-item" href="#!"><i
-                                                        class="fab fa-facebook dropdown-item-icon"></i>Facebook</a>
-                                                <a class="dropdown-item" href="#!"><i
-                                                        class="fab fa-twitter dropdown-item-icon"></i>Twitter</a>
-                                                <a class="dropdown-item" href="#!"><i
-                                                        class="fab fa-linkedin dropdown-item-icon"></i>Linked
-                                                    In</a>
-                                                <a class="dropdown-item" href="#!"><i
-                                                        class="fas fa-copy dropdown-item-icon"></i>Copy Link</a>
-                                            </span>
-                                        </span>
+                                        <a class="text-muted text-decoration-none" href="#!" role="button"
+                                            id="courseDropdown" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <i class="mdi mdi-pencil"></i>
+                                        </a>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </li>
                             {% endfor %}
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-12">
+                <!-- Card -->
+                <div class="card border-0 mb-4 mb-lg-0">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            Contactos
+                        </h4>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        
+                        {% if contacts.email %}
+                        <div class="d-flex align-items-center justify-content-start border-bottom">
+                            <div>
+                                <i class="mdi mdi-email"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 info-profle">{{ contacts.email }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if contacts.phone %}
+                        <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
+                            <div>
+                                <i class="mdi mdi-phone"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 info-profle">{{ contacts.phone }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if contacts.get_location %}
+                        <div class="d-flex align-items-center justify-content-start profile-box">
+                            <div>
+                                <i class="mdi mdi-map-marker"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

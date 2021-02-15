@@ -26,3 +26,12 @@
   height: 150px;
   object-fit: cover;
 }
+
+.info-profle {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.profile-box {
+  margin-top: 25px;
+}
