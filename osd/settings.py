@@ -181,9 +181,9 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
         ("zoom", 15),
-        ("mapCenterLocationName", "london"),
-        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+        ("mapCenterLocationName", "lisbon"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'pt'}}),
         ("markerFitZoom", 12),
     ),
-    "GOOGLE_MAP_API_KEY":"AIzaSyCUo9hYhUUfxi3YIHJVqBnrypAFuHNwMWU"
+    "GOOGLE_MAP_API_KEY": os.environ.get('GOOGLE_MAP_API_KEY')
 }
