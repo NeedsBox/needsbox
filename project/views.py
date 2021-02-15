@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from .forms import AddServiceForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+import random
 
 # Create your views here.
 
@@ -15,9 +16,21 @@ def index(request):
     context = {}
 
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
+    random_distrito = Limits.objects.filter(nome="Aveiro")
+    x = Service.objects.filter(location__intersects=random_distrito)
+    
+    print(x)
+    
+    services = list(Service.objects.all())
+
+    # change 3 to how many random items you want
+    random_services = random.sample(services, 4)
+    # if you want only a single random item
+    #random_item = random.choice(items)
 
     context = {
         'distritos': distritos,
+        'random_services': random_services,
     }
 
     return render(request, 'index.html', context=context)

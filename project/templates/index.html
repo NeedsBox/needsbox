@@ -90,56 +90,54 @@
     <div class="container">
         <div class="row d-lg-flex align-items-center mb-4">
             <div class="col">
-                <h2 class="mb-0">Recommended to you</h2>
+                <h2 class="mb-0">Serviços em Aveiro</h2>
             </div>
             <div class="col-auto">
                 <a href="pages/course-filter-list.html" class="btn btn-outline-primary btn-sm">View All</a>
             </div>
         </div>
         <div class="row">
+            {% for random_service in random_services %}
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
                     <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-react.jpg' %}" alt="" class="rounded-top card-img-top"></a>
+                            src="{{ random_service.image_url }}" alt="" class="rounded-top card-img-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
                         <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">How to
-                                easily create a website with React</a></h4>
+                                class="text-inherit">{{ random_service.title }}</a></h4>
                         <!-- List -->
                         <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><i class="far fa-clock mr-1"></i>3h 56m</li>
-                            <li class="list-inline-item">
-                                <svg class="mr-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE" />
-                                    <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9" />
-                                    <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9" />
-                                </svg>
-                                Beginner
+                            <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              </svg> {{ random_service.get_location }}
                             </li>
                         </ul>
                         <div class="lh-1">
                             <span>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning"></i>
+                                {% if random_service.get_average_review.count != 0 %}
+								{% for i in "x"|ljust:random_service.get_average_review.stars %}
+								<i class="mdi mdi-star mr-n1 text-warning"></i>
+								{% endfor %}
+								{% if random_service.get_average_review.half_stars != 0 %}
+								<i class="mdi mdi-star-half mr-n1 text-warning"></i>
+								{% endif %}
+								{% endif %}
                             </span>
-                            <span class="text-warning">4.5</span>
-                            <span class="font-size-xs text-muted">(7,700)</span>
+                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
+                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
                         </div>
                     </div>
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <div class="row align-items-center no-gutters">
                             <div class="col-auto">
-                                <img src="{% static 'images/avatar-1.jpg' %}" class="rounded-circle avatar-xs" alt="">
+                                <img src="{{ random_service.user.profile_image.url }}" class="rounded-circle avatar-xs" alt="">
                             </div>
                             <div class="col ml-2">
-                                <span>Morris Mccoy</span>
+                                <span>{{ random_service.user }}</span>
                             </div>
                             <div class="col-auto">
                                 <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
@@ -151,168 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-graphql.jpg' %}" alt="" class="rounded-top card-img-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">GraphQL:
-                                introduction to graphQL for beginners</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><i class="far fa-clock mr-1"></i>2h 46m</li>
-                            <li class="list-inline-item">
-                                <svg class="mr-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE" />
-                                    <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE" />
-                                    <rect x="11" y="2" width="2" height="12" rx="1" fill="#754FFE" />
-                                </svg>
-                                Advance
-                            </li>
-                        </ul>
-                        <div class="lh-1">
-                            <span>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning"></i>
-                            </span>
-                            <span class="text-warning">4.5</span>
-                            <span class="font-size-xs text-muted">(9,300)</span>
-                        </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{% static 'images/avatar-2.jpg' %}" class="rounded-circle avatar-xs" alt="">
-                            </div>
-                            <div class="col ml-2">
-                                <span>Ted Hawkins</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-angular.jpg' %}" alt="" class="card-img-top rounded-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">Angular -
-                                the complete guide for beginner</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><i class="far fa-clock mr-1"></i>1h 30m</li>
-                            <li class="list-inline-item">
-                                <svg class="mr-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE" />
-                                    <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9" />
-                                    <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9" />
-                                </svg>
-                                Beginner
-                            </li>
-                        </ul>
-                        <div class="lh-1">
-                            <span>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning"></i>
-                            </span>
-                            <span class="text-warning">4.5</span>
-                            <span class="font-size-xs text-muted">(8,890)</span>
-                        </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{% static 'images/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="">
-                            </div>
-                            <div class="col ml-2">
-                                <span>Juanita Bell</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{% static 'images/course-python.jpg' %}" alt="" class="card-img-top rounded-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">The Python
-                                Course: build web application</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><i class="far fa-clock mr-1"></i>2h 30m</li>
-                            <li class="list-inline-item">
-                                <svg class="mr-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE" />
-                                    <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE" />
-                                    <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9" />
-                                </svg>
-                                Intermediate
-                            </li>
-                        </ul>
-                        <div class="lh-1">
-                            <span>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning mr-n1"></i>
-                                <i class="mdi mdi-star text-warning"></i>
-                            </span>
-                            <span class="text-warning">4.5</span>
-                            <span class="font-size-xs text-muted">(13,245)</span>
-                        </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{% static 'images/avatar-4.jpg' %}" class="rounded-circle avatar-xs" alt="">
-                            </div>
-                            <div class="col ml-2">
-                                <span>Claire Robertson</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
