@@ -3,7 +3,9 @@ from django.shortcuts import render
 
 from spatialdata.models import Limits
 from .models import Category, Service
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .forms import AddServiceForm
 
 # Create your views here.
 
@@ -34,8 +36,6 @@ def search(request):
 
     concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
     distrito_polygon = Limits.objects.filter(distrito=distrito).count()
-    print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLA" + str(concelho_polygon))
-    # location = Concelho.objects.filter(geom__intersects=context['post'].location).values('nome', 'distrito_title')
 
     if concelho != "none":
         services = Service.objects.filter(
@@ -57,3 +57,13 @@ def search(request):
     }
 
     return render(request, 'pages/search.html', context=context)
+
+
+class ServiceCreate(CreateView):
+    model = Service
+    form_class = AddServiceForm
+
+
+class ServiceUpdate(UpdateView):
+    model = Service
+    fields = '__all__'

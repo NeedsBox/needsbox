@@ -20,7 +20,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.js"
+			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			  crossorigin="anonymous"></script>
 
 
     <!-- Libs CSS -->
@@ -39,6 +42,7 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
     <title>NeedsBox - Find the work you need!</title>
+        {{ form.media }}
 </head>
 
 <body>
