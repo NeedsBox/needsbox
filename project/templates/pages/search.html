@@ -151,12 +151,12 @@
 							<div class="col-lg-4 col-md-6 col-12">
 								<!-- Card -->
 								<div class="card  mb-4 card-hover">
-									<a href="course-single.html" class="card-img-top"><img
+									<a href="{% url 'needsbox:service_detail' service.id %}" class="card-img-top"><img
 											src="{{ service.image_url }}" alt=""
 											class="card-img-top rounded-top"></a>
 									<!-- Card body -->
 									<div class="card-body">
-										<h4 class="mb-2 text-truncate-line-2 "><a href="course-single.html"
+										<h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' service.id %}"
 												class="text-inherit">{{ service.title }}</a>
 										</h4>
 										<!-- List inline -->

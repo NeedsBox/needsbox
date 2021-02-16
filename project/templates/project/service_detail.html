@@ -3,8 +3,8 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
 
     <head>
@@ -29,20 +29,35 @@
         <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
 
     </head>
-
     <body>
-
-
     <div class="pt-lg-8 pb-lg-16 pt-8 pb-12 bg-primary">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-7 col-lg-7 col-md-12">
                     <div>
-                        <h1 class="text-white display-4 font-weight-semi-bold"> {{ service.title }}  </h1>
+                        <h1 class="text-white display-4 font-weight-semi-bold">{{ service.title }}</h1>
                         <p class="text-white mb-6 lead">
                             {{ service.category }}
                         </p>
+                        <div class="d-flex align-items-center">
+                            <span class="ml-4">
+                            {% for i in "x"|ljust:service.get_average_review.stars %}
+                                <i class="mdi mdi-star mr-n1 text-warning"></i>
+                            {% endfor %}
+                                {% if service.get_average_review.half_stars != 0 %}
+                                    <i class="mdi mdi-star-half mr-n1 text-warning"></i>
+                                {% endif %}
+                                <span class="text-warning">{{ service.get_average_review.average }}</span>
+                                <span class="text-white">({{ service.get_average_review.count }})</span>
+              </span>
+                            <span class="text-white ml-4 d-none d-md-block">
+                                                            <i class="mdi mdi-map-marker "></i>
 
+                <span class="align-middle">
+                    {{ service.get_location }}
+                </span>
+              </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,40 +90,37 @@
                                 <div class="tab-pane fade show active" id="table" role="tabpanel"
                                      aria-labelledby="table-tab">
                                     <p>{{ service.description }}</p>
-                                    <img src="{{ service.image_url }}" alt="" class="rounded img-4by3-lg"/>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 col-12 mt-lg-n22">
-
+                    <!-- Card -->
                     <div class="card mb-3 mb-4">
-
-
+                        <div class="p-1">
+                            <div>
+                                <img
+                                        src="{{ service.image_url }}" alt="" class="rounded-top card-img-top">
+                            </div>
+                        </div>
+                        <!-- Card body -->
                         <div class="card-body">
-                            <a class="btn btn-primary btn-block">Contactar o vendedor</a>
-                            <p class="btn btn-outline-primary btn-block">Preço : {{ service.price }} $</p>
+                            <a class="btn btn-primary btn-block">{{ service.price }} €</a>
+                            <a href="#!" class="btn btn-outline-primary btn-block">Enviar mensagem</a>
                         </div>
                     </div>
-
-
+                    <!-- Card -->
                     <div class="card">
-
+                        <!-- Card body -->
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="position-relative">
-                                    <a href="#!" class="position-absolute mt-2 ml-n3" data-toggle="tooltip"
-                                       data-placement="top">
                                     <img src="{{ service.user.profile_image.url }}" alt=""
-                                         class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
-                                    </a>
+                                         class="rounded-circle avatar-xl"/>
                                 </div>
                                 <div class="ml-4">
                                     <h4 class="mb-0">{{ service.user.name }}</h4>
-
                                 </div>
                             </div>
                             <p>{{ service.user.biography }}</p>
@@ -116,9 +128,11 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
+    </div>
+
+
+    </div>
     </div>
 
 
@@ -149,5 +163,5 @@
 
     </body>
 
-</html>
+    </html>
 {% endblock %}

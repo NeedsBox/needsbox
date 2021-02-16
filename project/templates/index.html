@@ -2,79 +2,81 @@
 {% load static %}
 
 {% block content %}
-<!-- Page Content -->
-<div class="bg-primary tinted-image">
-    <div class="container">
-        <!-- Hero Section -->
-        <div class="row align-items-center no-gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 xdft">
-                <h1 class="text-white display-4 font-weight-bold">
-                    Bem Vindo ao NeedsBox
-                </h1>
-                <p class="text-white-50 mb-4 lead">
-                    Todos os serviços que procura num lugar!
-                </p>
-                <form action="{% url 'needsbox:search' %}" method="GET">
-                    <!-- Input -->
-                    <div class="input-group" id="app">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                            aria-describedby="button-addon2" name="search">
-                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="distrito">
-                            <option selected disabled value="none">Distrito</option>
-                            {% for distrito in distritos %}
-                            <option value="{{ distrito.distrito }}" v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
-                            </option>
-                            {% endfor %}
-                        </select>
-                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="concelho">
-                            <option selected disabled value="none">Concelho</option>
-                            <option v-for="concelho in concelhos" :value="concelho.nome">[[ concelho.nome ]]</option>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="btn btn-warning" type="submit" id="button-addon2"><i
-                                    class="bi bi-search"></i></button>
+    <!-- Page Content -->
+    <div class="bg-primary tinted-image">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="row align-items-center no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 xdft">
+                    <h1 class="text-white display-4 font-weight-bold">
+                        Bem Vindo ao NeedsBox
+                    </h1>
+                    <p class="text-white-50 mb-4 lead">
+                        Todos os serviços que procura num lugar!
+                    </p>
+                    <form action="{% url 'needsbox:search' %}" method="GET">
+                        <!-- Input -->
+                        <div class="input-group" id="app">
+                            <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                                   aria-describedby="button-addon2" name="search">
+                            <select class="custom-select input-group-append" id="inputGroupSelect01" name="distrito">
+                                <option selected disabled value="none">Distrito</option>
+                                {% for distrito in distritos %}
+                                    <option value="{{ distrito.distrito }}"
+                                            v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <select class="custom-select input-group-append" id="inputGroupSelect01" name="concelho">
+                                <option selected disabled value="none">Concelho</option>
+                                <option v-for="concelho in concelhos" :value="concelho.nome">[[ concelho.nome ]]
+                                </option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-warning" type="submit" id="button-addon2"><i
+                                        class="bi bi-search"></i></button>
+                            </div>
                         </div>
-                    </div>
 
-                </form>
+                    </form>
+                </div>
+
             </div>
-            
         </div>
     </div>
-</div>
-</div>
-<div class="bg-white py-4 shadow-sm">
-    <div class="container">
-        <div class="row align-items-center no-gutters">
-            <!-- Features -->
-            <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
-                <div class="d-flex align-items-center">
+    </div>
+    <div class="bg-white py-4 shadow-sm">
+        <div class="container">
+            <div class="row align-items-center no-gutters">
+                <!-- Features -->
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
+                    <div class="d-flex align-items-center">
                     <span
-                        class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
+                            class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
                         <i class="fe fe-users"> </i></span>
-                    <div class="ml-3">
-                        <h4 class="mb-0 font-weight-semi-bold">Profissionais de todo o lado</h4>
-                        <p class="mb-0">Mais de {{ users }} profissionais!</p>
+                        <div class="ml-3">
+                            <h4 class="mb-0 font-weight-semi-bold">Profissionais de todo o lado</h4>
+                            <p class="mb-0">Mais de {{ users }} profissionais!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Features -->
-            <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
-                <div class="d-flex align-items-center">
+                <!-- Features -->
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-lg-0 mb-4">
+                    <div class="d-flex align-items-center">
                     <span
-                        class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
+                            class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
                         <i class="fe fe-box"> </i></span>
-                    <div class="ml-3">
-                        <h4 class="mb-0 font-weight-semi-bold">Serviços</h4>
-                        <p class="mb-0">Mais de {{ services_count }} serviços!</p>
+                        <div class="ml-3">
+                            <h4 class="mb-0 font-weight-semi-bold">Serviços</h4>
+                            <p class="mb-0">Mais de {{ services_count }} serviços!</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Features -->
-            <div class="col-xl-4 col-lg-4 col-md-12">
-                <div class="d-flex align-items-center">
+                <!-- Features -->
+                <div class="col-xl-4 col-lg-4 col-md-12">
+                    <div class="d-flex align-items-center">
                     <span
-                        class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
+                            class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
                         <i class="fe fe-mail"> </i></span>
                     <div class="ml-3">
                         <h4 class="mb-0 font-weight-semi-bold">Anúncios</h4>
@@ -102,11 +104,11 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Card -->
                 <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
+                    <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
                             src="{{ random_service.image_url }}" alt="" class="rounded-top card-img-top"></a>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
+                        <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
                                 class="text-inherit">{{ random_service.title }}</a></h4>
                         <!-- List -->
                         <ul class="mb-3 list-inline">
@@ -119,212 +121,227 @@
                         <div class="lh-1">
                             <span>
                                 {% if random_service.get_average_review.count != 0 %}
-								{% for i in "x"|ljust:random_service.get_average_review.stars %}
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								{% endfor %}
-								{% if random_service.get_average_review.half_stars != 0 %}
-								<i class="mdi mdi-star-half mr-n1 text-warning"></i>
-								{% endif %}
-								{% endif %}
+                                    {% for i in "x"|ljust:random_service.get_average_review.stars %}
+                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    {% endfor %}
+                                    {% if random_service.get_average_review.half_stars != 0 %}
+                                        <i class="mdi mdi-star-half mr-n1 text-warning"></i>
+                                    {% endif %}
+                                {% endif %}
                             </span>
-                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
-                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
-                        </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{{ random_service.user.profile_image.url }}" class="rounded-circle avatar-xs" alt="">
+                                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
+                                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
+                                        </div>
+                                    </div>
+                                    <!-- Card Footer -->
+                                    <div class="card-footer">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col-auto">
+                                                <img src="{{ random_service.user.profile_image.url }}"
+                                                     class="rounded-circle avatar-xs" alt=""/>
+                                            </div>
+                                            <div class="col ml-2">
+                                                <span>{{ random_service.user }}</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a href="#!" class="text-muted" data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   title="Add to Bookmarks">
+                                                    <i class="fe fe-bookmark  "></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col ml-2">
-                                <span>{{ random_service.user }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-</div>
-<div class="pb-lg-3 pt-lg-3">
-    <div class="container">
-        <div class="row d-lg-flex align-items-center mb-4">
-            <div class="col">
-                <h2 class="mb-0">Adicionados Recentemente</h2>
-            </div>
-            <div class="col-auto" >
-                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
-            </div>
-        </div>
-        <div class="row">
-            {% for random_service in recent_services %}
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{{ random_service.image_url }}" alt="" class="rounded-top card-img-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">{{ random_service.title }}</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              </svg> {{ random_service.get_location }}
-                            </li>
-                        </ul>
-                        <div class="lh-1">
+        <div class="pb-lg-3 pt-lg-3">
+            <div class="container">
+                <div class="row d-lg-flex align-items-center mb-4">
+                    <div class="col">
+                        <h2 class="mb-0">Adicionados Recentemente</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for random_service in recent_services %}
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Card -->
+                            <div class="card  mb-4 card-hover">
+                                <a href="pages/course-single.html" class="card-img-top"><img
+                                        src="{{ random_service.image_url }}" alt=""
+                                        class="rounded-top card-img-top"></a>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
+                                                                              class="text-inherit">{{ random_service.title }}</a>
+                                    </h4>
+                                    <!-- List -->
+                                    <ul class="mb-3 list-inline">
+                                        <li class="list-inline-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                            {{ random_service.get_location }}
+                                        </li>
+                                    </ul>
+                                    <div class="lh-1">
                             <span>
                                 {% if random_service.get_average_review.count != 0 %}
-								{% for i in "x"|ljust:random_service.get_average_review.stars %}
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								{% endfor %}
-								{% if random_service.get_average_review.half_stars != 0 %}
-								<i class="mdi mdi-star-half mr-n1 text-warning"></i>
-								{% endif %}
-								{% endif %}
+                                    {% for i in "x"|ljust:random_service.get_average_review.stars %}
+                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    {% endfor %}
+                                    {% if random_service.get_average_review.half_stars != 0 %}
+                                        <i class="mdi mdi-star-half mr-n1 text-warning"></i>
+                                    {% endif %}
+                                {% endif %}
                             </span>
-                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
-                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
+                                        <span class="text-warning">{{ random_service.get_average_review.average }}</span>
+                                        <span class="text-muted">({{ random_service.get_average_review.count }})</span>
+                                    </div>
+                                </div>
+                                <!-- Card Footer -->
+                                <div class="card-footer">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-auto">
+                                            <img src="{{ random_service.user.profile_image.url }}"
+                                                 class="rounded-circle avatar-xs" alt="">
+                                        </div>
+                                        <div class="col ml-2">
+                                            <span>{{ random_service.user }}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
+                                               title="Add to Bookmarks">
+                                                <i class="fe fe-bookmark  "></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{{ random_service.user.profile_image.url }}" class="rounded-circle avatar-xs" alt="">
-                            </div>
-                            <div class="col ml-2">
-                                <span>{{ random_service.user }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-</div>
-<div class="pb-lg-8 pt-lg-3 py-6">
-    <div class="container">
-        <div class="row d-lg-flex align-items-center mb-4">
-            <div class="col">
-                <h2 class="mb-0">Melhores Serviços</h2>
-            </div>
-            <div class="col-auto" >
-                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
-            </div>
-        </div>
-        <div class="row">
-            {% for random_service in best_services %}
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="pages/course-single.html" class="card-img-top"><img
-                            src="{{ random_service.image_url }}" alt="" class="rounded-top card-img-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
-                                class="text-inherit">{{ random_service.title }}</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              </svg> {{ random_service.get_location }}
-                            </li>
-                        </ul>
-                        <div class="lh-1">
+        <div class="pb-lg-8 pt-lg-3 py-6">
+            <div class="container">
+                <div class="row d-lg-flex align-items-center mb-4">
+                    <div class="col">
+                        <h2 class="mb-0">Melhores Serviços</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for random_service in best_services %}
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Card -->
+                            <div class="card  mb-4 card-hover">
+                                <a href="pages/course-single.html" class="card-img-top"><img
+                                        src="{{ random_service.image_url }}" alt=""
+                                        class="rounded-top card-img-top"></a>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
+                                                                              class="text-inherit">{{ random_service.title }}</a>
+                                    </h4>
+                                    <!-- List -->
+                                    <ul class="mb-3 list-inline">
+                                        <li class="list-inline-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                            {{ random_service.get_location }}
+                                        </li>
+                                    </ul>
+                                    <div class="lh-1">
                             <span>
                                 {% if random_service.get_average_review.count != 0 %}
-								{% for i in "x"|ljust:random_service.get_average_review.stars %}
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								{% endfor %}
-								{% if random_service.get_average_review.half_stars != 0 %}
-								<i class="mdi mdi-star-half mr-n1 text-warning"></i>
-								{% endif %}
-								{% endif %}
+                                    {% for i in "x"|ljust:random_service.get_average_review.stars %}
+                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    {% endfor %}
+                                    {% if random_service.get_average_review.half_stars != 0 %}
+                                        <i class="mdi mdi-star-half mr-n1 text-warning"></i>
+                                    {% endif %}
+                                {% endif %}
                             </span>
-                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
-                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
+                                        <span class="text-warning">{{ random_service.get_average_review.average }}</span>
+                                        <span class="text-muted">({{ random_service.get_average_review.count }})</span>
+                                    </div>
+                                </div>
+                                <!-- Card Footer -->
+                                <div class="card-footer">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-auto">
+                                            <img src="{{ random_service.user.profile_image.url }}"
+                                                 class="rounded-circle avatar-xs" alt="">
+                                        </div>
+                                        <div class="col ml-2">
+                                            <span>{{ random_service.user }}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
+                                               title="Add to Bookmarks">
+                                                <i class="fe fe-bookmark  "></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Card Footer -->
-                    <div class="card-footer">
-                        <div class="row align-items-center no-gutters">
-                            <div class="col-auto">
-                                <img src="{{ random_service.user.profile_image.url }}" class="rounded-circle avatar-xs" alt="">
-                            </div>
-                            <div class="col ml-2">
-                                <span>{{ random_service.user }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                    title="Add to Bookmarks">
-                                    <i class="fe fe-bookmark  "></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-</div>
 
 
 
-<script>
+    <script>
 
-    var app = new Vue({
-        delimiters: ["[[", "]]"],
-        el: '#app',
-        data: {
-            info: null,
-            concelhos: null,
-            currentUrl: location.toString(),
-            host: location.host
-        },
-        methods: {
-            getDataFromApi() {
-                value = event.currentTarget.value;
-                return axios
-                .get(this.currentUrl + 'api/limits/' + value)
-                .then(response => (this.info = response.data))
-                .then(response => (this.concelhos = this.info))
-                .catch(error => console.log(error))
+        var app = new Vue({
+            delimiters: ["[[", "]]"],
+            el: '#app',
+            data: {
+                info: null,
+                concelhos: null,
+                currentUrl: location.toString(),
+                host: location.host
             },
-        },
-    });
-
-    var more = new Vue({
-        el: '#more-1',
-        data: {
-            counter: 0
-        },
-        methods: {
-            search() {
-                document.getElementById("button-addon2").click()
+            methods: {
+                getDataFromApi() {
+                    value = event.currentTarget.value;
+                    return axios
+                        .get(this.currentUrl + 'api/limits/' + value)
+                        .then(response => (this.info = response.data))
+                        .then(response => (this.concelhos = this.info))
+                        .catch(error => console.log(error))
+                },
             },
-        },
-    });
-</script>
+        });
+
+        var more = new Vue({
+            el: '#more-1',
+            data: {
+                counter: 0
+            },
+            methods: {
+                search() {
+                    document.getElementById("button-addon2").click()
+                },
+            },
+        });
+    </script>
 {% endblock %}
