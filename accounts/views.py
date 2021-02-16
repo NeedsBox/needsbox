@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.html import strip_tags
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import RegisterForm
 from .models import Account, PublicContacts
@@ -33,35 +33,36 @@ class UserRegisterView(generic.CreateView):
         )
         return super().form_valid(form)
 
+
 class AccountDetailView(generic.DetailView):
     model = Account
     slug_field = "username"
 
+
 def profile(request, username):
     context = {}
-    
-    
+
     try:
         user = Account.objects.get(username=username)
     except Account.DoesNotExist:
         return render(request, 'pages/404-error.html', context=context)
-    
+
     if user.get_type() != 'PRO':
         return render(request, 'pages/404-error.html', context=context)
-    
+
     services = Service.objects.filter(user=user)
-    
+
     try:
         public_contacts = PublicContacts.objects.get(user=user)
     except PublicContacts.DoesNotExist:
         public_contacts = 0
     review_count = 0
     service_count = 0
-    
+
     for service in services:
         service_count += 1
         review_count += service.get_reviews_count()
-    
+
     context = {
         'user': user,
         'services': services,
@@ -69,5 +70,16 @@ def profile(request, username):
         'service_count': service_count,
         'contacts': public_contacts,
     }
-    
+
     return render(request, 'profile.html', context=context)
+
+
+def user_delete_view(request, username):
+    obj = get_object_or_404(Account, username=username)
+    if request.method == "POST":
+        obj.delete()
+        return redirect('needsbox:index')
+    context = {
+        "object": obj
+    }
+    return render(request, 'user_delete.html', context)
