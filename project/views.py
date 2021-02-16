@@ -25,9 +25,9 @@ def index(request):
     services = list(Service.objects.all())
     services_count = Service.objects.all().count()
     ad_count = Advertisement.objects.all().count()
-    
+
     users = Account.objects.all().count()
-    
+
     by_location = []
     for x in services:
         limits = Limits.objects.filter(geom__intersects=x.location).values('nome', 'distrito_title')
@@ -37,10 +37,10 @@ def index(request):
     random_services = random.sample(by_location, 4)
     recent_services = Service.objects.all().order_by('-created_at')[:4]
     best_services = []
-    
+
     for service in services:
         best_services.append(service.get_average_review_for_index())
-    
+
     best_services_r = []
     best_services = sorted(best_services, key = lambda i: i['average'], reverse=True)
     best_services = best_services[:4]
@@ -155,3 +155,8 @@ class AdvertisementDelete(LoginRequiredMixin, DeleteView):
 
 class ServiceDetail(DetailView):
     model = Service
+
+
+
+def about(request):
+    return render(request, 'pages/about.html')
