@@ -4,6 +4,7 @@ from django.views.generic import DetailView
 
 from spatialdata.models import Limits
 from .models import Category, Service, Advertisement
+from accounts.models import Account
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
@@ -22,6 +23,10 @@ def index(request):
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
 
     services = list(Service.objects.all())
+    services_count = Service.objects.all().count()
+    ad_count = Advertisement.objects.all().count()
+    
+    users = Account.objects.all().count()
     
     by_location = []
     for x in services:
@@ -47,6 +52,9 @@ def index(request):
         'random_services': random_services,
         'recent_services': recent_services,
         'best_services': best_services_r,
+        'users': users,
+        'services_count': services_count,
+        'ad_count': ad_count,
     }
 
     return render(request, 'index.html', context=context)

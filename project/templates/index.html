@@ -51,10 +51,10 @@
                 <div class="d-flex align-items-center">
                     <span
                         class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
-                        <i class="fe fe-video"> </i></span>
+                        <i class="fe fe-users"> </i></span>
                     <div class="ml-3">
-                        <h4 class="mb-0 font-weight-semi-bold">30,000 online courses</h4>
-                        <p class="mb-0">Enjoy a variety of fresh topics</p>
+                        <h4 class="mb-0 font-weight-semi-bold">Profissionais de todo o lado</h4>
+                        <p class="mb-0">Mais de {{ users }} profissionais!</p>
                     </div>
                 </div>
             </div>
@@ -63,10 +63,10 @@
                 <div class="d-flex align-items-center">
                     <span
                         class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
-                        <i class="fe fe-users"> </i></span>
+                        <i class="fe fe-box"> </i></span>
                     <div class="ml-3">
-                        <h4 class="mb-0 font-weight-semi-bold">Expert instruction</h4>
-                        <p class="mb-0">Find the right instructor for you</p>
+                        <h4 class="mb-0 font-weight-semi-bold">Serviços</h4>
+                        <p class="mb-0">Mais de {{ services_count }} serviços!</p>
                     </div>
                 </div>
             </div>
@@ -75,10 +75,10 @@
                 <div class="d-flex align-items-center">
                     <span
                         class="icon-sahpe icon-lg bg-light-warning rounded-circle text-center text-dark-warning font-size-md ">
-                        <i class="fe fe-clock"> </i></span>
+                        <i class="fe fe-mail"> </i></span>
                     <div class="ml-3">
-                        <h4 class="mb-0 font-weight-semi-bold">Lifetime access</h4>
-                        <p class="mb-0">Learn on your schedule</p>
+                        <h4 class="mb-0 font-weight-semi-bold">Anúncios</h4>
+                        <p class="mb-0">Mais de {{ ad_count }} anúncios!</p>
                     </div>
                 </div>
             </div>
@@ -86,14 +86,15 @@
     </div>
 </div>
 <!-- Content -->
+<div id="more-1">
 <div class="pt-lg-12 pb-lg-3 pt-8 pb-6">
     <div class="container">
         <div class="row d-lg-flex align-items-center mb-4">
             <div class="col">
                 <h2 class="mb-0">Serviços em Aveiro</h2>
             </div>
-            <div class="col-auto">
-                <a href="pages/course-filter-list.html" class="btn btn-outline-primary btn-sm">View All</a>
+            <div class="col-auto" >
+                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
             </div>
         </div>
         <div class="row">
@@ -159,8 +160,8 @@
             <div class="col">
                 <h2 class="mb-0">Adicionados Recentemente</h2>
             </div>
-            <div class="col-auto">
-                <a href="pages/course-filter-list.html" class="btn btn-outline-primary btn-sm">View All</a>
+            <div class="col-auto" >
+                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
             </div>
         </div>
         <div class="row">
@@ -226,8 +227,8 @@
             <div class="col">
                 <h2 class="mb-0">Melhores Serviços</h2>
             </div>
-            <div class="col-auto">
-                <a href="pages/course-filter-list.html" class="btn btn-outline-primary btn-sm">View All</a>
+            <div class="col-auto" >
+                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
             </div>
         </div>
         <div class="row">
@@ -287,10 +288,12 @@
         </div>
     </div>
 </div>
+</div>
 
 
 
 <script>
+
     var app = new Vue({
         delimiters: ["[[", "]]"],
         el: '#app',
@@ -308,6 +311,18 @@
                 .then(response => (this.info = response.data))
                 .then(response => (this.concelhos = this.info))
                 .catch(error => console.log(error))
+            },
+        },
+    });
+
+    var more = new Vue({
+        el: '#more-1',
+        data: {
+            counter: 0
+        },
+        methods: {
+            search() {
+                document.getElementById("button-addon2").click()
             },
         },
     });
