@@ -57,6 +57,10 @@ class Service(models.Model):
         reviews = Review.objects.filter(service=self)
         return reviews.count()
 
+    def get_review_name(self):
+        review = Review(service=self)
+        return review.user.username
+
     def get_average_review(self):
         reviews = Review.objects.filter(service=self)
         count = reviews.count()

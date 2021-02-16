@@ -68,28 +68,72 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-12 mt-n8 mb-4 mb-lg-0">
-
+                    <!-- Card -->
                     <div class="card rounded-lg">
-
+                        <!-- Card header -->
                         <div class="card-header border-bottom-0 p-0">
                             <div>
-
+                                <!-- Nav -->
                                 <ul class="nav nav-lb-tab" id="tab" role="tablist">
-
                                     <li class="nav-item">
                                         <a class="nav-link" id="description-tab" data-toggle="pill" href="#description"
                                            role="tab"
-                                           aria-controls="description" aria-selected="false">Descrição</a>
+                                           aria-controls="description" aria-selected="false">Description</a>
                                     </li>
-
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="review-tab" data-toggle="pill" href="#review" role="tab"
+                                           aria-controls="review" aria-selected="false">Reviews</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
+                        <!-- Card Body -->
                         <div class="card-body">
                             <div class="tab-content" id="tabContent">
-                                <div class="tab-pane fade show active" id="table" role="tabpanel"
-                                     aria-labelledby="table-tab">
-                                    <p>{{ service.description }}</p>
+                                <div class="tab-pane fade" id="description" role="tabpanel"
+                                     aria-labelledby="description-tab">
+                                    <!-- Description -->
+                                    <div class="mb-4">
+                                        <p>{{ service.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                    <!-- Reviews -->
+                                    <div class="mb-3">
+                                        <h3 class="mb-4">Como avaliam os seus serviços</h3>
+                                        <div class="row align-items-center">
+                                            <div class="col-auto text-center">
+                                                {% if service.get_average_review.count != 0 %}
+                                                    {% for i in "x"|ljust:service.get_average_review.stars %}
+                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                    {% endfor %}
+                                                    {% if service.get_average_review.half_stars != 0 %}
+                                                        <i class="mdi mdi-star-half mr-n1 text-warning"></i>
+                                                    {% endif %}
+                                                {% endif %}
+                                                <span class="text-warning">{{ service.get_average_review.average }}</span>
+                                                <span class="text-muted">({{ service.get_average_review.count }})</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- hr -->
+                                    <hr class="my-5"/>
+                                    <div class="mb-3">
+                                        <div class="d-lg-flex align-items-center justify-content-between mb-5">
+                                            <!-- Reviews -->
+                                            <div class="mb-3 mb-lg-0">
+                                                <h3 class="mb-0">Reviews</h3>
+                                            </div>
+                                        </div>
+                                        {% for service in services %}
+                                            <div class="media-body ml-3">
+
+                                                <h4>{{ service.get_review_name }}</h4>>
+
+
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +173,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
