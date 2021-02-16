@@ -11,5 +11,6 @@ urlpatterns = [
     path('create/', views.ServiceCreate.as_view(), name="service_form"),
     path('<int:pk>/update/', views.ServiceUpdate.as_view(), name="service_update"),
     path('<int:pk>/delete/', views.ServiceDelete.as_view(), name="service_delete"),
+    path('<int:pk>/service/', views.ServiceDetail.as_view(), name="service_detail"),
 
 ]

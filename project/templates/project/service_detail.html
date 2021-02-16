@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+
+        <link href="{% static 'fonts/feather/feather.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/dragula/dist/dragula.min.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/%40mdi/font/css/materialdesignicons.min.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/prismjs/themes/prism.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/dropzone/dist/dropzone.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet"/>
+        <link href="{% static 'libs/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+        <link href="{% static 'libs/%40yaireo/tagify/dist/tagify.css' %}" rel="stylesheet">
+
+
+        <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
+
+    </head>
+
+    <body>
+
+
+    <div class="pt-lg-8 pb-lg-16 pt-8 pb-12 bg-primary">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-7 col-md-12">
+                    <div>
+                        <h1 class="text-white display-4 font-weight-semi-bold"> {{ service.title }}  </h1>
+                        <p class="text-white mb-6 lead">
+                            {{ service.category }}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pb-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-12 mt-n8 mb-4 mb-lg-0">
+
+                    <div class="card rounded-lg">
+
+                        <div class="card-header border-bottom-0 p-0">
+                            <div>
+
+                                <ul class="nav nav-lb-tab" id="tab" role="tablist">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="description-tab" data-toggle="pill" href="#description"
+                                           role="tab"
+                                           aria-controls="description" aria-selected="false">Descrição</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="tabContent">
+                                <div class="tab-pane fade show active" id="table" role="tabpanel"
+                                     aria-labelledby="table-tab">
+                                    <p>{{ service.description }}</p>
+                                    <img src="{{ service.image_url }}" alt="" class="rounded img-4by3-lg"/>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-12 mt-lg-n22">
+
+                    <div class="card mb-3 mb-4">
+
+
+                        <div class="card-body">
+                            <a class="btn btn-primary btn-block">Contactar o vendedor</a>
+                            <p class="btn btn-outline-primary btn-block">Preço : {{ service.price }} $</p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="position-relative">
+                                    <img src="{{ user.profile_image.url }}" alt=""
+                                         class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
+                                    <a href="#!" class="position-absolute mt-2 ml-n3" data-toggle="tooltip"
+                                       data-placement="top"
+                                    <img src="{{ user.profile_image.url }}" alt=""
+                                         class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
+                                    </a>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="mb-0">{{ user.name }}</h4>
+
+                                </div>
+                            </div>
+                            <p>{{ user.biography }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/odometer/odometer.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'libs/magnific-popup/dist/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <script src="{% static 'libs/inputmask/dist/jquery.inputmask.min.js' %}"></script>
+    <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+    <script src="{% static 'libs/quill/dist/quill.min.js' %}"></script>
+    <script src="{% static 'libs/file-upload-with-preview/dist/file-upload-with-preview.min.js' %}"></script>
+    <script src="{% static 'libs/dragula/dist/dragula.min.js' %}"></script>
+    <script src="{% static 'libs/bs-stepper/dist/js/bs-stepper.min.js' %}"></script>
+    <script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+    <script src="{% static 'libs/jQuery.print/jQuery.print.js' %}"></script>
+    <script src="{% static 'libs/prismjs/prism.js' %}"></script>
+    <script src="{% static 'libs/prismjs/components/prism-scss.min.js' %}"></script>
+    <script src="{% static 'libs/%40yaireo/tagify/dist/tagify.min.js' %}"></script>
+
+
+    <script src="cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+
+    <script src="{% static 'js/theme.min.js' %}"></script>
+
+    </body>
+
+</html>
+{% endblock %}

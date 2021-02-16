@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
+from django.views.generic import DetailView
 
 from spatialdata.models import Limits
 from .models import Category, Service
@@ -101,3 +102,6 @@ class ServiceDelete(LoginRequiredMixin, DeleteView):
     model = Service
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
+
+class ServiceDetail(DetailView):
+    model = Service

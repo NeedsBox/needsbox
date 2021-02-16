@@ -80,3 +80,17 @@ class UpdateServiceForm(forms.ModelForm):
             ),
             'location': GooglePointFieldWidget,
         }
+
+class DetailServiceForm(forms.ModelForm):
+    image = forms.ImageField(),
+
+    class Meta:
+        model = Service
+        fields = [
+            'category',
+            'title',
+            'description',
+            'price',
+            'location',
+            'image',
+        ]
