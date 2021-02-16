@@ -105,8 +105,3 @@ class Review(models.Model):
     def __str__(self):
         return f"Review de {self.user.username}: \n{self.msg}"
 
-
-class User(models.Model):
-    name = models.CharField(max_length=50)
-    biography = models.CharField(max_length=1000)
-    profile_image = models.ImageField(blank=True)

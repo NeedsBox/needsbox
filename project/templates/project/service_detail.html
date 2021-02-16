@@ -100,20 +100,18 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="position-relative">
-                                    <img src="{{ user.profile_image.url }}" alt=""
-                                         class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
                                     <a href="#!" class="position-absolute mt-2 ml-n3" data-toggle="tooltip"
-                                       data-placement="top"
-                                    <img src="{{ user.profile_image.url }}" alt=""
+                                       data-placement="top">
+                                    <img src="{{ service.user.profile_image.url }}" alt=""
                                          class="rounded-circle avatar-xxl border-white border-width-4 position-relative">
                                     </a>
                                 </div>
                                 <div class="ml-4">
-                                    <h4 class="mb-0">{{ user.name }}</h4>
+                                    <h4 class="mb-0">{{ service.user.name }}</h4>
 
                                 </div>
                             </div>
-                            <p>{{ user.biography }}</p>
+                            <p>{{ service.user.biography }}</p>
                         </div>
                     </div>
                 </div>
