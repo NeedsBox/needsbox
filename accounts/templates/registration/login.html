@@ -51,7 +51,7 @@
               <form action="" method="post">
                 {% csrf_token %}
                 <h1 class="h3 mb-3 fw-normal">Insira os seus dados</h1>
-                {{ form }}
+                    {{ form }}
                 <div class="checkbox mb-3">
                   <label>
                     Não tem conta? <a href="{% url 'accounts:register' %}">Registe-se</a>
@@ -59,7 +59,7 @@
                 </div>
                   <div class="checkbox mb-3">
                     <label>
-                    <a href="{% url 'accounts:password_reset' %}">Recuperar Palavra-passe</a>
+                    Esqueceu a sua Palavra-passe? <a href="{% url 'accounts:password_reset' %}">Recupere-a</a>
                   </label>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
