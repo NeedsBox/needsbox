@@ -22,15 +22,31 @@ def index(request):
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
 
     services = list(Service.objects.all())
+    
+    by_location = []
+    for x in services:
+        limits = Limits.objects.filter(geom__intersects=x.location).values('nome', 'distrito_title')
+        if limits[0]['distrito_title'] == "Aveiro":
+            by_location.append(x)
 
-    # change 3 to how many random items you want
-    random_services = random.sample(services, 4)
-    # if you want only a single random item
-    # random_item = random.choice(items)
+    random_services = random.sample(by_location, 4)
+    recent_services = Service.objects.all().order_by('-created_at')[:4]
+    best_services = []
+    
+    for service in services:
+        best_services.append(service.get_average_review_for_index())
+    
+    best_services_r = []
+    best_services = sorted(best_services, key = lambda i: i['average'], reverse=True)
+    best_services = best_services[:4]
+    for b_service in best_services:
+        best_services_r.append(b_service['service'])
 
     context = {
         'distritos': distritos,
         'random_services': random_services,
+        'recent_services': recent_services,
+        'best_services': best_services_r,
     }
 
     return render(request, 'index.html', context=context)
