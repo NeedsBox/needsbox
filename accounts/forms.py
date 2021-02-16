@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 
 from .models import Account
 
@@ -67,3 +67,30 @@ class LoginForm(AuthenticationForm):
             'username',
             'password',
         )
+
+
+class ResetPasswordForm(PasswordResetForm):
+    email = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Email',
+            'class': 'form-control',
+        }
+    ), label='')
+
+
+class ResetPasswordConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Nova Palavra-passe',
+            'class': 'form-control',
+            'type': 'password',
+        }
+    ), label='')
+
+    new_password2 = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Confirmação da Palavra-passe',
+            'class': 'form-control',
+            'type': 'password',
+        }
+    ), label='')

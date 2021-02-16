@@ -51,10 +51,15 @@
               <form action="" method="post">
                 {% csrf_token %}
                 <h1 class="h3 mb-3 fw-normal">Insira os seus dados</h1>
-                {{ form }}
+                    {{ form }}
                 <div class="checkbox mb-3">
                   <label>
                     Não tem conta? <a href="{% url 'accounts:register' %}">Registe-se</a>
+                  </label>
+                </div>
+                  <div class="checkbox mb-3">
+                    <label>
+                    Esqueceu a sua Palavra-passe? <a href="{% url 'accounts:password_reset' %}">Recupere-a</a>
                   </label>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
@@ -97,7 +102,5 @@
 
 </body>
 
-
-<!-- Mirrored from codescandy.com/geeks/pages/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Jan 2021 18:54:10 GMT -->
 
 </html>
