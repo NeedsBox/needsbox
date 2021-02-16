@@ -1,11 +1,12 @@
 from django import forms
 from mapwidgets.widgets import GooglePointFieldWidget
 
-from project.models import Service
+from project.models import Service, Advertisement
 
 
 class AddServiceForm(forms.ModelForm):
     image = forms.ImageField(),
+
     class Meta:
         model = Service
         fields = [
@@ -22,21 +23,58 @@ class AddServiceForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
                 }
-                ),
+            ),
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                 }
-                ),
+            ),
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',
                 }
-                ),
+            ),
             'price': forms.NumberInput(
                 attrs={
                     'class': 'form-control',
                 }
-                ),
+            ),
+            'location': GooglePointFieldWidget,
+        }
+
+
+class AddAdvertisementForm(forms.ModelForm):
+    image = forms.ImageField(),
+
+    class Meta:
+        model = Advertisement
+        fields = [
+            'category',
+            'title',
+            'description',
+            'location',
+            'image',
+        ]
+        widgets = {
+            'category': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'price': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
             'location': GooglePointFieldWidget,
         }

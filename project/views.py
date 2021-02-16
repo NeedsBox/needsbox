@@ -2,13 +2,14 @@ from django.db.models import Q
 from django.shortcuts import render
 
 from spatialdata.models import Limits
-from .models import Category, Service
+from .models import Category, Service, Advertisement
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import AddServiceForm
+from .forms import AddServiceForm, AddAdvertisementForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 import random
+
 
 # Create your views here.
 
@@ -16,15 +17,13 @@ def index(request):
     context = {}
 
     distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
-    
-    
-    
+
     services = list(Service.objects.all())
 
     # change 3 to how many random items you want
     random_services = random.sample(services, 4)
     # if you want only a single random item
-    #random_item = random.choice(items)
+    # random_item = random.choice(items)
 
     context = {
         'distritos': distritos,
@@ -70,10 +69,10 @@ def search(request):
 
     return render(request, 'pages/search.html', context=context)
 
-
-#class ServiceCreate(CreateView):
+    # class ServiceCreate(CreateView):
     model = Service
     form_class = AddServiceForm
+
 
 # View para criar um Post
 class ServiceCreate(LoginRequiredMixin, CreateView):
@@ -81,7 +80,7 @@ class ServiceCreate(LoginRequiredMixin, CreateView):
     form_class = AddServiceForm
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
-    
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
@@ -92,3 +91,16 @@ class ServiceCreate(LoginRequiredMixin, CreateView):
 class ServiceUpdate(UpdateView):
     model = Service
     fields = '__all__'
+
+
+class AdvertisementCreate(LoginRequiredMixin, CreateView):
+    model = Advertisement
+    form_class = AddAdvertisementForm
+    success_url = reverse_lazy('needsbox:index')
+    login_url = reverse_lazy('accounts:login')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
