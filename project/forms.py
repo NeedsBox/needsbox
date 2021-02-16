@@ -155,6 +155,7 @@ class UpdateServiceForm(forms.ModelForm):
             'location': GooglePointFieldWidget,
         }
 
+
 class DetailServiceForm(forms.ModelForm):
     image = forms.ImageField(),
 

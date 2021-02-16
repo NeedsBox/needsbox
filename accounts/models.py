@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db import models
-from phone_field import PhoneField
 from django.contrib.gis.db import models
+from phone_field import PhoneField
+
 from spatialdata.models import Limits
 
 
@@ -82,12 +82,13 @@ class Account(AbstractBaseUser):
     def get_type(self):
         return self.account_type
 
+
 class PublicContacts(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     email = models.EmailField(null=True)
     phone = PhoneField(null=True)
     address = models.PointField(null=True)
-    
+
     def get_location(self):
         limits = Limits.objects.filter(geom__intersects=self.address).values('nome', 'distrito_title')
         return str(limits[0]['nome'])

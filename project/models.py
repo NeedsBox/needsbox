@@ -93,7 +93,7 @@ class Service(models.Model):
         }
 
         return context
-    
+
     def get_average_review_for_index(self):
         reviews = Review.objects.filter(service=self)
         count = reviews.count()
@@ -135,4 +135,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review de {self.user.username}: \n{self.msg}"
-

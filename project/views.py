@@ -1,17 +1,17 @@
+import random
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import DetailView
-
-from spatialdata.models import Limits
-from .models import Category, Service, Advertisement
-from accounts.models import Account
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from accounts.models import Account
+from spatialdata.models import Limits
 from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
 from .forms import UpdateServiceForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
-import random
+from .models import Category, Service, Advertisement
 
 
 # Create your views here.
@@ -42,7 +42,7 @@ def index(request):
         best_services.append(service.get_average_review_for_index())
 
     best_services_r = []
-    best_services = sorted(best_services, key = lambda i: i['average'], reverse=True)
+    best_services = sorted(best_services, key=lambda i: i['average'], reverse=True)
     best_services = best_services[:4]
     for b_service in best_services:
         best_services_r.append(b_service['service'])
@@ -153,9 +153,9 @@ class AdvertisementDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
 
+
 class ServiceDetail(DetailView):
     model = Service
-
 
 
 def about(request):
