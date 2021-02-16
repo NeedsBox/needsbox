@@ -24,6 +24,7 @@ class AddServiceForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
+<<<<<<< HEAD
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -98,6 +99,8 @@ class UpdateAdvertisementForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
+=======
+>>>>>>> 76474f96ddf7a81680e5bbe43e5a0345f629e1b8
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -115,3 +118,56 @@ class UpdateAdvertisementForm(forms.ModelForm):
             ),
             'location': GooglePointFieldWidget,
         }
+
+
+class UpdateServiceForm(forms.ModelForm):
+    image = forms.ImageField(),
+
+    class Meta:
+        model = Service
+        fields = [
+            'category',
+            'title',
+            'description',
+            'price',
+            'location',
+            'image',
+        ]
+
+        widgets = {
+            'category': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'price': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'location': GooglePointFieldWidget,
+        }
+
+class DetailServiceForm(forms.ModelForm):
+    image = forms.ImageField(),
+
+    class Meta:
+        model = Service
+        fields = [
+            'category',
+            'title',
+            'description',
+            'price',
+            'location',
+            'image',
+        ]

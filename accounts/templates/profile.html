@@ -106,7 +106,7 @@ no-repeat;
                             {% for service in services %}
                             <li class="list-group-item px-0 pb-3 pt-0">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a href="#!">
+                                    <a href="{% url 'needsbox:service_detail' service.id %}">
                                         <div class="d-lg-flex align-items-center">
                                             <div>
                                                 <img src="{{ service.image_url }}" alt=""
@@ -146,10 +146,15 @@ no-repeat;
                                     </a>
                                     {% if request.user == user %}
                                     <div>
-                                        <a class="text-muted text-decoration-none" href="#!" role="button"
-                                            id="courseDropdown" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
+                                        <a class="text-muted text-decoration-none" href="{% url 'needsbox:service_update' service.id %}" role="button"
+                                            id="courseDropdown"  aria-haspopup="true" aria-expanded="false">
                                             <i class="mdi mdi-pencil"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="text-muted text-decoration-none" href="{% url 'needsbox:service_delete' service.id %}" role="button"
+                                            id="courseDropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-delete"></i>
                                         </a>
                                     </div>
                                     {% endif %}
