@@ -118,6 +118,8 @@ class ServiceCreate(LoginRequiredMixin, CreateView):
 class ServiceUpdate(LoginRequiredMixin, UpdateView):
     model = Service
     form_class = UpdateServiceForm
+    template_name = 'project/service_update_form.html'
+
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
 
@@ -144,6 +146,7 @@ class AdvertisementCreate(LoginRequiredMixin, CreateView):
 class AdvertisementUpdate(LoginRequiredMixin, UpdateView):
     model = Advertisement
     form_class = UpdateAdvertisementForm
+    template_name = 'project/advertisement_update_form.html'
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
 
