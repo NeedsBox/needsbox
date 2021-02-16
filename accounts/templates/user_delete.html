@@ -49,6 +49,7 @@
                         <!-- Card body -->
                         <div class="card-body">
                             <form action="" enctype='multipart/form-data' method="post">
+                                {% csrf_token %}
                                 <h3 class="mb-0 font-weight-bold mr-2">Tem a certeza que quer eliminar a sua conta
                                     ?</h3>
                                 <button type="submit" class="btn btn-primary btn-block">
