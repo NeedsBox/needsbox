@@ -67,3 +67,31 @@ class LoginForm(AuthenticationForm):
             'username',
             'password',
         )
+
+class UpdateForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Username',
+            'class': 'form-control',
+        }
+    ), label='')
+    email = forms.EmailField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Email',
+            'class': 'form-control',
+        }
+    ), label='')
+    name = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Name',
+            'class': 'form-control',
+        }
+    ), label='')
+
+    class Meta:
+        model = Account
+        fields = (
+            'username',
+            'email',
+            'name',
+        )

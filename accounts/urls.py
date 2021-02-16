@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from . import views, forms
+from django.contrib.auth.decorators import login_required
+from django.conf.urls import url
 
 app_name = 'accounts'
 
@@ -23,5 +25,6 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/',
          auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
          name='password_reset_confirm'),
-
+     
+     path('<int:pk>/edit/', views.AccoutUpdateView.as_view(), name="account_update"),
 ]

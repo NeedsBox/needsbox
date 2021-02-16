@@ -5,9 +5,10 @@ from django.utils.html import strip_tags
 from django.views import generic
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UpdateForm
 from .models import Account, PublicContacts
 from project.models import Service
+from django.views.generic.edit import UpdateView
 
 
 # Create your views here.
@@ -38,6 +39,14 @@ class AccountDetailView(generic.DetailView):
     model = Account
     slug_field = "username"
 
+class AccoutUpdateView(UpdateView):
+    model = Account
+    template_name = 'profile-edit.html'
+    fields = [
+        'name',
+        'profile_image'
+    ]
+    success_url = reverse_lazy('needsbox:index')
 
 def profile(request, username):
     context = {}
