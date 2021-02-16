@@ -24,7 +24,6 @@ class AddServiceForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
-<<<<<<< HEAD
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -99,8 +98,6 @@ class UpdateAdvertisementForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
-=======
->>>>>>> 76474f96ddf7a81680e5bbe43e5a0345f629e1b8
             'title': forms.TextInput(
                 attrs={
                     'class': 'form-control',

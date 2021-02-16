@@ -6,12 +6,8 @@ from spatialdata.models import Limits
 from .models import Category, Service, Advertisement
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-<<<<<<< HEAD
 from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
-=======
-from .forms import AddServiceForm
 from .forms import UpdateServiceForm
->>>>>>> 76474f96ddf7a81680e5bbe43e5a0345f629e1b8
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 import random
@@ -104,8 +100,8 @@ class ServiceUpdate(LoginRequiredMixin, UpdateView):
 
 class ServiceDelete(LoginRequiredMixin, DeleteView):
     model = Service
-<<<<<<< HEAD
     fields = '__all__'
+    success_url = reverse_lazy('needsbox:index')
 
 
 class AdvertisementCreate(LoginRequiredMixin, CreateView):
@@ -132,10 +128,6 @@ class AdvertisementDelete(LoginRequiredMixin, DeleteView):
     model = Advertisement
     success_url = reverse_lazy('needsbox:index')
     login_url = reverse_lazy('accounts:login')
-=======
-    success_url = reverse_lazy('needsbox:index')
-    login_url = reverse_lazy('accounts:login')
 
 class ServiceDetail(DetailView):
     model = Service
->>>>>>> 76474f96ddf7a81680e5bbe43e5a0345f629e1b8
