@@ -78,3 +78,40 @@ class AddAdvertisementForm(forms.ModelForm):
             ),
             'location': GooglePointFieldWidget,
         }
+
+
+class UpdateAdvertisementForm(forms.ModelForm):
+    image = forms.ImageField(),
+
+    class Meta:
+        model = Advertisement
+        fields = [
+            'category',
+            'title',
+            'description',
+            'location',
+            'image',
+        ]
+        widgets = {
+            'category': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'price': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'location': GooglePointFieldWidget,
+        }

@@ -10,4 +10,6 @@ urlpatterns = [
     # path('search/', views.SearchResultsView.as_view(), name='search_results'),
     path('create/', views.ServiceCreate.as_view(), name="service_form"),
     path('create_ad/', views.AdvertisementCreate.as_view(), name="advertisement_form"),
+    path('<int:pk>/update_ad/', views.AdvertisementUpdate.as_view(), name="advertisement_update_form"),
+    path('<int:pk>/delete_ad/', views.AdvertisementDelete.as_view(), name="advertisement_confirm_delete"),
 ]

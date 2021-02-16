@@ -5,7 +5,7 @@ from spatialdata.models import Limits
 from .models import Category, Service, Advertisement
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import AddServiceForm, AddAdvertisementForm
+from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 import random
@@ -104,3 +104,16 @@ class AdvertisementCreate(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+
+class AdvertisementUpdate(LoginRequiredMixin, UpdateView):
+    model = Advertisement
+    form_class = UpdateAdvertisementForm
+    success_url = reverse_lazy('needsbox:index')
+    login_url = reverse_lazy('accounts:login')
+
+
+class AdvertisementDelete(LoginRequiredMixin, DeleteView):
+    model = Advertisement
+    success_url = reverse_lazy('needsbox:index')
+    login_url = reverse_lazy('accounts:login')
