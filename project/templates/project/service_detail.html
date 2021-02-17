@@ -156,7 +156,9 @@
                                          class="rounded-circle avatar-xl"/>
                                 </div>
                                 <div class="ml-4">
-                                    <h4 class="mb-0">{{ service.user.name }}</h4>
+                                    <a href="{% url 'accounts:profile' service.user.username %}">
+                                        <h4 class="mb-0">{{ service.user.name }}</h4>
+                                    </a>
                                 </div>
                             </div>
                             <p>{{ service.user.biography }}</p>

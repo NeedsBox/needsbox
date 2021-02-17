@@ -86,39 +86,45 @@
             </div>
         </div>
     </div>
-</div>
-<!-- Content -->
-<div id="more-1">
-<div class="pt-lg-12 pb-lg-3 pt-8 pb-6">
-    <div class="container">
-        <div class="row d-lg-flex align-items-center mb-4">
-            <div class="col">
-                <h2 class="mb-0">Serviços em Aveiro</h2>
-            </div>
-            <div class="col-auto" >
-                <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
-            </div>
-        </div>
-        <div class="row">
-            {% for random_service in random_services %}
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Card -->
-                <div class="card  mb-4 card-hover">
-                    <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
-                            src="{{ random_service.image_url }}" alt="" class="rounded-top card-img-top"></a>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
-                                class="text-inherit">{{ random_service.title }}</a></h4>
-                        <!-- List -->
-                        <ul class="mb-3 list-inline">
-                            <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                              </svg> {{ random_service.get_location }}
-                            </li>
-                        </ul>
-                        <div class="lh-1">
+    </div>
+    <!-- Content -->
+    <div id="more-1">
+        <div class="pt-lg-12 pb-lg-3 pt-8 pb-6">
+            <div class="container">
+                <div class="row d-lg-flex align-items-center mb-4">
+                    <div class="col">
+                        <h2 class="mb-0">Serviços em Aveiro</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a v-on:click="search()" class="btn btn-outline-primary btn-sm">Ver Mais</a>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for random_service in random_services %}
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Card -->
+                            <div class="card  mb-4 card-hover">
+                                <a href="{% url 'needsbox:service_detail' random_service.id %}"
+                                   class="card-img-top"><img
+                                        src="{{ random_service.image_url }}" alt=""
+                                        class="rounded-top card-img-top"></a>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h4 class="mb-2 text-truncate-line-2 "><a
+                                            href="{% url 'needsbox:service_detail' random_service.id %}"
+                                            class="text-inherit">{{ random_service.title }}</a></h4>
+                                    <!-- List -->
+                                    <ul class="mb-3 list-inline">
+                                        <li class="list-inline-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            </svg>
+                                            {{ random_service.get_location }}
+                                        </li>
+                                    </ul>
+                                    <div class="lh-1">
                             <span>
                                 {% if random_service.get_average_review.count != 0 %}
                                     {% for i in "x"|ljust:random_service.get_average_review.stars %}
@@ -129,31 +135,33 @@
                                     {% endif %}
                                 {% endif %}
                             </span>
-                                            <span class="text-warning">{{ random_service.get_average_review.average }}</span>
-                                            <span class="text-muted">({{ random_service.get_average_review.count }})</span>
-                                        </div>
+                                        <span class="text-warning">{{ random_service.get_average_review.average }}</span>
+                                        <span class="text-muted">({{ random_service.get_average_review.count }})</span>
                                     </div>
-                                    <!-- Card Footer -->
-                                    <div class="card-footer">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col-auto">
-                                                <img src="{{ random_service.user.profile_image.url }}"
-                                                     class="rounded-circle avatar-xs" alt=""/>
-                                            </div>
-                                            <div class="col ml-2">
+                                </div>
+                                <!-- Card Footer -->
+                                <div class="card-footer">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col-auto">
+                                            <img src="{{ random_service.user.profile_image.url }}"
+                                                 class="rounded-circle avatar-xs" alt=""/>
+                                        </div>
+                                        <div class="col ml-2">
+                                            <a href="{% url 'accounts:profile' random_service.user %}">
                                                 <span>{{ random_service.user }}</span>
-                                            </div>
-                                            <div class="col-auto">
+                                            </a>
+                                        </div>
+                                        <!--    <div class="col-auto">
                                                 <a href="#!" class="text-muted" data-toggle="tooltip"
                                                    data-placement="top"
                                                    title="Add to Bookmarks">
                                                     <i class="fe fe-bookmark  "></i>
                                                 </a>
-                                            </div>
-                                        </div>
+                                            </div> -->
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </a>
                     {% endfor %}
                 </div>
@@ -174,13 +182,15 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Card -->
                             <div class="card  mb-4 card-hover">
-                                <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
+                                <a href="{% url 'needsbox:service_detail' random_service.id %}"
+                                   class="card-img-top"><img
                                         src="{{ random_service.image_url }}" alt=""
                                         class="rounded-top card-img-top"></a>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
-                                                                              class="text-inherit">{{ random_service.title }}</a>
+                                    <h4 class="mb-2 text-truncate-line-2 "><a
+                                            href="{% url 'needsbox:service_detail' random_service.id %}"
+                                            class="text-inherit">{{ random_service.title }}</a>
                                     </h4>
                                     <!-- List -->
                                     <ul class="mb-3 list-inline">
@@ -216,14 +226,16 @@
                                                  class="rounded-circle avatar-xs" alt="">
                                         </div>
                                         <div class="col ml-2">
-                                            <span>{{ random_service.user }}</span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                               title="Add to Bookmarks">
-                                                <i class="fe fe-bookmark  "></i>
+                                            <a href="{% url 'accounts:profile' random_service.user %}">
+                                                <span>{{ random_service.user }}</span>
                                             </a>
                                         </div>
+                                        <!--    <div class="col-auto">
+                                                <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
+                                                   title="Add to Bookmarks">
+                                                    <i class="fe fe-bookmark  "></i>
+                                                </a>
+                                            </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -247,13 +259,15 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Card -->
                             <div class="card  mb-4 card-hover">
-                                <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
+                                <a href="{% url 'needsbox:service_detail' random_service.id %}"
+                                   class="card-img-top"><img
                                         src="{{ random_service.image_url }}" alt=""
                                         class="rounded-top card-img-top"></a>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
-                                                                              class="text-inherit">{{ random_service.title }}</a>
+                                    <h4 class="mb-2 text-truncate-line-2 "><a
+                                            href="{% url 'needsbox:service_detail' random_service.id %}"
+                                            class="text-inherit">{{ random_service.title }}</a>
                                     </h4>
                                     <!-- List -->
                                     <ul class="mb-3 list-inline">
@@ -289,14 +303,16 @@
                                                  class="rounded-circle avatar-xs" alt="">
                                         </div>
                                         <div class="col ml-2">
-                                            <span>{{ random_service.user }}</span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
-                                               title="Add to Bookmarks">
-                                                <i class="fe fe-bookmark  "></i>
+                                            <a href="{% url 'accounts:profile' random_service.user %}">
+                                                <span>{{ random_service.user }}</span>
                                             </a>
                                         </div>
+                                        <!--  <div class="col-auto">
+                                              <a href="#!" class="text-muted" data-toggle="tooltip" data-placement="top"
+                                                 title="Add to Bookmarks">
+                                                  <i class="fe fe-bookmark  "></i>
+                                              </a>
+                                          </div> -->
                                     </div>
                                 </div>
                             </div>
