@@ -21,12 +21,22 @@ class Advertisement(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     location = models.PointField()
-    image = models.ImageField(default="static/images/default-service.jpg", blank=True, upload_to='advertisements')
+    image = models.ImageField(default="static/images/default-service.jpg", blank=True, upload_to='services')
     created_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+    
+    def image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return static("images/default-service.jpg")
+    
+    def get_location(self):
+        limits = Limits.objects.filter(geom__intersects=self.location).values('nome', 'distrito_title')
+        return str(limits[0]['nome'])
 
 
 class Service(models.Model):

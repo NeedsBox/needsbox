@@ -239,6 +239,42 @@
 <script src="{% static 'libs/prismjs/components/prism-scss.min.js' %}"></script>
 <script src="{% static 'libs/%40yaireo/tagify/dist/tagify.min.js' %}"></script>
 
+<script>
+
+    var app = new Vue({
+        delimiters: ["[[", "]]"],
+        el: '#app',
+        data: {
+            info: null,
+            concelhos: null,
+            currentUrl: location.toString(),
+            host: location.host
+        },
+        methods: {
+            getDataFromApi() {
+                value = event.currentTarget.value;
+                return axios
+                    .get(this.currentUrl + 'api/limits/' + value)
+                    .then(response => (this.info = response.data))
+                    .then(response => (this.concelhos = this.info))
+                    .catch(error => console.log(error))
+            },
+        },
+    });
+
+    var more = new Vue({
+        el: '#more-1',
+        data: {
+            counter: 0
+        },
+        methods: {
+            search() {
+                document.getElementById("button-addon2").click()
+            },
+        },
+    });
+</script>
+
 
 <!-- clipboard -->
 <script src="../../cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>

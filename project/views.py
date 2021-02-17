@@ -142,16 +142,43 @@ def search_ad(request):
             Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
         ).filter(location__intersects=concelho_polygon)
     else:
-    """
+    
     try:
-        ads = Service.objects.filter(
+        ads = Advertisement.objects.filter(
             Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
         )
     except:
-        ads = Service.objects.all()
+        ads = Advertisement.objects.all()"""
+    
+    distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
+    
+    try:
+        distrito = request.GET["distrito"]
+    except:
+        distrito = "none"
+
+    try:
+        concelho = request.GET["concelho"]
+    except:
+        concelho = "none"
+
+    try:
+        concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
+        distrito_polygon = Limits.objects.filter(distrito=distrito).count()
+
+        if concelho != "none":
+            ads = Advertisement.objects.filter(
+                Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+            ).filter(location__intersects=concelho_polygon)
+        else:
+            ads = Advertisement.objects.filter(
+                Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+            )
+    except:
+        ads = Advertisement.objects.all()
     
     page = request.GET.get('page', 1)
-    paginator = Paginator(ads, 2)
+    paginator = Paginator(ads, 5)
 
     categorias = Category.objects.all()
     ads_count = ads.count()
@@ -168,6 +195,7 @@ def search_ad(request):
         'services': users,
         'total_services': ads_count,
         'users': users,
+        'distritos': distritos,
     }
 
     return render(request, 'pages/search-ad.html', context=context)
@@ -201,7 +229,7 @@ def search(request):
         services = Service.objects.all()
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(services, 2)
+    paginator = Paginator(services, 9)
 
     categorias = Category.objects.all()
     services_count = services.count()

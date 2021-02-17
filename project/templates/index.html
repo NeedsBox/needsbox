@@ -309,39 +309,5 @@
 
 
 
-    <script>
-
-        var app = new Vue({
-            delimiters: ["[[", "]]"],
-            el: '#app',
-            data: {
-                info: null,
-                concelhos: null,
-                currentUrl: location.toString(),
-                host: location.host
-            },
-            methods: {
-                getDataFromApi() {
-                    value = event.currentTarget.value;
-                    return axios
-                        .get(this.currentUrl + 'api/limits/' + value)
-                        .then(response => (this.info = response.data))
-                        .then(response => (this.concelhos = this.info))
-                        .catch(error => console.log(error))
-                },
-            },
-        });
-
-        var more = new Vue({
-            el: '#more-1',
-            data: {
-                counter: 0
-            },
-            methods: {
-                search() {
-                    document.getElementById("button-addon2").click()
-                },
-            },
-        });
-    </script>
+    
 {% endblock %}
