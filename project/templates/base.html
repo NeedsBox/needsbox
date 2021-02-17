@@ -254,9 +254,10 @@
             getDataFromApi() {
                 value = event.currentTarget.value;
                 return axios
-                    .get(this.currentUrl + 'api/limits/' + value)
+                    .get(window.location.origin + "/api/limits/" + value)
                     .then(response => (this.info = response.data))
                     .then(response => (this.concelhos = this.info))
+                    .then(response => console.log("vue"))
                     .catch(error => console.log(error))
             },
         },
