@@ -7,6 +7,7 @@ app_name = 'needsbox'
 urlpatterns = [
     path('', views.index, name="index"),
     path('search/', views.search, name="search"),
+    path('search/ad/', views.search_ad, name="search_ad"),
     path('about/', views.about, name="about"),
     path('ad/create/', views.AdvertisementCreate.as_view(), name="advertisement_form"),
     path('ad/<int:pk>/update/', views.AdvertisementUpdate.as_view(), name="advertisement_update_form"),

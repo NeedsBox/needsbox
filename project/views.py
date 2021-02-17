@@ -12,6 +12,7 @@ from spatialdata.models import Limits
 from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
 from .forms import UpdateServiceForm
 from .models import Category, Service, Advertisement
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -163,3 +164,44 @@ class ServiceDetail(DetailView):
 
 def about(request):
     return render(request, 'pages/about.html')
+
+def search_ad(request):
+    context = {}
+
+    #concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
+    #distrito_polygon = Limits.objects.filter(distrito=distrito).count()
+
+    """if concelho != "none":
+        ads = Advertisement.objects.filter(
+            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+        ).filter(location__intersects=concelho_polygon)
+    else:
+    """
+    try:
+        ads = Service.objects.filter(
+            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+        )
+    except:
+        ads = Service.objects.all()
+    
+    page = request.GET.get('page', 1)
+    paginator = Paginator(ads, 2)
+
+    categorias = Category.objects.all()
+    ads_count = ads.count()
+    
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    context = {
+        'categorias': categorias,
+        'services': users,
+        'total_services': ads_count,
+        'users': users,
+    }
+
+    return render(request, 'pages/search-ad.html', context=context)
