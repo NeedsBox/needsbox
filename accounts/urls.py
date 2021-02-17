@@ -2,7 +2,12 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, reverse_lazy
 
 from . import views, forms
+<<<<<<< HEAD
 from .forms import ResetPasswordForm, ResetPasswordConfirmForm
+=======
+from django.contrib.auth.decorators import login_required
+from django.conf.urls import url
+>>>>>>> settings
 
 app_name = 'accounts'
 
@@ -31,10 +36,15 @@ urlpatterns = [
                                                      form_class=ResetPasswordConfirmForm,
                                                      success_url=reverse_lazy('accounts:password_reset_complete')),
          name='password_reset_confirm'),
+<<<<<<< HEAD
 
     path('password-reset-complete',
          auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
          name='password_reset_complete'),
 
     path('change_password/', views.change_password, name='change_password'),
+=======
+     path('<str:username>/edit/', views.update_view, name="account_edit"),
+     path('<str:username>/info/', views.update_info_view, name="account_info"),
+>>>>>>> settings
 ]
