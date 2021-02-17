@@ -1,0 +1,24 @@
+<div class="navbar-nav flex-column">
+    <span class="navbar-header">Definições de conta</span>
+    <!-- List -->
+    <ul class="list-unstyled ml-n2 mb-0">
+        <!-- Nav item -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:account_edit' request.user.username %}"><i class="fe fe-settings nav-icon"></i>Editar Conta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:account_info' request.user.username %}"><i class="fe fe-at-sign nav-icon"></i>Informações Públicas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="notifications.html"><i class="fe fe-bell nav-icon"></i>Notificações</a>
+        </li>
+        <!-- Nav item -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:user_delete' request.user.username %}"><i class="fe fe-trash nav-icon"></i>Apagar conta</a>
+        </li>
+        <!-- Nav item -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:logout' %}"><i class="fe fe-power nav-icon"></i>Logout</a>
+        </li>
+    </ul>
+</div>

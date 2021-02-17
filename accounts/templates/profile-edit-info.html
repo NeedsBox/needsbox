@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pt-5">
+    <div class="container">
+            <!-- User info -->
+        <div class="row align-items-center">			
+            <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                <!-- Bg -->
+                <div class="pt-16 rounded-top" style="
+                            background: url({% static 'images/profile-bg.jpg)' %};
+                            background-size: cover;
+                            {% static '$1' %};
+                        "></div>
+                <div
+                    class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+                            <img src="{{ request.user.profile_image.url }}" class="avatar-xl rounded-circle border-width-4 border-white"
+                                alt="" />
+                        </div>
+                        <div class="lh-1">
+                            <h2 class="mb-0">
+                                {{ request.user.name }}
+                            </h2>
+                            <p class="mb-0 d-block">@{{ request.user.username }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="{% url 'needsbox:index' %}" class="btn btn-outline-primary btn-sm d-none d-md-block">Página Inicial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content -->
+<div class="pb-5 py-md-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-12">
+                <!-- Side navbar -->
+                <nav class="navbar navbar-expand-md navbar-light shadow-sm mb-4 mb-lg-0 small-sidenav">
+                    <!-- Menu -->
+                    <a class="d-xl-none d-lg-none d-md-none text-inherit font-weight-bold" href="#!">Menu</a>
+                    <!-- Button -->
+                    <button class="navbar-toggler d-md-none icon-shape icon-sm rounded bg-primary text-light" type="button"
+                        data-toggle="collapse" data-target="#smallSidenav" aria-controls="smallSidenav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="fe fe-menu"></span>
+                    </button>
+                    <!-- Collapse navbar -->
+                    <div class="collapse navbar-collapse" id="smallSidenav">
+                        {% include 'sidebar.html' %}
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9 col-md-8 col-12">
+                <!-- Card -->
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header">
+                        <h3 class="mb-0">Editar conta</h3>
+                        
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <div>
+                            <!-- Form -->
+                            <form class="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+                                {{ form.as_p }}
+                                <div class="col-12">
+                                    <!-- Button -->
+                                    <button class="btn btn-primary" type="submit">
+                                        Atualizar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'libs/odometer/odometer.min.js' %}"></script>
+<script src="{% static 'libs/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'libs/magnific-popup/dist/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'libs/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+<script src="{% static 'libs/inputmask/dist/jquery.inputmask.min.js' %}"></script>
+<script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+<script src="{% static 'libs/quill/dist/quill.min.js' %}"></script>
+<script src="{% static 'libs/file-upload-with-preview/dist/file-upload-with-preview.min.js' %}"></script>
+<script src="{% static 'libs/dragula/dist/dragula.min.js' %}"></script>
+<script src="{% static 'libs/bs-stepper/dist/js/bs-stepper.min.js' %}"></script>
+<script src="{% static 'libs/dropzone/dist/min/dropzone.min.js' %}"></script>
+<script src="{% static 'libs/jQuery.print/jQuery.print.js' %}"></script>
+<script src="{% static 'libs/prismjs/prism.js' %}"></script>
+<script src="{% static 'libs/prismjs/components/prism-scss.min.js' %}"></script>
+<script src="{% static 'libs/%40yaireo/tagify/dist/tagify.min.js' %}"></script>
+
+
+<!-- clipboard -->
+<script src="cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="{% static 'js/theme.min.js' %}"></script>
+{% endblock %}

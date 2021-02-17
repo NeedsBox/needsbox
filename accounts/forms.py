@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-from .models import Account
+from .models import Account, PublicContacts
 
 
 class RegisterForm(UserCreationForm):
@@ -95,3 +95,57 @@ class UpdateForm(forms.Form):
             'email',
             'name',
         )
+
+# creating a form 
+class UpdateAccountForm(forms.ModelForm):
+    class Meta:
+        model = Account 
+        fields = (
+            'name',
+            'profile_image',
+            'biography',
+            'small_biography',
+            'contact',
+            'account_type',
+        )
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'account_type': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                },
+
+            ),
+            'small_biography': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'biography': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'contact': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                },
+            ),
+        }
+
+class PublicContactsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user',None)
+        super(PublicContactsForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = PublicContacts
+        fields = [
+            
+            'email',
+            'phone',
+            'address',
+        ]

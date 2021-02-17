@@ -49,9 +49,13 @@ no-repeat;
                     <!-- Card body -->
                     <div class="card-body">
                         <h4>Descrição</h4>
+                        {% if user.biography %}
                         <p>
                             {{ user.biography }}
                         </p>
+                        {% else %}
+                        <p>Sem descrição disponível</p>
+                        {% endif %}
                         <a href="#!" class="btn-link"> Enviar Mensagem</a>
                     </div>
                 </div>
@@ -103,6 +107,9 @@ no-repeat;
                         <!-- List group -->
                         <ul class="list-group list-group-flush">
                             <!-- List group item -->
+                            {% if service_count == 0 %}
+                            <p class="mb-0 info-profle">Este utilizador não tem serviços</p>
+                            {% endif %}
                             {% for service in services %}
                             <li class="list-group-item px-0 pb-3 pt-0">
                                 <div class="d-flex align-items-center justify-content-between">
@@ -170,12 +177,12 @@ no-repeat;
                 <div class="card border-0 mb-4 mb-lg-0">
                     <div class="card-header">
                         <h4 class="mb-0">
-                            Contactos
+                            Informações
                         </h4>
                     </div>
                     <!-- Card body -->
                     <div class="card-body">
-                        
+                        {% if contacts %}
                         {% if contacts.email %}
                         <div class="d-flex align-items-center justify-content-start border-bottom">
                             <div>
@@ -203,6 +210,16 @@ no-repeat;
                             </div>
                             <div>
                                 <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div class="d-flex align-items-center justify-content-start border-bottom">
+                            <div>
+                                <i class="mdi mdi-information"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 info-profle">Não existem informações</p>
                             </div>
                         </div>
                         {% endif %}
