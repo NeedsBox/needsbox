@@ -203,6 +203,8 @@ def search_ad(request):
 def search(request):
     context = {}
 
+    distritos = Limits.objects.values('distrito', 'distrito_title').distinct().order_by('distrito')
+
     try:
         distrito = request.GET["distrito"]
     except:
@@ -246,6 +248,7 @@ def search(request):
         'services': users,
         'total_services': services_count,
         'users': users,
+        'distritos': distritos,
     }
 
     return render(request, 'pages/search.html', context=context)
