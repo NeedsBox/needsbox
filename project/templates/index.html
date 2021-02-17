@@ -174,12 +174,12 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Card -->
                             <div class="card  mb-4 card-hover">
-                                <a href="pages/course-single.html" class="card-img-top"><img
+                                <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
                                         src="{{ random_service.image_url }}" alt=""
                                         class="rounded-top card-img-top"></a>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
+                                    <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
                                                                               class="text-inherit">{{ random_service.title }}</a>
                                     </h4>
                                     <!-- List -->
@@ -247,12 +247,12 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Card -->
                             <div class="card  mb-4 card-hover">
-                                <a href="{{ random_service.id }}" class="card-img-top"><img
+                                <a href="{% url 'needsbox:service_detail' random_service.id %}" class="card-img-top"><img
                                         src="{{ random_service.image_url }}" alt=""
                                         class="rounded-top card-img-top"></a>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <h4 class="mb-2 text-truncate-line-2 "><a href="pages/course-single.html"
+                                    <h4 class="mb-2 text-truncate-line-2 "><a href="{% url 'needsbox:service_detail' random_service.id %}"
                                                                               class="text-inherit">{{ random_service.title }}</a>
                                     </h4>
                                     <!-- List -->
