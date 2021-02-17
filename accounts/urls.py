@@ -32,6 +32,6 @@ urlpatterns = [
                                                      form_class=forms.ResetPasswordConfirmForm,
                                                      success_url=reverse_lazy('accounts:password_reset_complete')),
          name='password_reset_confirm'),
-     path('<str:username>/edit/', views.update_view, name="account_edit"),
-     path('<str:username>/info/', views.update_info_view, name="account_info"),
+    path('<str:username>/edit/', views.update_view, name="account_edit"),
+    path('<str:username>/info/', views.update_info_view, name="account_info"),
 ]
