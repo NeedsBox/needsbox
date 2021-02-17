@@ -82,23 +82,6 @@
 
             <div class="dropdown-divider"></div>
             <ul class="list-unstyled">
-<<<<<<< HEAD
-                <li>
-                    <a class="dropdown-item" href="{% url 'accounts:profile' request.user.username %}">
-                        <i class="fe fe-user mr-2"></i>Profile
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{% url 'needsbox:service_form' %}">
-                        <i class="fe fe-plus mr-2"></i>Criar Serviço
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{% url 'needsbox:advertisement_form' %}">
-                        <i class="fe fe-plus-circle mr-2"></i>Criar Anúncio
-                    </a>
-                </li>
-=======
             {% if request.user.account_type == 'PRO' %}
             <li>
                 <a class="dropdown-item" href="{% url 'accounts:profile' request.user.username %}">
@@ -116,7 +99,6 @@
                     <i class="fe fe-plus-circle mr-2"></i>Criar Anúncio
                 </a>
             </li>
->>>>>>> settings
                 <li>
                     <a class="dropdown-item" href="{% url 'accounts:account_edit' request.user.username %}">
                         <i class="fe fe-settings mr-2"></i>Definições

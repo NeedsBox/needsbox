@@ -68,7 +68,6 @@ class LoginForm(AuthenticationForm):
             'password',
         )
 
-<<<<<<< HEAD
 
 class ResetPasswordForm(PasswordResetForm):
     email = forms.CharField(widget=forms.TextInput(
@@ -95,7 +94,6 @@ class ResetPasswordConfirmForm(SetPasswordForm):
             'type': 'password',
         }
     ), label='')
-=======
 class UpdateForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -177,4 +175,3 @@ class PublicContactsForm(forms.ModelForm):
             'phone',
             'address',
         ]
->>>>>>> settings

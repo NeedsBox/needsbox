@@ -4,12 +4,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
-<<<<<<< HEAD
-
-from project.models import Service
-from .forms import RegisterForm
-from .models import Account, PublicContacts
-=======
 from django.shortcuts import (get_object_or_404, 
                               render,
                               redirect,
@@ -19,7 +13,6 @@ from .forms import PublicContactsForm, UpdateAccountForm, RegisterForm, UpdateFo
 from .models import Account, PublicContacts
 from project.models import Service
 from django.views.generic.edit import UpdateView
->>>>>>> settings
 
 
 # Create your views here.

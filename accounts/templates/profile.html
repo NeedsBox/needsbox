@@ -39,22 +39,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <!-- Content -->
-    <div class="py-5 py-md-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-12">
-                    <!-- Card -->
-                    <div class="card border-0 mb-4">
-                        <!-- Card body -->
-                        <div class="card-body">
-                            <h4>Descrição</h4>
-                            <p>
-                                {{ user.biography }}
-                            </p>
-                            <a href="#!" class="btn-link"> Enviar Mensagem</a>
-=======
 </div>
 <!-- Content -->
 <div class="py-5 py-md-5">
@@ -78,19 +62,7 @@
                 </div>
                 <!-- Card -->
                 <div class="card border-0 mb-4 mb-lg-0">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-                            <div>
-                                <h4 class="mb-0 font-weight-bold">{{ service_count }}</h4>
-                                <p class="font-size-xs mb-0">Serviços</p>
-                            </div>
-                            <div>
-                                <span><i class="fe fe-file-text font-size-lg"></i></span>
-                            </div>
->>>>>>> settings
-                        </div>
-                    </div>
+                   
                     <!-- Card -->
                     <div class="card border-0 mb-4 mb-lg-0">
                         <!-- Card body -->
@@ -125,82 +97,6 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <div class="col-lg-6 col-md-4 col-12">
-                    <!-- Card -->
-                    <div class="card border-0">
-                        <!-- Card header -->
-                        <div class="card-header">
-                            <h4 class="mb-0">
-                                Serviços <span class="text-muted font-size-xs">({{ service_count }})</span>
-                            </h4>
-                        </div>
-                        <!-- Card body -->
-                        <div class="card-body">
-                            <!-- List group -->
-                            <ul class="list-group list-group-flush">
-                                <!-- List group item -->
-                                {% for service in services %}
-                                    <li class="list-group-item px-0 pb-3 pt-0">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <a href="{% url 'needsbox:service_detail' service.id %}">
-                                                <div class="d-lg-flex align-items-center">
-                                                    <div>
-                                                        <img src="{{ service.image_url }}" alt=""
-                                                             class="rounded img-4by3-lg"/>
-                                                    </div>
-                                                    <div class="ml-lg-3 mt-2 mt-lg-0">
-                                                        <h4 class="text-primary-hover">
-                                                            {{ service.title }}
-                                                        </h4>
-                                                        <ul class="list-inline font-size-xs mb-0 text-inherit">
-                                                            <li class="list-inline-item">
-                                                                {% if service.price %}
-                                                                    <i class="far fa-clock mr-1"></i>Custo:
-                                                                    {{ service.price }}€/h
-                                                                {% else %}
-                                                                    <i class="far fa-clock mr-1"></i>Custo: Requisitar
-                                                                {% endif %}
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <i class="mdi mdi-map-marker"></i>
-                                                                {{ service.get_location }}
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                {% if service.get_average_review.count != 0 %}
-                                                                    {% for i in "x"|ljust:service.get_average_review.stars %}
-                                                                        <i class="mdi mdi-star mr-n1 text-warning"></i>
-                                                                    {% endfor %}
-                                                                    {% if service.get_average_review.half_stars != 0 %}
-                                                                        <i class="mdi mdi-star-half mr-n1 text-warning"></i>
-                                                                    {% endif %}
-                                                                {% endif %}
-                                                                <span class="text-warning">{{ service.get_average_review.average }}</span>
-                                                                <span class="text-muted">({{ service.get_average_review.count }})</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            {% if request.user == user %}
-                                                <div>
-                                                    <a class="text-muted text-decoration-none"
-                                                       href="{% url 'needsbox:service_update' service.id %}"
-                                                       role="button"
-                                                       id="courseDropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-pencil"></i>
-                                                    </a>
-                                                </div>
-                                                <div>
-                                                    <a class="text-muted text-decoration-none"
-                                                       href="{% url 'needsbox:service_delete' service.id %}"
-                                                       role="button"
-                                                       id="courseDropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </a>
-                                                </div>
-                                            {% endif %}
-=======
             </div>
             <div class="col-lg-6 col-md-4 col-12">
                 <!-- Card -->
@@ -258,7 +154,6 @@
                                                     </li>
                                                 </ul>
                                             </div>
->>>>>>> settings
                                         </div>
                                     </li>
                                 {% endfor %}
@@ -271,106 +166,57 @@
                     <div class="card border-0 mb-4 mb-lg-0">
                         <div class="card-header">
                             <h4 class="mb-0">
-                                Contactos
+                                Informações
                             </h4>
                         </div>
                         <!-- Card body -->
                         <div class="card-body">
-
+                            {% if contacts %}
                             {% if contacts.email %}
-                                <div class="d-flex align-items-center justify-content-start border-bottom">
-                                    <div>
-                                        <i class="mdi mdi-email"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 info-profle">{{ contacts.email }}</p>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-start border-bottom">
+                                <div>
+                                    <i class="mdi mdi-email"></i>
                                 </div>
-<<<<<<< HEAD
+                                <div>
+                                    <p class="mb-0 info-profle">{{ contacts.email }}</p>
+                                </div>
+                            </div>
                             {% endif %}
                             {% if contacts.phone %}
-                                <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
-                                    <div>
-                                        <i class="mdi mdi-phone"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 info-profle">{{ contacts.phone }}</p>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
+                                <div>
+                                    <i class="mdi mdi-phone"></i>
                                 </div>
+                                <div>
+                                    <p class="mb-0 info-profle">{{ contacts.phone }}</p>
+                                </div>
+                            </div>
                             {% endif %}
                             {% if contacts.get_location %}
-                                <div class="d-flex align-items-center justify-content-start profile-box">
-                                    <div>
-                                        <i class="mdi mdi-map-marker"></i>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
-                                    </div>
+                            <div class="d-flex align-items-center justify-content-start profile-box">
+                                <div>
+                                    <i class="mdi mdi-map-marker"></i>
                                 </div>
+                                <div>
+                                    <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            <div class="d-flex align-items-center justify-content-start border-bottom">
+                                <div>
+                                    <i class="mdi mdi-information"></i>
+                                </div>
+                                <div>
+                                    <p class="mb-0 info-profle">Não existem informações</p>
+                                </div>
+                            </div>
                             {% endif %}
                         </div>
-=======
-                            </li>
-                            {% endfor %}
-                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-12">
-                <!-- Card -->
-                <div class="card border-0 mb-4 mb-lg-0">
-                    <div class="card-header">
-                        <h4 class="mb-0">
-                            Informações
-                        </h4>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        {% if contacts %}
-                        {% if contacts.email %}
-                        <div class="d-flex align-items-center justify-content-start border-bottom">
-                            <div>
-                                <i class="mdi mdi-email"></i>
-                            </div>
-                            <div>
-                                <p class="mb-0 info-profle">{{ contacts.email }}</p>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% if contacts.phone %}
-                        <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
-                            <div>
-                                <i class="mdi mdi-phone"></i>
-                            </div>
-                            <div>
-                                <p class="mb-0 info-profle">{{ contacts.phone }}</p>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% if contacts.get_location %}
-                        <div class="d-flex align-items-center justify-content-start profile-box">
-                            <div>
-                                <i class="mdi mdi-map-marker"></i>
-                            </div>
-                            <div>
-                                <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% else %}
-                        <div class="d-flex align-items-center justify-content-start border-bottom">
-                            <div>
-                                <i class="mdi mdi-information"></i>
-                            </div>
-                            <div>
-                                <p class="mb-0 info-profle">Não existem informações</p>
-                            </div>
-                        </div>
-                        {% endif %}
->>>>>>> settings
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 {% endblock %}

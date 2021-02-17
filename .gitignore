@@ -97,3 +97,4 @@ db.sqlite3
 osd/.env
 osd/env
 .env
+__pycache__/
