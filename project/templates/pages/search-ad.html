@@ -2,251 +2,272 @@
 {% load static %}
 
 {% block content %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
-<!-- Page header -->
-<div class="bg-primary py-4 py-lg-6">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-12">
-				<div>
-					<h1 class="mb-0 text-white display-4">Pesquisa - Anúncios</h1>
-				</div>
-			</div>
-			<form action="{% url 'needsbox:search_ad' %}" method="GET">
-				<!-- Input -->
-				<div class="input-group" id="app">
-					<input type="text" class="form-control" placeholder="Search" aria-label="Search"
-						   aria-describedby="button-addon2" name="search">
-					<select class="custom-select input-group-append" id="inputGroupSelect01" name="distrito">
-						<option selected disabled value="none">Distrito</option>
-						{% for distrito in distritos %}
-							<option value="{{ distrito.distrito }}"
-									v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
-							</option>
-						{% endfor %}
-					</select>
-					<select class="custom-select input-group-append" id="inputGroupSelect01" name="concelho">
-						<option selected disabled value="none">Concelho</option>
-						<option v-for="concelho in concelhos" :value="concelho.nome">[[ concelho.nome ]]
-						</option>
-					</select>
-					<div class="input-group-append">
-						<button class="btn btn-warning" type="submit" id="button-addon2"><i
-								class="bi bi-search"></i></button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- Content -->
-<div class="py-6">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
-				<div class="row d-lg-flex justify-content-between align-items-center">
-					<div class="col-md-6 col-lg-8 col-xl-9 ">
-						<h4 class="mb-3 mb-lg-0">Existem em total de {{ total_services }} serviços</h4>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-3 col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
-				<!-- Card -->
-				<div class="card">
-					<!-- Card header -->
-					<div class="card-header">
-						<h4 class="mb-0">Filter</h4>
-					</div>
-					<!-- Card body -->
-					<div class="card-body">
-						<span class="dropdown-header px-0 mb-2"> Category</span>
-						<!-- Checkbox -->
-						{% for categoria in categorias %}
-						<div class="custom-control custom-checkbox mb-1">
-							<input type="checkbox" class="custom-control-input" id="{{ categoria.name }}Check">
-							<label class="custom-control-label" for="{{ categoria.name }}Check">{{ categoria.name}}</label>
-						</div>
-						{% endfor %}
-					</div>
-					<!-- Card body -->
-					<div class="card-body border-top">
-						<span class="dropdown-header px-0 mb-2"> Reviews</span>
-						<!-- Custom control -->
-						<div class="custom-control custom-radio mb-1">
-							<input type="radio" class="custom-control-input" id="starRadio1" name="customRadio" checked>
-							<label class="custom-control-label" for="starRadio1">
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star text-warning "></i>
-								<span class="font-size-xs">4.5 & UP</span>
-							</label>
-						</div>
-						<!-- Custom control -->
-						<div class="custom-control custom-radio mb-1">
-							<input type="radio" class="custom-control-input" id="starRadio2" name="customRadio">
-							<label class="custom-control-label" for="starRadio2"> <i
-									class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star text-warning "></i>
-								<span class="font-size-xs">4.0 & UP</span></label>
-						</div>
-						<!-- Custom control -->
-						<div class="custom-control custom-radio mb-1">
-							<input type="radio" class="custom-control-input" id="starRadio3" name="customRadio">
-							<label class="custom-control-label" for="starRadio3"> <i
-									class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star text-warning "></i>
-								<span class="font-size-xs">3.5 & UP</span></label>
-						</div>
-						<!-- Custom control -->
-						<div class="custom-control custom-radio mb-1">
-							<input type="radio" class="custom-control-input" id="starRadio4" name="customRadio">
-							<label class="custom-control-label" for="starRadio4"> <i
-									class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star mr-n1 text-warning"></i>
-								<i class="mdi mdi-star text-warning "></i>
-								<span class="font-size-xs">3.0 & UP</span></label>
-						</div>
-					</div>
-					<!-- Card body -->
-					<div class="card-body border-top">
-						<span class="dropdown-header px-0 mb-2"> Tipo</span>
-						<!-- Checkbox -->
-						<div class="custom-control custom-checkbox mb-1">
-							<input type="checkbox" class="custom-control-input" id="allTwoCheck" checked>
-							<label class="custom-control-label" for="allTwoCheck">Todos os Tipos</label>
-						</div>
-						<!-- Checkbox -->
-						<div class="custom-control custom-checkbox mb-1">
-							<input type="checkbox" class="custom-control-input" id="beginnerTwoCheck">
-							<label class="custom-control-label" for="beginnerTwoCheck">Empresa</label>
-						</div>
-						<!-- Checkbox -->
-						<div class="custom-control custom-checkbox mb-1">
-							<input type="checkbox" class="custom-control-input" id="intermediateCheck">
-							<label class="custom-control-label" for="intermediateCheck">Individual</label>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Tab content -->
-			<div class="col-xl-9 col-lg-9 col-md-8 col-12">
-				<div class="tab-content">
-					{% for service in services %}
-					<div class="" id="tabPaneList" role="tabpanel" aria-labelledby="tabPaneList">
-						<!-- Card -->
-						<div class="card mb-4 card-hover">
-						  <div class="row no-gutters">
-							<a class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
-							  style="background-image: url('{{ service.image_url }}');" href="{% url 'needsbox:service_detail' service.id %}">
-							  <!--img src="{{ service.image_url }}" alt="..." class="img-fluid"-->
-							</a>
-							<div class="col-lg-9 col-md-12 col-12">
-							  <!-- Card body -->
-							  <div class="card-body">
-								<h3 class="mb-2 text-truncate-line-2 "><a href="#!" class="text-inherit">{{ service.title }}</a></h3>
-									 <!-- List inline -->
-								<ul class="mb-5 list-inline">
-									<li class="list-inline-item">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-										<path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-										<path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-										  </svg>
-										{{ service.get_location }}
-									</li>
-								  
-								</ul>
-								 <!-- Row -->
-								<div class="row align-items-center no-gutters">
-								  <div class="col-auto">
-									<img src="{{ service.user.profile_image.url }}" class="rounded-circle avatar-xs" alt="">
-								  </div>
-								  <div class="col ml-2">
-									<span>{{ service.user.username }}</span>
-								  </div>
-								  <div class="col-auto">
-									<!-- Large modal -->
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{service.id}}">Ver</button>
-									<div id="modal-{{service.id}}" class="modal fade gd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-lg">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title">{{ service.title }}</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												  <span aria-hidden="true">&times;</span>
-												</button>
-											  </div>
-											  <div class="modal-body">
-												<p>{{ service.description }}</p>
-											  </div>
-											  <div class="modal-footer">
-												<a type="button" class="btn btn-secondary" href="{% url 'accounts:profile' service.user.username %}" >Utilizador</a>
-											  </div>
-										</div>
-									</div>
-									</div>
-								  </div>
-									</div>
-								  <div>
-								</div>
-							  </div>
-							</div>
-						  </div>
-						</div>
-					  </div>
-					  {% endfor %}
-					<!-- Tab pane -->
-					{% if users.has_other_pages %}
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-						{% if users.has_previous %}
-						  <li class="page-item">
-							<a class="page-link" href="?page={{ users.previous_page_number }}" aria-label="Previous">
-							  <span aria-hidden="true">&laquo;</span>
-							</a>
-						  </li>
-						{% else %}
-							<li class="page-item disabled">
-							<a class="page-link" href="" aria-label="Previous">
-							  <span aria-hidden="true">&laquo;</span>
-							</a>
-						  	</li>
-						{% endif %}
-						{% for i in users.paginator.page_range %}
-						{% if users.number == i %}
-							<li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
-						{% else %}
-							<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-						{% endif %}
-						{% endfor %}
-						{% if users.has_next %}
-						  <li class="page-item">
-							<a class="page-link" href="?page={{ users.next_page_number }}" aria-label="Next">
-							  <span aria-hidden="true">&raquo;</span>
-							</a>
-						  </li>
-						{% else %}
-						<li class="page-item disabled">
-							<a class="page-link" href="" aria-label="Next">
-							  <span aria-hidden="true">&raquo;</span>
-							</a>
-						  </li>
-						{% endif %}
-						</ul>
-					  </nav>
-					  {% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+            integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+            crossorigin="anonymous"></script>
+    <!-- Page header -->
+    <div class="bg-primary py-4 py-lg-6">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                    <div>
+                        <h1 class="mb-0 text-white display-4">Pesquisa - Anúncios</h1>
+                    </div>
+                </div>
+                <form action="{% url 'needsbox:search_ad' %}" method="GET">
+                    <!-- Input -->
+                    <div class="input-group" id="app">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                               aria-describedby="button-addon2" name="search">
+                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="distrito">
+                            <option selected disabled value="none">Distrito</option>
+                            {% for distrito in distritos %}
+                                <option value="{{ distrito.distrito }}"
+                                        v-on:click="getDataFromApi($event)">{{ distrito.distrito_title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <select class="custom-select input-group-append" id="inputGroupSelect01" name="concelho">
+                            <option selected disabled value="none">Concelho</option>
+                            <option v-for="concelho in concelhos" :value="concelho.nome">[[ concelho.nome ]]
+                            </option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" type="submit" id="button-addon2"><i
+                                    class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Content -->
+    <div class="py-6">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+                    <div class="row d-lg-flex justify-content-between align-items-center">
+                        <div class="col-md-6 col-lg-8 col-xl-9 ">
+                            <h4 class="mb-3 mb-lg-0">Existem em total de {{ total_services }} serviços</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
+                    <!-- Card -->
+                    <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h4 class="mb-0">Filter</h4>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <span class="dropdown-header px-0 mb-2"> Category</span>
+                            <!-- Checkbox -->
+                            {% for categoria in categorias %}
+                                <div class="custom-control custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" id="{{ categoria.name }}Check">
+                                    <label class="custom-control-label"
+                                           for="{{ categoria.name }}Check">{{ categoria.name }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body border-top">
+                            <span class="dropdown-header px-0 mb-2"> Reviews</span>
+                            <!-- Custom control -->
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="starRadio1" name="customRadio"
+                                       checked>
+                                <label class="custom-control-label" for="starRadio1">
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star text-warning "></i>
+                                    <span class="font-size-xs">4.5 & UP</span>
+                                </label>
+                            </div>
+                            <!-- Custom control -->
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="starRadio2" name="customRadio">
+                                <label class="custom-control-label" for="starRadio2"> <i
+                                        class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star text-warning "></i>
+                                    <span class="font-size-xs">4.0 & UP</span></label>
+                            </div>
+                            <!-- Custom control -->
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="starRadio3" name="customRadio">
+                                <label class="custom-control-label" for="starRadio3"> <i
+                                        class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star text-warning "></i>
+                                    <span class="font-size-xs">3.5 & UP</span></label>
+                            </div>
+                            <!-- Custom control -->
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="starRadio4" name="customRadio">
+                                <label class="custom-control-label" for="starRadio4"> <i
+                                        class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                    <i class="mdi mdi-star text-warning "></i>
+                                    <span class="font-size-xs">3.0 & UP</span></label>
+                            </div>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body border-top">
+                            <span class="dropdown-header px-0 mb-2"> Tipo</span>
+                            <!-- Checkbox -->
+                            <div class="custom-control custom-checkbox mb-1">
+                                <input type="checkbox" class="custom-control-input" id="allTwoCheck" checked>
+                                <label class="custom-control-label" for="allTwoCheck">Todos os Tipos</label>
+                            </div>
+                            <!-- Checkbox -->
+                            <div class="custom-control custom-checkbox mb-1">
+                                <input type="checkbox" class="custom-control-input" id="beginnerTwoCheck">
+                                <label class="custom-control-label" for="beginnerTwoCheck">Empresa</label>
+                            </div>
+                            <!-- Checkbox -->
+                            <div class="custom-control custom-checkbox mb-1">
+                                <input type="checkbox" class="custom-control-input" id="intermediateCheck">
+                                <label class="custom-control-label" for="intermediateCheck">Individual</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tab content -->
+                <div class="col-xl-9 col-lg-9 col-md-8 col-12">
+                    <div class="tab-content">
+                        {% for service in services %}
+                            <div class="" id="tabPaneList" role="tabpanel" aria-labelledby="tabPaneList">
+                                <!-- Card -->
+                                <div class="card mb-4 card-hover">
+                                    <div class="row no-gutters">
+                                        <a class="col-12 col-md-12 col-xl-3 col-lg-3 bg-cover img-left-rounded"
+                                           style="background-image: url('{{ service.image_url }}');"
+                                           href="{% url 'needsbox:service_detail' service.id %}">
+                                            <!--img src="{{ service.image_url }}" alt="..." class="img-fluid"-->
+                                        </a>
+                                        <div class="col-lg-9 col-md-12 col-12">
+                                            <!-- Card body -->
+                                            <div class="card-body">
+                                                <h3 class="mb-2 text-truncate-line-2 "><a href="#!"
+                                                                                          class="text-inherit">{{ service.title }}</a>
+                                                </h3>
+                                                <!-- List inline -->
+                                                <ul class="mb-5 list-inline">
+                                                    <li class="list-inline-item">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-geo-alt"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                        </svg>
+                                                        {{ service.get_location }}
+                                                    </li>
+
+                                                </ul>
+                                                <!-- Row -->
+                                                <div class="row align-items-center no-gutters">
+                                                    <div class="col-auto">
+                                                        <img src="{{ service.user.profile_image.url }}"
+                                                             class="rounded-circle avatar-xs" alt="">
+                                                    </div>
+                                                    <div class="col ml-2">
+                                                        <span>{{ service.user.username }}</span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <!-- Large modal -->
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-{{ service.id }}">Ver
+                                                        </button>
+                                                        <div id="modal-{{ service.id }}"
+                                                             class="modal fade gd-example-modal-lg" tabindex="-1"
+                                                             role="dialog" aria-labelledby="myLargeModalLabel"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">{{ service.title }}</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ service.description }}</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a type="button" class="btn btn-secondary"
+                                                                           href="{% url 'accounts:profile' service.user.username %}">Utilizador</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- Tab pane -->
+                        {% if users.has_other_pages %}
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if users.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ users.previous_page_number }}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% for i in users.paginator.page_range %}
+                                        {% if users.number == i %}
+                                            <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if users.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ users.next_page_number }}"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-	</div>
-
+    </div>
 {% endblock %}
