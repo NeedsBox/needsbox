@@ -61,41 +61,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 
-def search(request):
-    context = {}
 
-    try:
-        distrito = request.GET["distrito"]
-    except:
-        distrito = "none"
-
-    try:
-        concelho = request.GET["concelho"]
-    except:
-        concelho = "none"
-
-    concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
-    distrito_polygon = Limits.objects.filter(distrito=distrito).count()
-
-    if concelho != "none":
-        services = Service.objects.filter(
-            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
-        ).filter(location__intersects=concelho_polygon)
-    else:
-        services = Service.objects.filter(
-            Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
-        )
-
-    categorias = Category.objects.all()
-    services_count = services.count()
-
-    context = {
-        'categorias': categorias,
-        'services': services,
-        'total_services': services_count,
-    }
-
-    return render(request, 'pages/search.html', context=context)
 
     # class ServiceCreate(CreateView):
     model = Service
@@ -205,3 +171,53 @@ def search_ad(request):
     }
 
     return render(request, 'pages/search-ad.html', context=context)
+
+def search(request):
+    context = {}
+
+    try:
+        distrito = request.GET["distrito"]
+    except:
+        distrito = "none"
+
+    try:
+        concelho = request.GET["concelho"]
+    except:
+        concelho = "none"
+
+    try:
+        concelho_polygon = Limits.objects.filter(nome=concelho).values("geom", )
+        distrito_polygon = Limits.objects.filter(distrito=distrito).count()
+
+        if concelho != "none":
+            services = Service.objects.filter(
+                Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+            ).filter(location__intersects=concelho_polygon)
+        else:
+            services = Service.objects.filter(
+                Q(title__icontains=request.GET["search"]) | Q(user__username__icontains=request.GET["search"])
+            )
+    except:
+        services = Service.objects.all()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(services, 2)
+
+    categorias = Category.objects.all()
+    services_count = services.count()
+    
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    context = {
+        'categorias': categorias,
+        'services': users,
+        'total_services': services_count,
+        'users': users,
+    }
+
+    return render(request, 'pages/search.html', context=context)
