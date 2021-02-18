@@ -32,133 +32,149 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
-                 <!--   <div class="font-size-md mt-4 mt-lg-0 pb-2 pb-lg-0 d-lg-flex justify-content-end">
-                        <a href="#!" class="mdi mdi-link-variant text-muted mr-2"></a>
-                    </div> -->
+                    <!--   <div class="font-size-md mt-4 mt-lg-0 pb-2 pb-lg-0 d-lg-flex justify-content-end">
+                           <a href="#!" class="mdi mdi-link-variant text-muted mr-2"></a>
+                       </div> -->
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Content -->
-<div class="py-5 py-md-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-12">
-                <!-- Card -->
-                <div class="card border-0 mb-4">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <h4>Descrição</h4>
-                        {% if user.biography %}
-                        <p>
-                            {{ user.biography }}
-                        </p>
-                        {% else %}
-                        <p>Sem descrição disponível</p>
-                        {% endif %}
-                        <a href="#!" class="btn-link"> Enviar Mensagem</a>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="card border-0 mb-4 mb-lg-0">
-                   
+    </div>
+    <!-- Content -->
+    <div class="py-5 py-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
                     <!-- Card -->
-                    <div class="card border-0 mb-4 mb-lg-0">
+                    <div class="card border-0 mb-4">
                         <!-- Card body -->
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-                                <div>
-                                    <h4 class="mb-0 font-weight-bold">{{ service_count }}</h4>
-                                    <p class="font-size-xs mb-0">Serviços</p>
+                            <h4>Descrição</h4>
+                            {% if user.biography %}
+                                <p>
+                                    {{ user.biography }}
+                                </p>
+                            {% else %}
+                                <p>Sem descrição disponível</p>
+                            {% endif %}
+                            <a href="#!" class="btn-link"> Enviar Mensagem</a>
+                        </div>
+                    </div>
+                    <!-- Card -->
+                    <div class="card border-0 mb-4 mb-lg-0">
+
+                        <!-- Card -->
+                        <div class="card border-0 mb-4 mb-lg-0">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+                                    <div>
+                                        <h4 class="mb-0 font-weight-bold">{{ service_count }}</h4>
+                                        <p class="font-size-xs mb-0">Serviços</p>
+                                    </div>
+                                    <div>
+                                        <span><i class="fe fe-file-text font-size-lg"></i></span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span><i class="fe fe-file-text font-size-lg"></i></span>
-                                </div>
-                            </div>
-                            <!--div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-                                <div>
-                                    <h4 class="mb-0 font-weight-bold">11,604</h4>
-                                    <p class="font-size-xs mb-0">Total Students</p>
-                                </div>
-                                <div>
-                                    <span><i class="fe fe-users font-size-lg"></i></span>
-                                </div>
-                            </div-->
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h4 class="mb-0 font-weight-bold">{{ review_count }}</h4>
-                                    <p class="font-size-xs mb-0">Reviews</p>
-                                </div>
-                                <div>
-                                    <span><i class="fe fe-star font-size-lg"></i></span>
+                                <!--div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+                                    <div>
+                                        <h4 class="mb-0 font-weight-bold">11,604</h4>
+                                        <p class="font-size-xs mb-0">Total Students</p>
+                                    </div>
+                                    <div>
+                                        <span><i class="fe fe-users font-size-lg"></i></span>
+                                    </div>
+                                </div-->
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h4 class="mb-0 font-weight-bold">{{ review_count }}</h4>
+                                        <p class="font-size-xs mb-0">Reviews</p>
+                                    </div>
+                                    <div>
+                                        <span><i class="fe fe-star font-size-lg"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-4 col-12">
-                <!-- Card -->
-                <div class="card border-0">
-                    <!-- Card header -->
-                    <div class="card-header">
-                        <h4 class="mb-0">
-                            Serviços <span class="text-muted font-size-xs">({{ service_count }})</span>
-                        </h4>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- List group -->
-                        <ul class="list-group list-group-flush">
-                            <!-- List group item -->
-                            {% if service_count == 0 %}
-                            <p class="mb-0 info-profle">Este utilizador não tem serviços</p>
-                            {% endif %}
-                            {% for service in services %}
-                            <li class="list-group-item px-0 pb-3 pt-0">
-                                <div class="d-flex align-items-center justify-content-between">
+                <div class="col-lg-6 col-md-4 col-12">
+                    <!-- Card -->
+                    <div class="card border-0">
+                        <!-- Card header -->
+                        <div class="card-header">
+                            <h4 class="mb-0">
+                                Serviços <span class="text-muted font-size-xs">({{ service_count }})</span>
+                            </h4>
+                        </div>
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <!-- List group -->
+                            <ul class="list-group list-group-flush">
+                                <!-- List group item -->
+                                {% if service_count == 0 %}
+                                    <p class="mb-0 info-profle">Este utilizador não tem serviços</p>
+                                {% endif %}
+                                {% for service in services %}
+                                    <li class="list-group-item px-0 pb-3 pt-0">
+                                    <div class="d-flex align-items-center justify-content-between">
 
-                                        <div class="d-lg-flex align-items-center">
-                                            <div>
-                                                <a href="{% url 'needsbox:service_detail' service.id %}">
+                                    <div class="d-lg-flex align-items-center">
+                                        <div>
+                                            <a href="{% url 'needsbox:service_detail' service.id %}">
                                                 <img src="{{ service.image_url }}" alt=""
-                                                    class="rounded img-4by3-lg" />
-                                                </a>
-                                            </div>
-                                            <div class="ml-lg-3 mt-2 mt-lg-0">
-                                                 <a href="{% url 'needsbox:service_detail' service.id %}">
+                                                     class="rounded img-4by3-lg"/>
+                                            </a>
+                                        </div>
+                                        <div class="ml-lg-3 mt-2 mt-lg-0">
+                                            <a href="{% url 'needsbox:service_detail' service.id %}">
                                                 <h4 class="text-primary-hover">
                                                     {{ service.title }}
                                                 </h4>
-                                                 </a>
-                                                <ul class="list-inline font-size-xs mb-0 text-inherit">
-                                                    <li class="list-inline-item">
-                                                        {% if service.price %}
+                                            </a>
+                                            <ul class="list-inline font-size-xs mb-0 text-inherit">
+                                                <li class="list-inline-item">
+                                                    {% if service.price %}
                                                         <i class="far fa-clock mr-1"></i>Custo: {{ service.price }}€/h
-                                                        {% else %}
+                                                    {% else %}
                                                         <i class="far fa-clock mr-1"></i>Custo: Requisitar
+                                                    {% endif %}
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <i class="mdi mdi-map-marker"></i>
+                                                    {{ service.get_location }}
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    {% if service.get_average_review.count != 0 %}
+                                                        {% for i in "x"|ljust:service.get_average_review.stars %}
+                                                            <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                        {% endfor %}
+                                                        {% if service.get_average_review.half_stars != 0 %}
+                                                            <i class="mdi mdi-star-half mr-n1 text-warning"></i>
                                                         {% endif %}
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <i class="mdi mdi-map-marker"></i>
-                                                        {{ service.get_location }}
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        {% if service.get_average_review.count != 0 %}
-												{% for i in "x"|ljust:service.get_average_review.stars %}
-												<i class="mdi mdi-star mr-n1 text-warning"></i>
-												{% endfor %}
-												{% if service.get_average_review.half_stars != 0 %}
-												<i class="mdi mdi-star-half mr-n1 text-warning"></i>
-												{% endif %}
-												{% endif %}
-                                                        <span class="text-warning">{{ service.get_average_review.average }}</span>
-                                                        <span class="text-muted">({{ service.get_average_review.count }})</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    {% endif %}
+                                                    <span class="text-warning">{{ service.get_average_review.average }}</span>
+                                                    <span class="text-muted">({{ service.get_average_review.count }})</span>
+                                                </li>
+                                                <td class="text-muted border-top-0">
+											<span class="dropdown">
+												<a class="text-muted text-decoration-none" role="button"
+                                                   id="courseDropdown"
+                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													<i class="fe fe-more-vertical"></i>
+												</a>
+												<span class="dropdown-menu" aria-labelledby="courseDropdown">
+													<span class="dropdown-header">Ações </span>
+													<a class="dropdown-item" href="{% url 'needsbox:service_update' service.id %}"><i
+                                                            class="fe fe-edit dropdown-item-icon"></i>Edit</a>
+													<a class="dropdown-item" href="{% url 'needsbox:service_delete' service.id %}"><i
+                                                            class="fe fe-trash dropdown-item-icon"></i>Remove</a>
+												</span>
+											</span>
+                                                </td>
+                                            </ul>
                                         </div>
+                                    </div>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -175,51 +191,51 @@
                         <!-- Card body -->
                         <div class="card-body">
                             {% if contacts %}
-                            {% if contacts.email %}
-                            <div class="d-flex align-items-center justify-content-start border-bottom">
-                                <div>
-                                    <i class="mdi mdi-email"></i>
-                                </div>
-                                <div>
-                                    <p class="mb-0 info-profle">{{ contacts.email }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% if contacts.phone %}
-                            <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
-                                <div>
-                                    <i class="mdi mdi-phone"></i>
-                                </div>
-                                <div>
-                                    <p class="mb-0 info-profle">{{ contacts.phone }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% if contacts.get_location %}
-                            <div class="d-flex align-items-center justify-content-start profile-box">
-                                <div>
-                                    <i class="mdi mdi-map-marker"></i>
-                                </div>
-                                <div>
-                                    <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if contacts.email %}
+                                    <div class="d-flex align-items-center justify-content-start border-bottom">
+                                        <div>
+                                            <i class="mdi mdi-email"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 info-profle">{{ contacts.email }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if contacts.phone %}
+                                    <div class="d-flex align-items-center justify-content-start border-bottom profile-box">
+                                        <div>
+                                            <i class="mdi mdi-phone"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 info-profle">{{ contacts.phone }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if contacts.get_location %}
+                                    <div class="d-flex align-items-center justify-content-start profile-box">
+                                        <div>
+                                            <i class="mdi mdi-map-marker"></i>
+                                        </div>
+                                        <div>
+                                            <p class="mb-0 info-profle">{{ contacts.get_location }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% else %}
-                            <div class="d-flex align-items-center justify-content-start border-bottom">
-                                <div>
-                                    <i class="mdi mdi-information"></i>
+                                <div class="d-flex align-items-center justify-content-start border-bottom">
+                                    <div>
+                                        <i class="mdi mdi-information"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0 info-profle">Não existem informações</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="mb-0 info-profle">Não existem informações</p>
-                                </div>
-                            </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 {% endblock %}
