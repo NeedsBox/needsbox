@@ -13,6 +13,7 @@ from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
 from .forms import UpdateServiceForm
 from .models import Category, Review, Service, Advertisement
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -106,6 +107,8 @@ class AdvertisementCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        print(self.object.location)
+        print(self.object.id)
         self.object.save()
         return super().form_valid(form)
 

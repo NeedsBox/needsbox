@@ -13,6 +13,7 @@ from .forms import PublicContactsForm, UpdateAccountForm, RegisterForm, UpdateFo
 from .models import Account, PublicContacts
 from project.models import Service
 from django.views.generic.edit import UpdateView
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -25,14 +26,14 @@ class UserRegisterView(generic.CreateView):
 
     # Se o utilizador for criado com sucesso envio um email de agradecimento pelo registo
     def form_valid(self, form):
-        """message = "Hello {name}, welcome to my Unsplash-Clone made in Django!\n\n Any questions contact me at unsplash@scutelniciuc.xyz\n\nBest regards,\nAlexandru".format(
+        message = "Olá {name}, nem vindo ao NeedsBox!".format(
             name=form.cleaned_data.get('name'),)
         send_mail(
-            subject="THANKS FOR REGISTERING",
+            subject="Obrigado pelo registo!",
             message=message,
-            from_email='unsplash@scutelniciuc.xyz',
+            from_email='system@scutelniciuc.xyz',
             recipient_list=[form.cleaned_data.get('email')],
-        )"""
+        )
         return super().form_valid(form)
 
 
