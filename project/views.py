@@ -11,7 +11,7 @@ from accounts.models import Account
 from spatialdata.models import Limits
 from .forms import AddServiceForm, AddAdvertisementForm, UpdateAdvertisementForm
 from .forms import UpdateServiceForm
-from .models import Category, Service, Advertisement
+from .models import Category, Review, Service, Advertisement
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -126,6 +126,19 @@ class AdvertisementDelete(LoginRequiredMixin, DeleteView):
 
 class ServiceDetail(DetailView):
     model = Service
+
+def service_detail(request, pk):
+    context = {}
+    
+    service = Service.objects.get(id=pk)
+    reviews = Review.objects.all().filter(service=service)
+    
+    context = {
+        'service': service,
+        'reviews': reviews,
+    }
+    
+    return render(request, 'project/service_detail.html', context)
 
 
 def about(request):

@@ -2,34 +2,6 @@
 {% load static %}
 
 {% block content %}
-
-    <!DOCTYPE html>
-    <html lang="en">
-
-
-    <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-
-
-        <link href="{% static 'fonts/feather/feather.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/dragula/dist/dragula.min.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/%40mdi/font/css/materialdesignicons.min.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/prismjs/themes/prism.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/dropzone/dist/dropzone.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/magnific-popup/dist/magnific-popup.css' %}" rel="stylesheet"/>
-        <link href="{% static 'libs/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
-        <link href="{% static 'libs/%40yaireo/tagify/dist/tagify.css' %}" rel="stylesheet">
-
-
-        <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
-
-    </head>
-    <body>
     <div class="pt-lg-8 pb-lg-16 pt-8 pb-12 bg-primary">
         <div class="container">
             <div class="row align-items-center">
@@ -49,7 +21,7 @@
                                 {% endif %}
                                 <span class="text-warning">{{ service.get_average_review.average }}</span>
                                 <span class="text-white">({{ service.get_average_review.count }})</span>
-              </span>
+                            </span>
                             <span class="text-white ml-4 d-none d-md-block">
                                                             <i class="mdi mdi-map-marker "></i>
 
@@ -76,7 +48,7 @@
                                 <!-- Nav -->
                                 <ul class="nav nav-lb-tab" id="tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" id="description-tab" data-toggle="pill" href="#description"
+                                        <a class="nav-link active" id="description-tab active" data-toggle="pill" href="#description"
                                            role="tab"
                                            aria-controls="description" aria-selected="false">Description</a>
                                     </li>
@@ -90,7 +62,7 @@
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="tab-content" id="tabContent">
-                                <div class="tab-pane fade" id="description" role="tabpanel"
+                                <div class="tab-pane fade active show" id="description" role="tabpanel"
                                      aria-labelledby="description-tab">
                                     <!-- Description -->
                                     <div class="mb-4">
@@ -119,19 +91,35 @@
                                     <!-- hr -->
                                     <hr class="my-5"/>
                                     <div class="mb-3">
-                                        <div class="d-lg-flex align-items-center justify-content-between mb-5">
+                                        
                                             <!-- Reviews -->
-                                            <div class="mb-3 mb-lg-0">
-                                                <h3 class="mb-0">Reviews</h3>
-                                            </div>
-                                        </div>
+                                            {% for review in reviews %}
+                                            <div class="media border-bottom pb-4 mb-4">
+                                                <img src="{{ review.user.image_url }}" alt="" class="rounded-circle avatar-lg" />
+                                                <div class="media-body ml-3">
+                                                  <h4 class="mb-1">
+                                                    {{ review.user.name }}
+                                                    <!--span class="ml-1 font-size-xs text-muted"></span-->
+                                                  </h4>
+                                                  <div class="font-size-xs mb-2">
+                                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                    <i class="mdi mdi-star mr-n1 text-warning"></i>
+                                                  </div>
+                                                  <p>{{ review.msg }}</p>
+                                                </div>
+                                              </div>
+                                              {% endfor %}
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12 mt-lg-n22">
+                <div class="col-lg-4 col-md-12 col-12 mt-n8 mb-4 mb-lg-0">
                     <!-- Card -->
                     <div class="card mb-3 mb-4">
                         <div class="p-1">
@@ -142,8 +130,11 @@
                         </div>
                         <!-- Card body -->
                         <div class="card-body">
-                            <a class="btn btn-primary btn-block">{{ service.price }} €</a>
-                            <a href="#!" class="btn btn-outline-primary btn-block">Enviar mensagem</a>
+                            {% if service.price %}
+                            <p class="btn btn-primary btn-block">Preço: {{ service.price }} €/h</p>
+                            {% else %}
+                            <a class="btn btn-primary btn-block">Preço: Requisitar</a>
+                            {% endif %}
                         </div>
                     </div>
                     <!-- Card -->
@@ -199,8 +190,4 @@
 
 
     <script src="{% static 'js/theme.min.js' %}"></script>
-
-    </body>
-
-    </html>
 {% endblock %}

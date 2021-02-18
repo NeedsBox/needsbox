@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.gis.db import models
 from phone_field import PhoneField
+from django.templatetags.static import static
 
 from spatialdata.models import Limits
 
@@ -47,7 +48,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(max_length=60, unique=True, null=True)
     username = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=50, null=False)
-    profile_image = models.ImageField(default="static/images/default-profile-picture.png", blank=True,
+    profile_image = models.ImageField(blank=True,
                                       upload_to='profile_pictures')
     biography = models.TextField(blank=True)
     small_biography = models.CharField(blank=True, max_length=40)
@@ -81,6 +82,12 @@ class Account(AbstractBaseUser):
 
     def get_type(self):
         return self.account_type
+    
+    def image_url(self):
+        if self.profile_image:
+            return self.profile_image.url
+        else:
+            return static("images/default-service.jpg")
 
 
 class PublicContacts(models.Model):
